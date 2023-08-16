@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/16 14:39:58 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/16 15:18:57 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CUB3D_H
 
 # include "./../minilibx-linux/mlx.h"
-# include "./raycast.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -70,7 +69,7 @@ typedef struct s_data
 	t_arg	*arg;
 }	t_data;
 
-// ..................... PARSING ...........................................
+// ..................... PARSING ............................................
 
 t_data	*init_data(void);
 _Bool	is_cub(char *arg);
@@ -102,7 +101,7 @@ _Bool	chk_edges(t_data *data, char c, char d);
 _Bool	convert_map(t_data *data, t_arg *arg);
 _Bool	to_integers(t_data *data, t_arg *arg);
 
-// ..................... GNL ..............................................
+// ..................... GNL ................................................
 
 typedef struct s_stash
 {
@@ -124,7 +123,7 @@ void			ft_unleash(t_stash *stash);
 int				ft_linkbrows(t_stash *stash);
 void			ft_strcpy(char *prev, char *new);
 
-// ..................... RAYCAST ..............................................
+// ..................... RAYCAST ............................................
 
 # define BUFFER_SIZE 2048
 # define RADIAN 0.0174532925
@@ -133,8 +132,8 @@ void			ft_strcpy(char *prev, char *new);
 # define OFFSET_3D 600
 # define HEIGHT 600
 # define TWIDTH 1200
-// # define GRID_WIDTH 20
-// # define GRID_HEIGHT 20
+# define GRID_WIDTH 20
+# define GRID_HEIGHT 20
 
 typedef struct s_point
 {
