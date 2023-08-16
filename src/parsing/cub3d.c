@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:23:01 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/16 15:28:48 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/16 15:56:41 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,12 @@ _Bool	convert_map(t_data *data, t_arg *arg)
 	int	k;
 
 	i = 0;
-	j = 0;
 	k = 0;
-	while (arg->map[i])
-		i++;
-	arg->height = i;
+	arg->height = data->mlines;
 	i = 0;
-	while (arg->map[i])
+	while (i < data->mlines)
 	{
+		j = 0;
 		while (arg->map[i][j])
 			j++;
 		if (j > k)

@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:33:29 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/16 12:28:58 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/16 15:56:36 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ _Bool	chk_bottop(t_data *data, char *line, int j)
 			return (data->err = MAPERROR, 1);
 		i++;
 	}
-	// while (line[i] && line[i] != '\n')
-	// {
-	// 	if (line[i] != ' ')
-	// 		return (data->err = MAPERROR, 1);
-	// 	i++;
-	// }
 	return (chk_line(data, line, j));
 }
 
@@ -70,16 +64,23 @@ _Bool	search_map(t_data *data, char **raw)
 	j = 0;
 	while (raw[i][0] == '\n')
 		i++;
-	data->arg->map = (char **)malloc(sizeof(char) * (data->lines - i));
+	data->mlines = data->lines - i + 1;
+	data->arg->map = (char **)malloc(sizeof(char) * (data->mlines));
 	if (!data->arg->map)
 		return (data->err = MLLOC, 1);
+	data->arg->map[data->mlines] = NULL;
 	while (i <= data->lines)
 	{
-		if ((!j || i == data->lines) && chk_bottop(data, raw[i], j))
-			return (1);
+		if ((!j || i == data->lines))
+		{
+			if (chk_bottop(data, raw[i], j))
+				return (1);
+		}
 		else
+		{
 			if (chk_line(data, raw[i], j))
 				return (1);
+		}
 		i++;
 		j++;
 	}

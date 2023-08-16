@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/16 15:18:57 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/16 15:51:57 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_data
 {
 	char	**raw;
 	int		lines;
+	int		mlines;
 	int		fd;
 	size_t	err;
 	t_pars	pars;
