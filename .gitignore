@@ -1,2 +1,5 @@
-/obj
+obj/*.o
+minilibx-linux/*.a
+minilibx-linux/*.o
 cub3d
+.idea/*
