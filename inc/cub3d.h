@@ -178,7 +178,12 @@ typedef struct s_buffer
 	int		line_length;
 	int		endian;
 }	t_buffer;
-
+typedef struct s_texture
+{
+    t_color *texture;
+    int     width;
+    int     height;
+}   t_texture;
 typedef struct s_raydata
 {
 	void		*mlx;
@@ -188,10 +193,10 @@ typedef struct s_raydata
     int        map_width;
     int        map_height;
 	int			**map;
-    t_color     *NO;
-    t_color     *SO;
-    t_color     *WE;
-    t_color     *EA;
+    t_texture    *NO;
+    t_texture    *SO;
+    t_texture    *WE;
+    t_texture    *EA;
 	long		last_frame;
 }	t_raydata;
 

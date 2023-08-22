@@ -16,6 +16,14 @@ int key_pressed(int keycode, t_raydata *raydata)
 		mlx_destroy_display(raydata->mlx);
 		free(raydata->mlx);
         free(raydata->player);
+        free(raydata->EA->texture);
+        free(raydata->EA);
+        free(raydata->WE->texture);
+        free(raydata->WE);
+        free(raydata->SO->texture);
+        free(raydata->SO);
+        free(raydata->NO->texture);
+        free(raydata->NO);
 		free(raydata);
 		exit(0);
 	}

@@ -11,29 +11,33 @@
 /* ************************************************************************** */
 
 #include "./../../inc/raycast.h"
-t_color *load_texture(void *mlx, char *path)
+t_texture *load_texture(void *mlx, char *path)
 {
     t_buffer img;
-    int img_width;
-    int img_height;
+    t_texture *texture;
 
-    img.img = mlx_xpm_file_to_image(mlx, path, &img_width, &img_height);
-    if (!img.img)
-        return (NULL);
-    t_color *texture = malloc(sizeof(t_color) * img_width * img_height);
+    texture = malloc(sizeof(t_texture));
     if (!texture)
         return (NULL);
+    texture->width = 0;
+    texture->height = 0;
+    img.img = mlx_xpm_file_to_image(mlx, path, &texture->width, &texture->height);
+    if (!img.img) {
+        return (NULL);
+    }
+    texture->texture = malloc(sizeof(t_color) * texture->width * texture->height);
     char *addr = mlx_get_data_addr(img.img, &img.bit_per_pixel, &img.line_length, &img.endian);
     printf("Loading texture %s\t[", path);
-    for (int y = 0; y < img_height; y++)
+    for (int y = 0; y < texture->height; y++)
     {
-        for (int x = 0; x < img_width; x++)
+        for (int x = 0; x < texture->width; x++)
         {
             int color = *(unsigned int *)(addr + (y * img.line_length + x * (img.bit_per_pixel / 8)));
-            texture[y * img_width + x].color = color;
+            texture->texture[y * texture->width + x].color = color;
         }
         printf("|");
     }
+    mlx_destroy_image(mlx, img.img);
     printf("]\n");
     return (texture);
 }
