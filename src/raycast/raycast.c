@@ -35,8 +35,25 @@ int raycast(t_data *data, t_arg *arg)
 												  &raydata->img_buffer->line_length,
 												  &raydata->img_buffer->endian);
     raydata->player = malloc(sizeof (t_player));
-	raydata->player->pos.x = (double)HEIGHT /2;
-	raydata->player->pos.y = (double) WIDTH /2;
+    int found = 0;
+    double grid_size_x = (double) WIDTH / arg->width;
+    double grid_size_y = (double) HEIGHT / arg->height;
+    for (int i=0;i < arg->height;i++) {
+        for (int j=0;j < arg->width;j++) {
+            if (arg->fmap[i][j] < 0) {
+                raydata->player->pos.x = (double) j * grid_size_x + grid_size_x / 2;
+                raydata->player->pos.y = (double) i * grid_size_y + grid_size_y / 2;
+                found = 1;
+                printf("\nfound player at %d %d posx %f posy %f\n", i, j, raydata->player->pos.x, raydata->player->pos.y);
+            }
+            printf("%d ", arg->fmap[i][j]);
+        }
+        printf("\n");
+    }
+    if (found == 0) {
+        raydata->player->pos.x = (double) HEIGHT / 2;
+        raydata->player->pos.y = (double) WIDTH / 2;
+    }
     raydata->player->angle = 0;
     raydata->player->size = 10;
     raydata->player->dir_vector.x = 1;
