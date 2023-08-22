@@ -6,7 +6,7 @@
 #    By: avassor <avassor@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 12:13:14 by mira              #+#    #+#              #
-#    Updated: 2023/08/17 14:00:29 by avassor          ###   ########.fr        #
+#    Updated: 2023/08/22 11:47:52 by avassor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CUB3D	= cub3d
 NAME	= $(CUB3D)
 
 CC		=	gcc
-CFLAGS 	=	-g #-Wall -Wextra -Werror
+CFLAGS 	=	-g -Wall -Wextra #-Werror
 LFLAGS	=	-lX11 -lXext -lm
 INC		=	-I ./inc/
 

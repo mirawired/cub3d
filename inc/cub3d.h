@@ -165,7 +165,8 @@ typedef union u_color
 typedef struct s_player {
 	t_point pos;
 	double angle;
-	double fov;
+    t_point dir_vector;
+    t_point plane_vector;
 	double size;
 }	t_player;
 
@@ -184,7 +185,8 @@ typedef struct s_raydata
 	void		*mlx_win;
 	t_buffer	*img_buffer;
 	t_player	*player;
-	// int			map[GRID_WIDTH][GRID_HEIGHT];
+    int        map_width;
+    int        map_height;
 	int			**map;
 	long		last_frame;
 }	t_raydata;

@@ -15,17 +15,31 @@ int key_pressed(int keycode, t_raydata *raydata)
 		mlx_destroy_window(raydata->mlx,raydata->mlx_win);
 		mlx_destroy_display(raydata->mlx);
 		free(raydata->mlx);
+        free(raydata->player);
 		free(raydata);
 		exit(0);
 	}
 	if (keycode == 97 || keycode == 65361)
 	{
+        t_point old_dir = raydata->player->dir_vector;
+        t_point old_plane = raydata->player->plane_vector;
+        raydata->player->dir_vector.x = raydata->player->dir_vector.x * cos(-3 * RADIAN) - raydata->player->dir_vector.y * sin(-3 * RADIAN);
+        raydata->player->dir_vector.y = old_dir.x * sin(-3 * RADIAN) + raydata->player->dir_vector.y * cos(-3 * RADIAN);
+        raydata->player->plane_vector.x = raydata->player->plane_vector.x * cos(-3 * RADIAN) - raydata->player->plane_vector.y * sin(-3 * RADIAN);
+        raydata->player->plane_vector.y = old_plane.x * sin(-3 * RADIAN) + raydata->player->plane_vector.y * cos(-3 * RADIAN);
+
         raydata->player->angle -= 3;
         if (raydata->player->angle < 0)
             raydata->player->angle = 359;
 	}
 	if (keycode == 100 || keycode == 65363)
 	{
+        t_point old_dir = raydata->player->dir_vector;
+        t_point old_plane = raydata->player->plane_vector;
+        raydata->player->dir_vector.x = raydata->player->dir_vector.x * cos(3 * RADIAN) - raydata->player->dir_vector.y * sin(3 * RADIAN);
+        raydata->player->dir_vector.y = old_dir.x * sin(3 * RADIAN) + raydata->player->dir_vector.y * cos(3 * RADIAN);
+        raydata->player->plane_vector.x = raydata->player->plane_vector.x * cos(3 * RADIAN) - raydata->player->plane_vector.y * sin(3 * RADIAN);
+        raydata->player->plane_vector.y = old_plane.x * sin(3 * RADIAN) + raydata->player->plane_vector.y * cos(3 * RADIAN);
         raydata->player->angle += 3;
         if (raydata->player->angle > 359)
             raydata->player->angle = 0;
