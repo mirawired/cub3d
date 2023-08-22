@@ -59,7 +59,10 @@ _Bool	to_integers(t_data *data, t_arg *arg)
 			return (data->err = MLLOC, 1);
 		while (arg->map[i][j])
 		{
-			arg->fmap[i][j] = ft_atoi(&arg->map[i][j]);
+            if (arg->map[i][j] == 'S')
+                arg->fmap[i][j] = '2';
+            else
+                arg->fmap[i][j] = arg->map[i][j] - '0';
 			j++;
 		}
 		while (j < arg->width)
@@ -112,7 +115,13 @@ int	main(int argc, char **argv)
 		return (rror(data->err, data));
 	if (pars_map(data) || convert_map(data, data->arg))
 		return (rror(1, data));
-	if (raycast(data, data->arg))
+    for (int i = 0; i < data->arg->height; i++)
+    {
+        for (int j = 0; j < data->arg->width; j++)
+            printf("%d-", data->arg->fmap[i][j]);
+        printf("\n");
+    }
+    	if (raycast(data, data->arg))
 		return (rror(1, data));
 	return (EXIT_SUCCESS);
 }
