@@ -60,7 +60,7 @@ _Bool	to_integers(t_data *data, t_arg *arg)
 		while (arg->map[i][j])
 		{
             if (arg->map[i][j] == 'S')
-                arg->fmap[i][j] = '2';
+                arg->fmap[i][j] = 2;
             else
                 arg->fmap[i][j] = arg->map[i][j] - '0';
 			j++;
