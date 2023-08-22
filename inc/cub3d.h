@@ -188,6 +188,10 @@ typedef struct s_raydata
     int        map_width;
     int        map_height;
 	int			**map;
+    t_color     *NO;
+    t_color     *SO;
+    t_color     *WE;
+    t_color     *EA;
 	long		last_frame;
 }	t_raydata;
 
@@ -202,7 +206,7 @@ void	fill_rectangle(t_raydata *raydata, t_color color, t_point top_left, t_point
 void	draw_rays(t_raydata *raydata);
 t_point	calc_point(t_point from, double angle, double distance);
 
-int		raycast(t_data *data, t_arg *arg);
+int		raycast(t_arg *arg);
 void	grab_arg(t_raydata *raydata, t_arg *arg);
 
 #endif

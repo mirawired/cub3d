@@ -11,11 +11,35 @@
 /* ************************************************************************** */
 
 #include "./../../inc/raycast.h"
-
-int raycast(t_data *data, t_arg *arg)
+t_color *load_texture(void *mlx, char *path)
 {
-	(void)data;
-	(void)arg;
+    t_buffer img;
+    int img_width;
+    int img_height;
+
+    img.img = mlx_xpm_file_to_image(mlx, path, &img_width, &img_height);
+    if (!img.img)
+        return (NULL);
+    t_color *texture = malloc(sizeof(t_color) * img_width * img_height);
+    if (!texture)
+        return (NULL);
+    char *addr = mlx_get_data_addr(img.img, &img.bit_per_pixel, &img.line_length, &img.endian);
+    printf("Loading texture %s\t[", path);
+    for (int y = 0; y < img_height; y++)
+    {
+        for (int x = 0; x < img_width; x++)
+        {
+            int color = *(unsigned int *)(addr + (y * img.line_length + x * (img.bit_per_pixel / 8)));
+            texture[y * img_width + x].color = color;
+        }
+        printf("|");
+    }
+    printf("]\n");
+    return (texture);
+}
+
+int raycast(t_arg *arg)
+{
 	t_raydata *raydata;
 
 	raydata = malloc(sizeof (t_raydata));
@@ -34,6 +58,11 @@ int raycast(t_data *data, t_arg *arg)
 												  &raydata->img_buffer->bit_per_pixel,
 												  &raydata->img_buffer->line_length,
 												  &raydata->img_buffer->endian);
+
+    raydata->EA = load_texture(raydata->mlx,arg->EA);
+    raydata->WE = load_texture(raydata->mlx,arg->WE);
+    raydata->NO = load_texture(raydata->mlx,arg->NO);
+    raydata->SO = load_texture(raydata->mlx,arg->SO);
     raydata->player = malloc(sizeof (t_player));
     int found = 0;
     double grid_size_x = (double) WIDTH / arg->width;
@@ -44,11 +73,8 @@ int raycast(t_data *data, t_arg *arg)
                 raydata->player->pos.x = (double) j * grid_size_x + grid_size_x / 2;
                 raydata->player->pos.y = (double) i * grid_size_y + grid_size_y / 2;
                 found = 1;
-                printf("\nfound player at %d %d posx %f posy %f\n", i, j, raydata->player->pos.x, raydata->player->pos.y);
             }
-            printf("%d ", arg->fmap[i][j]);
         }
-        printf("\n");
     }
     if (found == 0) {
         raydata->player->pos.x = (double) HEIGHT / 2;

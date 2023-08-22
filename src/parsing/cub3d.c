@@ -115,13 +115,7 @@ int	main(int argc, char **argv)
 		return (rror(data->err, data));
 	if (pars_map(data) || convert_map(data, data->arg))
 		return (rror(1, data));
-    for (int i = 0; i < data->arg->height; i++)
-    {
-        for (int j = 0; j < data->arg->width; j++)
-            printf("%d-", data->arg->fmap[i][j]);
-        printf("\n");
-    }
-    	if (raycast(data, data->arg))
+  	if (raycast(data->arg))
 		return (rror(1, data));
 	return (EXIT_SUCCESS);
 }
