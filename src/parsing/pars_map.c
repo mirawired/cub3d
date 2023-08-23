@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:43:37 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/16 16:00:59 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/22 15:52:09 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ _Bool	search_id(t_data *data, char **fill, char *id)
 			return (copy_id(data, fill, data->raw[i]));
 		i++;
 	}
+	data->err = NOID;
 	return (1);
 }
 

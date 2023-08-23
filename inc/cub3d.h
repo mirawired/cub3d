@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/16 15:51:57 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/23 12:39:24 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,20 @@
 # define NOID 136
 # define MAPERROR 137
 
+typedef struct s_rgb
+{
+	unsigned char	b;
+	unsigned char	g;
+	unsigned char	r;
+	unsigned char	t;
+}	t_rgb;
+
+typedef union u_color
+{
+	int		color;
+	t_rgb	s_rgb;
+}	t_color;
+
 typedef struct s_pars
 {
 	_Bool	N;
@@ -53,6 +67,8 @@ typedef struct s_arg
 	char	*EA;
 	int		F[3];
 	int		C[3];
+	t_color	*rgbF;
+	t_color	*rgbC;
 	char	**map;
 	int		**fmap;
 	int		width;
@@ -101,6 +117,7 @@ _Bool	is_origin(char id);
 _Bool	chk_edges(t_data *data, char c, char d);
 _Bool	convert_map(t_data *data, t_arg *arg);
 _Bool	to_integers(t_data *data, t_arg *arg);
+_Bool	convert_rgb(t_arg *arg);
 
 // ..................... GNL ................................................
 
@@ -147,20 +164,6 @@ typedef struct s_int_point
 	int x;
 	int y;
 }	t_int_point;
-
-typedef struct s_rgb
-{
-	unsigned char	b;
-	unsigned char	g;
-	unsigned char	r;
-	unsigned char	t;
-}	t_rgb;
-
-typedef union u_color
-{
-	int		color;
-	t_rgb	s_rgb;
-}	t_color;
 
 typedef struct s_player {
 	t_point pos;

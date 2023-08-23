@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:23:01 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/22 11:49:39 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/23 12:38:48 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,16 @@ t_data	*init_data(void)
 	data->pars.W = 0;
 	data->arg->height = -1;
 	data->arg->width = -1;
+	data->arg->rgbC = (t_color *)malloc(sizeof(t_color));
+	data->arg->rgbF = (t_color *)malloc(sizeof(t_color));
 	return (data);
+}
+
+_Bool	convert_rgb(t_arg *arg)
+{
+	arg->rgbC->color = ((arg->C[0] << 16) | (arg->C[1] << 8) | arg->C[2]);
+	arg->rgbF->color = ((arg->F[0] << 16) | (arg->F[1] << 8) | arg->F[2]);
+	return (0);
 }
 
 _Bool	to_integers(t_data *data, t_arg *arg)
@@ -59,10 +68,10 @@ _Bool	to_integers(t_data *data, t_arg *arg)
 			return (data->err = MLLOC, 1);
 		while (arg->map[i][j])
 		{
-            if (arg->map[i][j] == 'S')
-                arg->fmap[i][j] = 2;
-            else
-                arg->fmap[i][j] = arg->map[i][j] - '0';
+			if (arg->map[i][j] == 'S')
+				arg->fmap[i][j] = 2;
+			else
+				arg->fmap[i][j] = arg->map[i][j] - '0';
 			j++;
 		}
 		while (j < arg->width)
@@ -72,7 +81,7 @@ _Bool	to_integers(t_data *data, t_arg *arg)
 		}
 		i++;
 	}
-	return (0);
+	return (convert_rgb(arg));
 }
 
 _Bool	convert_map(t_data *data, t_arg *arg)
@@ -114,7 +123,7 @@ int	main(int argc, char **argv)
 	if (get_arg(data))
 		return (rror(data->err, data));
 	if (pars_map(data) || convert_map(data, data->arg))
-		return (rror(1, data));
+		return (rror(data->err, data));
     for (int i = 0; i < data->arg->height; i++)
     {
         for (int j = 0; j < data->arg->width; j++)
