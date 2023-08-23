@@ -33,7 +33,7 @@ _Bool	chk_line(t_data *data, char *line, int j)
 	int	i;
 
 	i = 0;
-	data->arg->map[j] = (char *)malloc(sizeof(char) * ft_strlen(line) + 1);
+	data->arg->map[j] = (char *)gc_alloc(ft_strlen(line) + 1,sizeof(char) );
 	if (!data->arg->map[j])
 		return (data->err = MLLOC, 1);
 	while (line[i] && line[i] != '\n')
@@ -65,7 +65,7 @@ _Bool	search_map(t_data *data, char **raw)
 	while (raw[i][0] == '\n')
 		i++;
 	data->mlines = data->lines - i + 1;
-	data->arg->map = (char **)malloc(sizeof(char *) * (data->mlines + 1));
+	data->arg->map = (char **)gc_alloc( (data->mlines + 1),sizeof(char *));
 	if (!data->arg->map)
 		return (data->err = MLLOC, 1);
 	data->arg->map[data->mlines] = NULL;

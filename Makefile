@@ -43,7 +43,8 @@ SRC =				cub3d.c					\
 					hooks.c					\
 					player.c				\
 					rays.c					\
-					render.c
+					render.c				\
+					gc.c
 
 SRCS = $(shell find $(SRC_PATH) -type d)
 

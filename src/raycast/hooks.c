@@ -11,20 +11,21 @@ int key_pressed(int keycode, t_raydata *raydata)
 	if (keycode == 65307)
 	{
 		mlx_destroy_image(raydata->mlx,raydata->img_buffer->img);
-		free(raydata->img_buffer);
+//		free(raydata->img_buffer);
 		mlx_destroy_window(raydata->mlx,raydata->mlx_win);
 		mlx_destroy_display(raydata->mlx);
 		free(raydata->mlx);
-        free(raydata->player);
-        free(raydata->EA->texture);
-        free(raydata->EA);
-        free(raydata->WE->texture);
-        free(raydata->WE);
-        free(raydata->SO->texture);
-        free(raydata->SO);
-        free(raydata->NO->texture);
-        free(raydata->NO);
-		free(raydata);
+//        free(raydata->player);
+//        free(raydata->EA->texture);
+//        free(raydata->EA);
+//        free(raydata->WE->texture);
+//        free(raydata->WE);
+//        free(raydata->SO->texture);
+//        free(raydata->SO);
+//        free(raydata->NO->texture);
+//        free(raydata->NO);
+//		free(raydata);
+        gc_free();
 		exit(0);
 	}
 	if (keycode == 97 || keycode == 65361)

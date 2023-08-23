@@ -16,7 +16,7 @@ t_texture *load_texture(void *mlx, char *path)
     t_buffer img;
     t_texture *texture;
 
-    texture = malloc(sizeof(t_texture));
+    texture = gc_alloc(1,sizeof(t_texture));
     if (!texture)
         return (NULL);
     texture->width = 0;
@@ -25,7 +25,7 @@ t_texture *load_texture(void *mlx, char *path)
     if (!img.img) {
         return (NULL);
     }
-    texture->texture = malloc(sizeof(t_color) * texture->width * texture->height);
+    texture->texture = gc_alloc( texture->width * texture->height,sizeof(t_color));
     char *addr = mlx_get_data_addr(img.img, &img.bit_per_pixel, &img.line_length, &img.endian);
     printf("Loading texture %s\t[", path);
     for (int y = 0; y < texture->height; y++)
@@ -46,10 +46,10 @@ int raycast(t_arg *arg)
 {
 	t_raydata *raydata;
 
-	raydata = malloc(sizeof (t_raydata));
+	raydata = gc_alloc(1,sizeof (t_raydata));
 	if (!raydata)
 		return (1);
-	raydata->img_buffer = malloc(sizeof(t_buffer));
+	raydata->img_buffer = gc_alloc(1,sizeof(t_buffer));
 	if (!raydata->img_buffer)
 		return (1);
     raydata->mlx = NULL;
@@ -67,7 +67,7 @@ int raycast(t_arg *arg)
     raydata->WE = load_texture(raydata->mlx,arg->WE);
     raydata->NO = load_texture(raydata->mlx,arg->NO);
     raydata->SO = load_texture(raydata->mlx,arg->SO);
-    raydata->player = malloc(sizeof (t_player));
+    raydata->player = gc_alloc(1,sizeof (t_player));
     int found = 0;
     double grid_size_x = (double) WIDTH / arg->width;
     double grid_size_y = (double) HEIGHT / arg->height;

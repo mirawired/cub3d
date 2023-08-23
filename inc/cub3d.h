@@ -124,6 +124,13 @@ void			ft_unleash(t_stash *stash);
 int				ft_linkbrows(t_stash *stash);
 void			ft_strcpy(char *prev, char *new);
 
+// ..................... GARBAGE COLLECTION ............................................
+#include "gc.h"
+t_garbage **gc_add(t_garbage *ptr);
+void	gc_free(void);
+int	gc_del(void *ptr);
+void	*gc_alloc(size_t nmemb, size_t size);
+
 // ..................... RAYCAST ............................................
 
 # define BUFFER_SIZE 2048
