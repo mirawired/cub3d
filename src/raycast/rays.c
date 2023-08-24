@@ -2,6 +2,59 @@
 // Created by corecaps on 27/07/23.
 //
 #include "./../../inc/raycast.h"
+void draw_slice (t_raydata *data, int texture_index, int draw_start, int draw_end, int x,double dist)
+{
+    static float index[4] = {0, 0, 0, 0};
+    float texture_step;
+    float texture_pos;
+    int y;
+    t_texture *texture;
+
+    if (texture_index == 0)
+        texture = data->NO;
+    else if (texture_index == 1)
+        texture = data->SO;
+    else if (texture_index == 2)
+        texture = data->WE;
+    else if (texture_index == 3)
+        texture = data->EA;
+    texture_step = 1.0 * texture->height / (draw_end - draw_start);
+
+    y = 0;
+    while (y<draw_start)
+    {
+        my_mlx_pixel_put(data->img_buffer, data->ceil_color, (t_int_point){x + OFFSET_3D, y});
+        y++;
+    }
+    texture_pos = 0;
+    while (y<draw_end)
+    {
+//        printf("texture_pos = %f index: %d\n", texture_pos, texture->height * (int)texture_pos + index[texture_index]);
+        int texture_pixel_index = (int)texture_pos * texture->width + (int)index[texture_index];
+        t_color color = texture->texture[texture_pixel_index];
+        color.s_rgb.r -= (int)dist;
+        color.s_rgb.g -= (int)dist;
+        color.s_rgb.b -= (int)dist;
+        my_mlx_pixel_put(data->img_buffer, color, (t_int_point){x + OFFSET_3D, y});
+        y++;
+        texture_pos += texture_step;
+    }
+    while (y<HEIGHT)
+    {
+        my_mlx_pixel_put(data->img_buffer, data->floor_color, (t_int_point){x + OFFSET_3D, y});
+        y++;
+    }
+    index[texture_index] += texture_step;
+    if (index[texture_index] > texture->width)
+        index[texture_index] = 0;
+    if (x == WIDTH - 1)
+    {
+        index[0] = 0;
+        index[1] = 0;
+        index[2] = 0;
+        index[3] = 0;
+    }
+}
 void draw_rays(t_raydata *data){
     t_color ray_color = {0x00FF00};
     t_color ceil_color = {0xb000b0};
@@ -70,17 +123,9 @@ void draw_rays(t_raydata *data){
         int drawEnd = lineHeight / 2 + HEIGHT / 2;
         if (drawEnd >= HEIGHT)
             drawEnd = HEIGHT - 1;
-        if (side == 1) {
-            ray_color.s_rgb.b = 0xF0 - perpWallDist * 10;
-            ray_color.s_rgb.g = 0xF0 - perpWallDist * 10;
-            ray_color.s_rgb.r = 0xF0 - perpWallDist * 10;
-        } else {
-            ray_color.s_rgb.b = 0xFF - perpWallDist * 10;
-            ray_color.s_rgb.g = 0xFF - perpWallDist * 10;
-            ray_color.s_rgb.r = 0xFF - perpWallDist * 10;
-        }
-        draw_line(data,ceil_color, (t_point){x + OFFSET_3D, 0}, (t_point){x + OFFSET_3D, drawStart});
-        draw_line(data, ray_color, (t_point){x + OFFSET_3D, drawStart}, (t_point){x+OFFSET_3D, drawEnd});
-        draw_line(data, floor_color, (t_point){x + OFFSET_3D, drawEnd}, (t_point){x + OFFSET_3D, HEIGHT});
+        draw_slice(data,0, drawStart, drawEnd, x, perpWallDist);
+//        draw_line(data,ceil_color, (t_point){x + OFFSET_3D, 0}, (t_point){x + OFFSET_3D, drawStart});
+//        draw_line(data, ray_color, (t_point){x + OFFSET_3D, drawStart}, (t_point){x+OFFSET_3D, drawEnd});
+//        draw_line(data, floor_color, (t_point){x + OFFSET_3D, drawEnd}, (t_point){x + OFFSET_3D, HEIGHT});
     }
 }

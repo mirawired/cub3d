@@ -93,6 +93,13 @@ int raycast(t_arg *arg)
     raydata->map = arg->fmap;
     raydata->map_height = arg->height;
     raydata->map_width = arg->width;
+    raydata->ceil_color.s_rgb.r = arg->C[0];
+    raydata->ceil_color.s_rgb.g = arg->C[1];
+    raydata->ceil_color.s_rgb.b = arg->C[2];
+    raydata->floor_color.s_rgb.r = arg->F[0];
+    raydata->floor_color.s_rgb.g = arg->F[1];
+    raydata->floor_color.s_rgb.b = arg->F[2];
+
     mlx_hook(raydata->mlx_win, 2, 1L << 0, key_pressed, raydata);
 	mlx_loop_hook(raydata->mlx,render,raydata);
 	mlx_loop(raydata->mlx);

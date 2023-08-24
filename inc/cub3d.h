@@ -204,6 +204,8 @@ typedef struct s_raydata
     t_texture    *SO;
     t_texture    *WE;
     t_texture    *EA;
+    t_color     ceil_color;
+    t_color     floor_color;
 	long		last_frame;
 }	t_raydata;
 
