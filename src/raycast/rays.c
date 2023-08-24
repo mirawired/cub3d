@@ -24,8 +24,7 @@ void draw_slice (t_raydata *data, int texture_index, int draw_start, int draw_en
     texture_pos = 0;
     wall_x *= texture->width;
     while (y < draw_end) {
-        int texture_pixel_index = (int) texture_pos * texture->width + (int) wall_x;
-        t_color color = texture->texture[texture_pixel_index];
+        t_color color = texture->texture[(int) texture_pos * texture->width + (int) wall_x];
         color.s_rgb.r -= (int) dist;
         color.s_rgb.g -= (int) dist;
         color.s_rgb.b -= (int) dist;
@@ -36,10 +35,9 @@ void draw_slice (t_raydata *data, int texture_index, int draw_start, int draw_en
     while (y++ < HEIGHT)
         my_mlx_pixel_put(data->img_buffer, data->floor_color, (t_int_point) {x + OFFSET_3D, y});
 }
+
 void draw_rays(t_raydata *data){
     t_color ray_color = {0x00FF00};
-    t_color ceil_color = {0xb000b0};
-    t_color floor_color = {0x300030};
     int grid_size_x = WIDTH / data->map_width;
     int grid_size_y = HEIGHT / data->map_height;
     t_point pos = {data->player->pos.x / grid_size_x, data->player->pos.y/grid_size_y};
