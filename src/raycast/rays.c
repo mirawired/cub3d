@@ -80,12 +80,14 @@ void draw_rays(t_raydata *data){
                 sideDist.x += deltaDist.x;
                 MapX += stepX;
                 side = 0;
+                ray_color = (t_color){0x0000FF};
             }
             else
             {
                 sideDist.y += deltaDist.y;
                 MapY += stepY;
                 side = 1;
+                ray_color = (t_color){0x00FF00};
             }
             if (data->map[MapY][MapX] > 0)
                 hit = 1;
