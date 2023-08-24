@@ -53,6 +53,29 @@ int key_pressed(int keycode, t_raydata *raydata)
         if (raydata->player->angle > 359)
             raydata->player->angle = 0;
 	}
+
+    if (keycode == 101)  // Keycode for 'e'
+    {
+        double stepSize = 10;  // Adjust the step size as needed
+
+        // Calculate the perpendicular vector to the player's direction vector
+        t_point perpVector = {-raydata->player->dir_vector.y, raydata->player->dir_vector.x};
+
+        raydata->player->pos.x += perpVector.x * stepSize;
+        raydata->player->pos.y += perpVector.y * stepSize;
+        clamp_player(raydata);
+    }
+    if (keycode == 113)  // Keycode for 'q'
+    {
+        double stepSize = 10;  // Adjust the step size as needed
+
+        // Calculate the perpendicular vector to the player's direction vector
+        t_point perpVector = {raydata->player->dir_vector.y, -raydata->player->dir_vector.x};
+
+        raydata->player->pos.x += perpVector.x * stepSize;
+        raydata->player->pos.y += perpVector.y * stepSize;
+        clamp_player(raydata);
+    }
     if (keycode == 119 || keycode == 65362)
     {
         raydata->player->pos.x +=	10 * cos(raydata->player->angle * RADIAN);
