@@ -2,9 +2,7 @@
 // Created by corecaps on 27/07/23.
 //
 #include "./../../inc/raycast.h"
-void draw_slice (t_raydata *data, int texture_index, int draw_start, int draw_end, int x,double dist)
-{
-    static float index[4] = {0, 0, 0, 0};
+void draw_slice (t_raydata *data, int texture_index, int draw_start, int draw_end, int x,double wall_x,double dist) {
     float texture_step;
     float texture_pos;
     int y;
@@ -21,39 +19,22 @@ void draw_slice (t_raydata *data, int texture_index, int draw_start, int draw_en
     texture_step = 1.0 * texture->height / (draw_end - draw_start);
 
     y = 0;
-    while (y<draw_start)
-    {
-        my_mlx_pixel_put(data->img_buffer, data->ceil_color, (t_int_point){x + OFFSET_3D, y});
-        y++;
-    }
+    while (y++ < draw_start)
+        my_mlx_pixel_put(data->img_buffer, data->ceil_color, (t_int_point) {x + OFFSET_3D, y});
     texture_pos = 0;
-    while (y<draw_end)
-    {
-//        printf("texture_pos = %f index: %d\n", texture_pos, texture->height * (int)texture_pos + index[texture_index]);
-        int texture_pixel_index = (int)texture_pos * texture->width + (int)index[texture_index];
+    wall_x *= texture->width;
+    while (y < draw_end) {
+        int texture_pixel_index = (int) texture_pos * texture->width + (int) wall_x;
         t_color color = texture->texture[texture_pixel_index];
-        color.s_rgb.r -= (int)dist;
-        color.s_rgb.g -= (int)dist;
-        color.s_rgb.b -= (int)dist;
-        my_mlx_pixel_put(data->img_buffer, color, (t_int_point){x + OFFSET_3D, y});
+        color.s_rgb.r -= (int) dist;
+        color.s_rgb.g -= (int) dist;
+        color.s_rgb.b -= (int) dist;
+        my_mlx_pixel_put(data->img_buffer, color, (t_int_point) {x + OFFSET_3D, y});
         y++;
         texture_pos += texture_step;
     }
-    while (y<HEIGHT)
-    {
-        my_mlx_pixel_put(data->img_buffer, data->floor_color, (t_int_point){x + OFFSET_3D, y});
-        y++;
-    }
-    index[texture_index] += texture_step;
-    if (index[texture_index] > texture->width)
-        index[texture_index] = 0;
-    if (x == WIDTH - 1)
-    {
-        index[0] = 0;
-        index[1] = 0;
-        index[2] = 0;
-        index[3] = 0;
-    }
+    while (y++ < HEIGHT)
+        my_mlx_pixel_put(data->img_buffer, data->floor_color, (t_int_point) {x + OFFSET_3D, y});
 }
 void draw_rays(t_raydata *data){
     t_color ray_color = {0x00FF00};
@@ -123,9 +104,10 @@ void draw_rays(t_raydata *data){
         int drawEnd = lineHeight / 2 + HEIGHT / 2;
         if (drawEnd >= HEIGHT)
             drawEnd = HEIGHT - 1;
-        draw_slice(data,0, drawStart, drawEnd, x, perpWallDist);
-//        draw_line(data,ceil_color, (t_point){x + OFFSET_3D, 0}, (t_point){x + OFFSET_3D, drawStart});
-//        draw_line(data, ray_color, (t_point){x + OFFSET_3D, drawStart}, (t_point){x+OFFSET_3D, drawEnd});
-//        draw_line(data, floor_color, (t_point){x + OFFSET_3D, drawEnd}, (t_point){x + OFFSET_3D, HEIGHT});
+        double wall_x;
+        if (side == 0) wall_x = pos.y + perpWallDist * ray_dir.y;
+        else wall_x = pos.x + perpWallDist * ray_dir.x;
+        wall_x -= floor((wall_x));
+        draw_slice(data,0, drawStart, drawEnd, x, wall_x,perpWallDist);
     }
 }
