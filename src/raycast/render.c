@@ -36,6 +36,7 @@ int render(t_raydata *raydata)
     }
     draw_line(raydata, white,(t_point) {(double)WIDTH, (double)0},(t_point) {(double)WIDTH, (double)HEIGHT});
     draw_player(raydata);
+    // FPS VIEW :
     draw_rays(raydata);
 	mlx_put_image_to_window(raydata->mlx,
 							raydata->mlx_win,

@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/23 12:40:17 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/25 17:10:39 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void	*gc_alloc(size_t nmemb, size_t size);
 # define TWIDTH 1200
 # define GRID_WIDTH 20
 # define GRID_HEIGHT 20
+# define SPRITENBR 1
 
 typedef struct s_point
 {
@@ -188,12 +189,29 @@ typedef struct s_buffer
 	int		line_length;
 	int		endian;
 }	t_buffer;
+
 typedef struct s_texture
 {
     t_color *texture;
     int     width;
     int     height;
 }   t_texture;
+
+typedef struct s_sprite
+{
+	double		x;
+	double		y;
+	t_texture	*texture;
+}	t_sprite;
+
+typedef struct s_spr
+{
+	t_sprite	sprite[SPRITENBR];
+	double		Zbuffer[WIDTH];
+	int			sprite_order[SPRITENBR];
+	double		spride_dist[SPRITENBR];
+}	t_spr;
+
 typedef struct s_raydata
 {
 	void		*mlx;
@@ -207,9 +225,11 @@ typedef struct s_raydata
     t_texture    *SO;
     t_texture    *WE;
     t_texture    *EA;
+	t_texture	*sprt1;
     t_color     ceil_color;
     t_color     floor_color;
 	long		last_frame;
+	t_spr		*spr;
 }	t_raydata;
 
 int		render(t_raydata *raydata);

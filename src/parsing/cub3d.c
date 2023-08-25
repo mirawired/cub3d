@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:23:01 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/25 10:34:08 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/25 12:06:21 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ _Bool	to_integers(t_data *data, t_arg *arg)
 			return (data->err = MLLOC, 1);
 		while (arg->map[i][j])
 		{
-            if (arg->map[i][j] == 'S')
+            if (is_origin(arg->map[i][j]))
                 arg->fmap[i][j] = -2;
             else
                 arg->fmap[i][j] = arg->map[i][j] - '0';

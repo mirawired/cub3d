@@ -67,6 +67,7 @@ int raycast(t_arg *arg)
     raydata->WE = load_texture(raydata->mlx,arg->WE);
     raydata->NO = load_texture(raydata->mlx,arg->NO);
     raydata->SO = load_texture(raydata->mlx,arg->SO);
+    raydata->sprt1 = load_texture(raydata->mlx, "ghost.xpm");
     raydata->player = gc_alloc(1,sizeof (t_player));
     int found = 0;
     double grid_size_x = (double) WIDTH / arg->width;
