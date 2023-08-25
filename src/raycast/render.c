@@ -11,9 +11,9 @@ int render(t_raydata *raydata)
     int grid_size_y = HEIGHT / raydata->map_height;
 
     t_color grid_color;
-    grid_color.s_rgb.r = (char)40;
-    grid_color.s_rgb.g = (char)40;
-    grid_color.s_rgb.b = (char)40;
+    grid_color.s_rgb.r = (char)127;
+    grid_color.s_rgb.g = (char)0;
+    grid_color.s_rgb.b = (char)0;
     for (int i = 0; i < raydata->map_height * grid_size_y;i += grid_size_y)
     {
         draw_line(raydata, grid_color,(t_point) {(double)0, (double)i},(t_point) {(double)WIDTH, (double)i});
@@ -22,6 +22,9 @@ int render(t_raydata *raydata)
     {
         draw_line(raydata, grid_color,(t_point) {(double)i, (double)0},(t_point) {(double)i, (double)HEIGHT});
     }
+    grid_color.s_rgb.r = (char)40;
+    grid_color.s_rgb.g = (char)40;
+    grid_color.s_rgb.b = (char)40;
     for (int i = 0; i < raydata->map_height;i++) {
         for (int j = 0; j < raydata->map_width;j ++) {
             if (raydata->map[i][j] == 1) {

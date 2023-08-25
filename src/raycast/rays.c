@@ -2,10 +2,42 @@
 // Created by corecaps on 27/07/23.
 //
 #include "./../../inc/raycast.h"
+void draw_slice (t_raydata *data, int texture_index, int draw_start, int draw_end, int x,double wall_x,double dist) {
+    float texture_step;
+    float texture_pos;
+    int y;
+    t_texture *texture;
+
+    if (texture_index == 0)
+        texture = data->NO;
+    else if (texture_index == 1)
+        texture = data->SO;
+    else if (texture_index == 2)
+        texture = data->WE;
+    else if (texture_index == 3)
+        texture = data->EA;
+    texture_step = 1.0 * texture->height / (draw_end - draw_start);
+
+    y = 0;
+    while (y++ < draw_start)
+        my_mlx_pixel_put(data->img_buffer, data->ceil_color, (t_int_point) {x + OFFSET_3D, y});
+    texture_pos = 0;
+    wall_x *= texture->width;
+    while (y < draw_end) {
+        t_color color = texture->texture[(int) texture_pos * texture->width + (int) wall_x];
+        color.s_rgb.r -= (int) dist;
+        color.s_rgb.g -= (int) dist;
+        color.s_rgb.b -= (int) dist;
+        my_mlx_pixel_put(data->img_buffer, color, (t_int_point) {x + OFFSET_3D, y});
+        y++;
+        texture_pos += texture_step;
+    }
+    while (y++ < HEIGHT)
+        my_mlx_pixel_put(data->img_buffer, data->floor_color, (t_int_point) {x + OFFSET_3D, y});
+}
+
 void draw_rays(t_raydata *data){
     t_color ray_color = {0x00FF00};
-    t_color ceil_color = {0xb000b0};
-    t_color floor_color = {0x300030};
     int grid_size_x = WIDTH / data->map_width;
     int grid_size_y = HEIGHT / data->map_height;
     t_point pos = {data->player->pos.x / grid_size_x, data->player->pos.y/grid_size_y};
@@ -48,12 +80,14 @@ void draw_rays(t_raydata *data){
                 sideDist.x += deltaDist.x;
                 MapX += stepX;
                 side = 0;
+                ray_color = (t_color){0x0000FF};
             }
             else
             {
                 sideDist.y += deltaDist.y;
                 MapY += stepY;
                 side = 1;
+                ray_color = (t_color){0x00FF00};
             }
             if (data->map[MapY][MapX] > 0)
                 hit = 1;
@@ -70,17 +104,10 @@ void draw_rays(t_raydata *data){
         int drawEnd = lineHeight / 2 + HEIGHT / 2;
         if (drawEnd >= HEIGHT)
             drawEnd = HEIGHT - 1;
-        if (side == 1) {
-            ray_color.s_rgb.b = 0xF0 - perpWallDist * 10;
-            ray_color.s_rgb.g = 0xF0 - perpWallDist * 10;
-            ray_color.s_rgb.r = 0xF0 - perpWallDist * 10;
-        } else {
-            ray_color.s_rgb.b = 0xFF - perpWallDist * 10;
-            ray_color.s_rgb.g = 0xFF - perpWallDist * 10;
-            ray_color.s_rgb.r = 0xFF - perpWallDist * 10;
-        }
-        draw_line(data,ceil_color, (t_point){x + OFFSET_3D, 0}, (t_point){x + OFFSET_3D, drawStart});
-        draw_line(data, ray_color, (t_point){x + OFFSET_3D, drawStart}, (t_point){x+OFFSET_3D, drawEnd});
-        draw_line(data, floor_color, (t_point){x + OFFSET_3D, drawEnd}, (t_point){x + OFFSET_3D, HEIGHT});
+        double wall_x;
+        if (side == 0) wall_x = pos.y + perpWallDist * ray_dir.y;
+        else wall_x = pos.x + perpWallDist * ray_dir.x;
+        wall_x -= floor((wall_x));
+        draw_slice(data,0, drawStart, drawEnd, x, wall_x,perpWallDist);
     }
 }

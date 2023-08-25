@@ -11,12 +11,10 @@ int key_pressed(int keycode, t_raydata *raydata)
 	if (keycode == 65307)
 	{
 		mlx_destroy_image(raydata->mlx,raydata->img_buffer->img);
-		free(raydata->img_buffer);
 		mlx_destroy_window(raydata->mlx,raydata->mlx_win);
 		mlx_destroy_display(raydata->mlx);
 		free(raydata->mlx);
-        free(raydata->player);
-		free(raydata);
+        gc_free();
 		exit(0);
 	}
 	if (keycode == 97 || keycode == 65361)
@@ -27,7 +25,6 @@ int key_pressed(int keycode, t_raydata *raydata)
         raydata->player->dir_vector.y = old_dir.x * sin(-3 * RADIAN) + raydata->player->dir_vector.y * cos(-3 * RADIAN);
         raydata->player->plane_vector.x = raydata->player->plane_vector.x * cos(-3 * RADIAN) - raydata->player->plane_vector.y * sin(-3 * RADIAN);
         raydata->player->plane_vector.y = old_plane.x * sin(-3 * RADIAN) + raydata->player->plane_vector.y * cos(-3 * RADIAN);
-
         raydata->player->angle -= 3;
         if (raydata->player->angle < 0)
             raydata->player->angle = 359;
@@ -44,6 +41,23 @@ int key_pressed(int keycode, t_raydata *raydata)
         if (raydata->player->angle > 359)
             raydata->player->angle = 0;
 	}
+
+    if (keycode == 101)  // Keycode for 'e'
+    {
+        double stepSize = 10;
+        t_point perpVector = {-raydata->player->dir_vector.y, raydata->player->dir_vector.x};
+        raydata->player->pos.x += perpVector.x * stepSize;
+        raydata->player->pos.y += perpVector.y * stepSize;
+        clamp_player(raydata);
+    }
+    if (keycode == 113)  // Keycode for 'q'
+    {
+        double stepSize = 10;
+        t_point perpVector = {raydata->player->dir_vector.y, -raydata->player->dir_vector.x};
+        raydata->player->pos.x += perpVector.x * stepSize;
+        raydata->player->pos.y += perpVector.y * stepSize;
+        clamp_player(raydata);
+    }
     if (keycode == 119 || keycode == 65362)
     {
         raydata->player->pos.x +=	10 * cos(raydata->player->angle * RADIAN);

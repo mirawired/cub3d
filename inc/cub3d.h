@@ -141,6 +141,13 @@ void			ft_unleash(t_stash *stash);
 int				ft_linkbrows(t_stash *stash);
 void			ft_strcpy(char *prev, char *new);
 
+// ..................... GARBAGE COLLECTION ............................................
+#include "gc.h"
+t_garbage **gc_add(t_garbage *ptr);
+void	gc_free(void);
+int	gc_del(void *ptr);
+void	*gc_alloc(size_t nmemb, size_t size);
+
 // ..................... RAYCAST ............................................
 
 # define BUFFER_SIZE 2048
@@ -181,7 +188,12 @@ typedef struct s_buffer
 	int		line_length;
 	int		endian;
 }	t_buffer;
-
+typedef struct s_texture
+{
+    t_color *texture;
+    int     width;
+    int     height;
+}   t_texture;
 typedef struct s_raydata
 {
 	void		*mlx;
@@ -191,6 +203,12 @@ typedef struct s_raydata
     int        map_width;
     int        map_height;
 	int			**map;
+    t_texture    *NO;
+    t_texture    *SO;
+    t_texture    *WE;
+    t_texture    *EA;
+    t_color     ceil_color;
+    t_color     floor_color;
 	long		last_frame;
 }	t_raydata;
 
@@ -205,7 +223,7 @@ void	fill_rectangle(t_raydata *raydata, t_color color, t_point top_left, t_point
 void	draw_rays(t_raydata *raydata);
 t_point	calc_point(t_point from, double angle, double distance);
 
-int		raycast(t_data *data, t_arg *arg);
+int		raycast(t_arg *arg);
 void	grab_arg(t_raydata *raydata, t_arg *arg);
 
 #endif

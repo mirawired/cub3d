@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:23:01 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/23 12:48:10 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/25 10:34:08 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ t_data	*init_data(void)
 {
 	t_data	*data;
 
-	data = (t_data *)malloc(sizeof(t_data));
+	data = (t_data *)gc_alloc(1,sizeof(t_data));
 	if (!data)
 		return (NULL);
-	data->arg = (t_arg *)malloc(sizeof(t_arg));
+	data->arg = (t_arg *) gc_alloc(1,sizeof(t_arg));
 	if (!data->arg)
 		return (free(data), NULL);
 	data->arg->NO = NULL;
@@ -57,26 +57,26 @@ _Bool	to_integers(t_data *data, t_arg *arg)
 	int	j;
 
 	i = 0;
-	arg->fmap = (int **)malloc(sizeof(int *) * arg->height);
+	arg->fmap = (int **)gc_alloc( arg->height,sizeof(int *));
 	if (!arg->fmap)
 		return (data->err = MLLOC, 1);
 	while (i < arg->height)
 	{
 		j = 0;
-		arg->fmap[i] = (int *)malloc(sizeof(int) * arg->width);
+		arg->fmap[i] = (int *) gc_alloc(  arg->width,sizeof(int));
 		if (!arg->fmap[i])
 			return (data->err = MLLOC, 1);
 		while (arg->map[i][j])
 		{
-			if (arg->map[i][j] == 'S')
-				arg->fmap[i][j] = 2;
-			else
-				arg->fmap[i][j] = arg->map[i][j] - '0';
+            if (arg->map[i][j] == 'S')
+                arg->fmap[i][j] = -2;
+            else
+                arg->fmap[i][j] = arg->map[i][j] - '0';
 			j++;
 		}
 		while (j < arg->width)
 		{
-			arg->fmap[i][j] = '1';
+			arg->fmap[i][j] = 1;
 			j++;
 		}
 		i++;
@@ -123,15 +123,10 @@ int	main(int argc, char **argv)
 	if (get_arg(data))
 		return (rror(data->err, data));
 	if (pars_map(data) || convert_map(data, data->arg))
-		return (rror(data->err, data));
-    for (int i = 0; i < data->arg->height; i++)
-    {
-        for (int j = 0; j < data->arg->width; j++)
-            printf("%d-", data->arg->fmap[i][j]);
-        printf("\n");
-    }
-    	if (raycast(data, data->arg))
 		return (rror(1, data));
+  	if (raycast(data->arg))
+		return (rror(1, data));
+      gc_free();
 	return (EXIT_SUCCESS);
 }
 
