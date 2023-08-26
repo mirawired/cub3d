@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/25 17:10:39 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/26 15:21:01 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,5 +245,7 @@ t_point	calc_point(t_point from, double angle, double distance);
 
 int		raycast(t_arg *arg);
 void	grab_arg(t_raydata *raydata, t_arg *arg);
+
+void	draw_sprites(t_raydata * data, double perpWallDist, t_point pos);
 
 #endif

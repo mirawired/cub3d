@@ -17,7 +17,6 @@ void draw_slice (t_raydata *data, int texture_index, int draw_start, int draw_en
     else if (texture_index == 3)
         texture = data->EA;
     texture_step = 1.0 * texture->height / (draw_end - draw_start);
-
     y = 0;
     while (y++ < draw_start)
         my_mlx_pixel_put(data->img_buffer, data->ceil_color, (t_int_point) {x + OFFSET_3D, y});
@@ -37,6 +36,7 @@ void draw_slice (t_raydata *data, int texture_index, int draw_start, int draw_en
 }
 
 void draw_rays(t_raydata *data){
+    double  perpWallDist;
     t_color ray_color = {0x00FF00};
     int grid_size_x = WIDTH / data->map_width;
     int grid_size_y = HEIGHT / data->map_height;
@@ -48,7 +48,7 @@ void draw_rays(t_raydata *data){
         int MapY = (int)pos.y;
         t_point sideDist;
         t_point deltaDist = {fabs(1 / ray_dir.x), fabs(1 / ray_dir.y)};
-        double perpWallDist;
+        // double perpWallDist;
         int stepX;
         int stepY;
         int hit = 0;
@@ -109,29 +109,6 @@ void draw_rays(t_raydata *data){
         else wall_x = pos.x + perpWallDist * ray_dir.x;
         wall_x -= floor((wall_x));
         draw_slice(data,0, drawStart, drawEnd, x, wall_x,perpWallDist);
-        /*SPRITES                                                                            */
-        data->spr = (t_spr *)gc_alloc(1, sizeof(t_spr));
-        t_spr   *spr = data->spr;
-        spr->sprite[0].x = 1.0;
-        spr->sprite[0].y = 1.0;
-        spr->sprite[0].texture = data->sprt1;
-        spr->Zbuffer[x] = perpWallDist;
-        int i = 0;
-        // while (i < SPRITENBR)
-        // {
-        //     spr->sprite_order[i] = i;
-        //     spr->spride_dist[i] = ((pos.x - spr->sprite[i].x) * (pos.x - spr->sprite[i].x) + (pos.y - spr->sprite[i].y) * (pos.y - spr->sprite[i].y));
-        //      i++;
-        // }
-        // sort_sprites(spr);
-        while (i < SPRITENBR)
-        {
-            double  spriteX = spr->sprite[spr->sprite_order[i]].x - pos.x;
-            double  spriteY = spr->sprite[spr->sprite_order[i]].y - pos.y;
-
-            double invDet = 1.0 / (data->player->plane_vector.x * data->player->dir_vector.y - data->player->dir_vector.x * data->player->plane_vector.y);
-            double transX = invDet * (data->player->dir_vector.y * spriteX - data->player->dir_vector.x * spriteY);
-            double transY = invDet * (-data->player->plane_vector.y * spriteX + data->player->plane_vector.x + data->player->plane_vector.x * spriteY);
-        }
     }
+    draw_sprites(data, perpWallDist, pos);
 }
