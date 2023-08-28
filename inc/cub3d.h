@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/26 15:21:01 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/28 14:58:37 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void	*gc_alloc(size_t nmemb, size_t size);
 # define TWIDTH 1200
 # define GRID_WIDTH 20
 # define GRID_HEIGHT 20
-# define SPRITENBR 1
+# define SPRITENBR 2
 
 typedef struct s_point
 {
@@ -225,7 +225,8 @@ typedef struct s_raydata
     t_texture    *SO;
     t_texture    *WE;
     t_texture    *EA;
-	t_texture	*sprt1;
+	// t_texture	*sprt1;
+	// t_texture	*sprt2;
     t_color     ceil_color;
     t_color     floor_color;
 	long		last_frame;

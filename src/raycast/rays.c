@@ -41,6 +41,7 @@ void draw_rays(t_raydata *data){
     int grid_size_x = WIDTH / data->map_width;
     int grid_size_y = HEIGHT / data->map_height;
     t_point pos = {data->player->pos.x / grid_size_x, data->player->pos.y/grid_size_y};
+
     for (int x = 0; x< WIDTH;x++) {
         double cameraX = 2 * x / (double)WIDTH - 1;
         t_point ray_dir = {data->player->dir_vector.x + data->player->plane_vector.x * cameraX, data->player->dir_vector.y + data->player->plane_vector.y * cameraX};
@@ -109,6 +110,7 @@ void draw_rays(t_raydata *data){
         else wall_x = pos.x + perpWallDist * ray_dir.x;
         wall_x -= floor((wall_x));
         draw_slice(data,0, drawStart, drawEnd, x, wall_x,perpWallDist);
+        data->spr->Zbuffer[x] = perpWallDist;
     }
     draw_sprites(data, perpWallDist, pos);
 }
