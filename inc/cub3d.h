@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/28 14:58:37 by avassor          ###   ########.fr       */
+/*   Updated: 2023/08/30 15:49:04 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ typedef struct s_spr
 	t_sprite	sprite[SPRITENBR];
 	double		Zbuffer[WIDTH];
 	int			sprite_order[SPRITENBR];
-	double		spride_dist[SPRITENBR];
+	double		sprite_dist[SPRITENBR];
 }	t_spr;
 
 typedef struct s_raydata
@@ -225,8 +225,6 @@ typedef struct s_raydata
     t_texture    *SO;
     t_texture    *WE;
     t_texture    *EA;
-	// t_texture	*sprt1;
-	// t_texture	*sprt2;
     t_color     ceil_color;
     t_color     floor_color;
 	long		last_frame;
