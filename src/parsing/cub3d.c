@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:23:01 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/25 12:06:21 by avassor          ###   ########.fr       */
+/*   Updated: 2023/09/05 13:31:25 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@ t_data	*init_data(void)
 {
 	t_data	*data;
 
-	data = (t_data *)gc_alloc(1,sizeof(t_data));
-	if (!data)
+	data = (t_data *)gc_alloc(1, sizeof(t_data));
+	if (!data || init_alloc(data))
 		return (NULL);
-	data->arg = (t_arg *) gc_alloc(1,sizeof(t_arg));
-	if (!data->arg)
-		return (free(data), NULL);
 	data->arg->NO = NULL;
 	data->arg->SO = NULL;
 	data->arg->WE = NULL;
@@ -39,8 +36,6 @@ t_data	*init_data(void)
 	data->pars.W = 0;
 	data->arg->height = -1;
 	data->arg->width = -1;
-	data->arg->rgbC = (t_color *)malloc(sizeof(t_color));
-	data->arg->rgbF = (t_color *)malloc(sizeof(t_color));
 	return (data);
 }
 
@@ -57,23 +52,17 @@ _Bool	to_integers(t_data *data, t_arg *arg)
 	int	j;
 
 	i = 0;
-	arg->fmap = (int **)gc_alloc( arg->height,sizeof(int *));
+	arg->fmap = (int **)gc_alloc(arg->height, sizeof(int *));
 	if (!arg->fmap)
 		return (data->err = MLLOC, 1);
 	while (i < arg->height)
 	{
 		j = 0;
-		arg->fmap[i] = (int *) gc_alloc(  arg->width,sizeof(int));
+		arg->fmap[i] = (int *)gc_alloc(arg->width, sizeof(int));
 		if (!arg->fmap[i])
 			return (data->err = MLLOC, 1);
 		while (arg->map[i][j])
-		{
-            if (is_origin(arg->map[i][j]))
-                arg->fmap[i][j] = -2;
-            else
-                arg->fmap[i][j] = arg->map[i][j] - '0';
-			j++;
-		}
+			do_conv(arg, i, j++);
 		while (j < arg->width)
 		{
 			arg->fmap[i][j] = 1;
@@ -86,7 +75,6 @@ _Bool	to_integers(t_data *data, t_arg *arg)
 
 _Bool	convert_map(t_data *data, t_arg *arg)
 {
-	(void)data;
 	int	i;
 	int	j;
 	int	k;
@@ -94,7 +82,6 @@ _Bool	convert_map(t_data *data, t_arg *arg)
 	i = 0;
 	k = 0;
 	arg->height = data->mlines;
-	i = 0;
 	while (i < data->mlines)
 	{
 		j = 0;
@@ -124,17 +111,8 @@ int	main(int argc, char **argv)
 		return (rror(data->err, data));
 	if (pars_map(data) || convert_map(data, data->arg))
 		return (rror(1, data));
-  	if (raycast(data->arg))
+	if (raycast(data->arg))
 		return (rror(1, data));
-      gc_free();
+	gc_free();
 	return (EXIT_SUCCESS);
 }
-
-// PRINT RAW
-	// int i = 0;
-	// while (data->raw[i] && i < data->lines)
-	// {
-	// 	printf("%s", data->raw[i]);
-	// 	i++;
-	// }
-	//

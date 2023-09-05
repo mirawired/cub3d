@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:33:29 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/22 14:05:53 by avassor          ###   ########.fr       */
+/*   Updated: 2023/09/05 12:52:15 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ _Bool	chk_line(t_data *data, char *line, int j)
 	int	i;
 
 	i = 0;
-	data->arg->map[j] = (char *)gc_alloc(ft_strlen(line) + 1,sizeof(char) );
+	data->arg->map[j] = (char *)gc_alloc(ft_strlen(line) + 1, sizeof(char));
 	if (!data->arg->map[j])
 		return (data->err = MLLOC, 1);
 	while (line[i] && line[i] != '\n')
@@ -65,22 +65,14 @@ _Bool	search_map(t_data *data, char **raw)
 	while (raw[i][0] == '\n')
 		i++;
 	data->mlines = data->lines - i + 1;
-	data->arg->map = (char **)gc_alloc( (data->mlines + 1),sizeof(char *));
+	data->arg->map = (char **)gc_alloc((data->mlines + 1), sizeof(char *));
 	if (!data->arg->map)
 		return (data->err = MLLOC, 1);
 	data->arg->map[data->mlines] = NULL;
 	while (i <= data->lines)
 	{
-		if ((!j || i == data->lines))
-		{
-			if (chk_bottop(data, raw[i], j))
-				return (1);
-		}
-		else
-		{
-			if (chk_line(data, raw[i], j))
-				return (1);
-		}
+		if (map_op(data, raw, i, j))
+			return (1);
 		i++;
 		j++;
 	}
@@ -89,7 +81,7 @@ _Bool	search_map(t_data *data, char **raw)
 	return (0);
 }
 
-_Bool	convert_nbr(t_data *data, int *arr, char *raw, int l, int k)
+_Bool	convert_nbr(t_data *data, int *arr, char *raw, int l)
 {
 	char	*tmp;
 
@@ -98,10 +90,11 @@ _Bool	convert_nbr(t_data *data, int *arr, char *raw, int l, int k)
 	if (!tmp)
 		return (data->err = MLLOC, 1);
 	ft_strncpy(raw, tmp, l);
-	arr[k] = ft_atoi(tmp);
+	arr[data->k] = ft_atoi(tmp);
 	free(tmp);
-	if (arr[k] < 0 || arr[k] > 255)
+	if (arr[data->k] < 0 || arr[data->k] > 255)
 		return (data->err = ARGRR, 1);
+	data->k++;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:34:28 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/16 11:30:08 by avassor          ###   ########.fr       */
+/*   Updated: 2023/09/05 12:03:57 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,12 @@ _Bool	is_origin(char id)
 	if (id == 'N' || id == 'S' || id == 'E' || id == 'W')
 		return (1);
 	return (0);
+}
+
+void	do_conv(t_arg *arg, int i, int j)
+{
+	if (is_origin(arg->map[i][j]))
+		arg->fmap[i][j] = -2;
+	else
+		arg->fmap[i][j] = arg->map[i][j] - '0';
 }

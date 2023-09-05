@@ -112,5 +112,5 @@ void draw_rays(t_raydata *data){
         draw_slice(data,0, drawStart, drawEnd, x, wall_x,perpWallDist);
         data->spr->Zbuffer[x] = perpWallDist;
     }
-    draw_sprites(data, perpWallDist, pos);
+    draw_sprites(data, pos);
 }

@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/30 15:49:04 by avassor          ###   ########.fr       */
+/*   Updated: 2023/09/05 13:30:26 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define RFD 135
 # define NOID 136
 # define MAPERROR 137
+# define BLACK -16777216
 
 typedef struct s_rgb
 {
@@ -81,6 +82,7 @@ typedef struct s_data
 	int		lines;
 	int		mlines;
 	int		fd;
+	int		k;
 	size_t	err;
 	t_pars	pars;
 	t_arg	*arg;
@@ -106,7 +108,7 @@ _Bool	ft_strncmp(char *needle, char *haystack, int size);
 _Bool	copy_nbr(t_data *data, int *arr, char *raw);
 _Bool	search_id_nbr(t_data *data, int *arr, char *id);
 int		ft_atoi(const char *p);
-_Bool	convert_nbr(t_data *data, int *arr, char *raw, int l, int k);
+_Bool	convert_nbr(t_data *data, int *arr, char *raw, int l);
 void	ft_strncpy(char *prev, char *new, int nbr);
 void	clear_line(char *raw);
 _Bool	chk_bottop(t_data *data, char *line, int j);
@@ -118,6 +120,8 @@ _Bool	chk_edges(t_data *data, char c, char d);
 _Bool	convert_map(t_data *data, t_arg *arg);
 _Bool	to_integers(t_data *data, t_arg *arg);
 _Bool	convert_rgb(t_arg *arg);
+void	do_conv(t_arg *arg, int i, int j);
+_Bool	map_op(t_data *data, char **raw, int i, int j);
 
 // ..................... GNL ................................................
 
@@ -204,12 +208,32 @@ typedef struct s_sprite
 	t_texture	*texture;
 }	t_sprite;
 
+typedef struct s_cs
+{
+	double	spriteX;
+	double	spriteY;
+	double	invDet;
+	double	transX;
+	double	transY;
+	int		spriteScreenX;
+	int		vMoveScreen;
+	int		spriteHeight;
+	int		drawStartY;
+	int		drawEndY;
+	int		spriteWidth;
+	int		drawStartX;
+	int		drawEndX;
+	int		stripe;
+}	t_cs;
+
 typedef struct s_spr
 {
+	t_sprite	*curr;
 	t_sprite	sprite[SPRITENBR];
 	double		Zbuffer[WIDTH];
 	int			sprite_order[SPRITENBR];
 	double		sprite_dist[SPRITENBR];
+	t_cs		cs;
 }	t_spr;
 
 typedef struct s_raydata
@@ -245,6 +269,10 @@ t_point	calc_point(t_point from, double angle, double distance);
 int		raycast(t_arg *arg);
 void	grab_arg(t_raydata *raydata, t_arg *arg);
 
-void	draw_sprites(t_raydata * data, double perpWallDist, t_point pos);
+void	draw_sprites(t_raydata * data, t_point pos);
+void	sort_sprites(t_spr	*spr, t_point pos);
+void	comp_sprites(t_raydata *data, t_sprite *curr, t_point pos);
+void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr);
+void	comp_long(t_raydata *data, t_cs *cs);
 
 #endif
