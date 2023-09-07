@@ -17,7 +17,7 @@ _Bool	copy_id(t_data *data, char **fill, char *raw)
 	int	i;
 
 	i = 0;
-	*fill = (char *)malloc(sizeof(char) * (ft_strlen(&raw[5]) + 1));
+	*fill = (char *)gc_alloc( (ft_strlen(&raw[5]) + 1),sizeof(char));
 	if (!*fill)
 		return (data->err = MLLOC, 1);
 	ft_strcpy(&raw[5], *fill);

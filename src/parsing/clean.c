@@ -19,12 +19,12 @@ void	clean_raw(t_data *data)
 	i = 0;
 	while (i < data->lines)
 	{
-		free(data->raw[i]);
+		gc_del(data->raw[i]);
 		i++;
 	}
 	if (i)
 	{
-		free(data->raw);
+		gc_del(data->raw);
 		data->raw = NULL;
 	}
 }

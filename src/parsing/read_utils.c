@@ -14,8 +14,7 @@
 
 _Bool	copy_line(t_data *data, char *line)
 {
-	data->raw[data->lines] = (char *)malloc(sizeof(char)
-			* (ft_strlen(line) + 1));
+	data->raw[data->lines] = (char *)gc_alloc((ft_strlen(line) + 1),sizeof(char));
 	if (!data->raw[data->lines])
 		return (data->err = MLLOC, clean_raw(data), 1);
 	ft_strcpy(line, data->raw[data->lines]);
@@ -28,13 +27,12 @@ _Bool	upscale_raw(t_data *data)
 	int		count;
 
 	count = 0;
-	new = (char **)malloc(sizeof(char *) * (data->lines + 1));
+	new = (char **)gc_alloc((data->lines + 1),sizeof(char *) );
 	if (!new)
 		return (data->err = MLLOC, 1);
 	while (count < data->lines)
 	{
-		new[count] = (char *)malloc(sizeof(char)
-				* (ft_strlen(data->raw[count]) + 1));
+		new[count] = (char *)gc_alloc((ft_strlen(data->raw[count]) + 1),sizeof(char));
 		if (!new[count])
 			return (data->err = MLLOC, clean_raw(data), 1);
 		ft_strcpy(data->raw[count], new[count]);
