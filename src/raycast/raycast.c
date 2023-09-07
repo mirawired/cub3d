@@ -70,10 +70,10 @@ int raycast(t_arg *arg)
     raydata->spr = (t_spr *)gc_alloc(1, sizeof(t_spr));
     raydata->spr->sprite[0].texture = load_texture(raydata->mlx, "ghost.xpm");
     raydata->spr->sprite[1].texture = load_texture(raydata->mlx, "ghost2.xpm");
-    raydata->spr->sprite[0].x = 2.0;
-    raydata->spr->sprite[0].y = 2.0;
-    raydata->spr->sprite[1].x = 3.0;
-    raydata->spr->sprite[1].y = 3.0;
+    raydata->spr->sprite[0].x = 1.0;
+    raydata->spr->sprite[0].y = 1.0;
+    raydata->spr->sprite[1].x = 1.0;
+    raydata->spr->sprite[1].y = 2.0;
     raydata->player = gc_alloc(1,sizeof (t_player));
     int found = 0;
     double grid_size_x = (double) WIDTH / arg->width;

@@ -32,7 +32,7 @@ void	sort_sprites(t_spr	*spr, t_point pos)
 		{
 			spr->sprite_order[i] = i + 1;
 			spr->sprite_order[i + 1] = i;
-			i = -1;
+            break;
 		}
 		i++;
 	}

@@ -25,6 +25,7 @@ int render(t_raydata *raydata)
     grid_color.s_rgb.r = (char)40;
     grid_color.s_rgb.g = (char)40;
     grid_color.s_rgb.b = (char)40;
+    t_color nmi_color = {0xFF0000};
     for (int i = 0; i < raydata->map_height;i++) {
         for (int j = 0; j < raydata->map_width;j ++) {
             if (raydata->map[i][j] == 1) {
@@ -32,12 +33,43 @@ int render(t_raydata *raydata)
                                (t_point) {(double)(j * grid_size_x), (double)(i * grid_size_y)},
                                (t_point) {(double)((j + 1) * grid_size_x), (double)((i + 1) * grid_size_y)});
             }
+            if ( j == (int)raydata->spr->sprite[0].x &&  i== (int)raydata->spr->sprite[0].y) {
+                fill_rectangle(raydata, nmi_color,
+                               (t_point) {(double) (j * grid_size_x + (double) grid_size_x / 3),
+                                          (double) (i * grid_size_y + (double) grid_size_y / 3)},
+                               (t_point) {(double) ((j + 1) * grid_size_x - (double) grid_size_x / 3),
+                                          (double) ((i + 1) * grid_size_y - (double) grid_size_y / 3)});
+            }
+            if ( j == (int)raydata->spr->sprite[1].x &&  i== (int)raydata->spr->sprite[1].y) {
+                fill_rectangle(raydata, nmi_color,
+                               (t_point) {(double) (j * grid_size_x + (double) grid_size_x / 3),
+                                          (double) (i * grid_size_y + (double) grid_size_y / 3)},
+                               (t_point) {(double) ((j + 1) * grid_size_x - (double) grid_size_x / 3),
+                                          (double) ((i + 1) * grid_size_y - (double) grid_size_y / 3)});
+            }
         }
     }
+    if (raydata->map[(int)raydata->spr->sprite[0].y][(int)raydata->spr->sprite[0].x+1] == 0)
+        raydata->spr->sprite[0].x += 0.01;
+    if (raydata->map[(int)raydata->spr->sprite[0].y+1][(int)raydata->spr->sprite[0].x] == 0)
+        raydata->spr->sprite[0].y += 0.03;
+    if (raydata->map[(int)raydata->spr->sprite[1].y][(int)raydata->spr->sprite[1].x+1] == 0)
+        raydata->spr->sprite[1].x += 0.03;
+    if (raydata->map[(int)raydata->spr->sprite[1].y+1][(int)raydata->spr->sprite[1].x] == 0)
+        raydata->spr->sprite[1].y += 0.01;
+    if (raydata->spr->sprite[0].x > raydata->map_width)
+        raydata->spr->sprite[0].x = 0;
+    if (raydata->spr->sprite[0].y > raydata->map_height)
+        raydata->spr->sprite[0].y = 0;
+    if (raydata->spr->sprite[1].x > raydata->map_width)
+        raydata->spr->sprite[1].x = 0;
+    if (raydata->spr->sprite[1].y > raydata->map_height)
+        raydata->spr->sprite[1].y = 0;
+
     draw_line(raydata, white,(t_point) {(double)WIDTH, (double)0},(t_point) {(double)WIDTH, (double)HEIGHT});
     draw_player(raydata);
-    // FPS VIEW :
     draw_rays(raydata);
+    draw_sprites(raydata, raydata->player->pos);
 	mlx_put_image_to_window(raydata->mlx,
 							raydata->mlx_win,
 							raydata->img_buffer->img,

@@ -113,4 +113,5 @@ void draw_rays(t_raydata *data){
         data->spr->Zbuffer[x] = perpWallDist;
     }
     draw_sprites(data, pos);
+
 }
