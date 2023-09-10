@@ -6,8 +6,9 @@
 int my_mlx_pixel_put(t_buffer *data, t_color color, t_int_point coord)
 {
 	char	*dst;
-    if (coord.x < 0 || coord.x >= TWIDTH || coord.y < 0 || coord.y >= HEIGHT)
-        return (-1);
+    if (coord.x < 0 || coord.x > WIDTH || coord.y < 0 || coord.y > HEIGHT) {
+        printf("error : %d %d\n",coord.x,coord.y);
+        return (-1); }
 	dst = data->address + (coord.y * data->line_length + coord.x * (data->bit_per_pixel / 8));
 	*(unsigned int*)dst = color.color;
 	return (0);
@@ -39,7 +40,7 @@ void	clear_buffer(t_raydata *raydata)
 	black.color = 0;
 	for (int y = 0; y < HEIGHT; y ++)
 	{
-		for (int x = 0;x < TWIDTH;x ++)
+		for (int x = 0;x < WIDTH;x ++)
         {
             t_int_point coord = {x, y};
             my_mlx_pixel_put(raydata->img_buffer, black, coord);

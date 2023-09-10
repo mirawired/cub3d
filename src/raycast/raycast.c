@@ -54,9 +54,9 @@ int raycast(t_arg *arg)
 		return (1);
     raydata->mlx = NULL;
 	raydata->mlx = mlx_init();
-    raydata->mlx_win = mlx_new_window(raydata->mlx,TWIDTH,HEIGHT,"RAYCAST");
+    raydata->mlx_win = mlx_new_window(raydata->mlx,WIDTH,HEIGHT,"RAYCAST");
 	raydata->img_buffer->img = mlx_new_image(raydata->mlx,
-										  TWIDTH +  1,
+										  WIDTH +  1,
 										  HEIGHT + 1);
 	raydata->img_buffer->address = mlx_get_data_addr(raydata->img_buffer->img,
 												  &raydata->img_buffer->bit_per_pixel,

@@ -93,7 +93,7 @@ void draw_rays(t_raydata *data){
             if (data->map[MapY][MapX] > 0)
                 hit = 1;
         }
-        draw_line(data, ray_color, (t_point){pos.x * grid_size_x, pos.y * grid_size_y}, (t_point){MapX * grid_size_x, MapY * grid_size_y});
+//        draw_line(data, ray_color, (t_point){pos.x * grid_size_x, pos.y * grid_size_y}, (t_point){MapX * grid_size_x, MapY * grid_size_y});
         if (side == 0)
             perpWallDist = sideDist.x - deltaDist.x;
         else
