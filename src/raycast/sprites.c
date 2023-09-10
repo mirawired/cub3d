@@ -98,7 +98,7 @@ void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr)
 			color = curr->texture->texture[64 * texy + texx];
 			if (color.color != BLACK)
 				my_mlx_pixel_put(data->img_buffer, color,
-					(t_int_point){cs->stripe + OFFSET_3D, y});
+					(t_int_point){cs->stripe , y});
 			y++;
 		}
 	}

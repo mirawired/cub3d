@@ -41,27 +41,29 @@ void nmi_ai(const t_raydata *raydata) {
 }
 
 void draw_minimap(t_raydata *raydata) {
-    int grid_size_x = MAP_WIDTH / raydata->map_width;
-    int grid_size_y = MAP_HEIGHT / raydata->map_height;
-    fill_rectangle(raydata,(t_color)0,(t_point){OFFSET_MAP_X,OFFSET_MAP_Y},(t_point){OFFSET_MAP_X + MAP_WIDTH, OFFSET_MAP_Y + MAP_HEIGHT});
+    int grid_size_x = MAP_WIDTH / (raydata->map_width);
+    int grid_size_y = MAP_HEIGHT / (raydata->map_height);
     t_color grid_color;
-    grid_color.s_rgb.r = (char)127;
+    grid_color.s_rgb.r = (char)255;
     grid_color.s_rgb.g = (char)0;
     grid_color.s_rgb.b = (char)0;
-    for (int i = OFFSET_MAP_Y; i < MAP_HEIGHT + OFFSET_MAP_Y;i += grid_size_y)
-    {
-        draw_line(raydata, grid_color,(t_point) {(double)OFFSET_MAP_X, (double)i},(t_point) {(double)OFFSET_MAP_X + MAP_WIDTH , (double)i});
-//        printf("%d %d -> %d %d \n",(int)i,OFFSET_MAP_X, (int)i, OFFSET_MAP_X + MAP_WIDTH);
-    }
-//    printf("----\n\n");
-    for (int i = OFFSET_MAP_X; i < MAP_WIDTH + OFFSET_MAP_X;i += grid_size_x)
-    {
-        draw_line(raydata, grid_color,(t_point) {(double)i, (double)OFFSET_MAP_Y},(t_point) {(double)i, (double)OFFSET_MAP_Y + MAP_HEIGHT});
-    }
-    grid_color.s_rgb.r = (char)40;
-    grid_color.s_rgb.g = (char)40;
-    grid_color.s_rgb.b = (char)40;
-    t_color nmi_color = {0xFF0000};
+//    for (int y = OFFSET_MAP_Y; y < MAP_HEIGHT + OFFSET_MAP_Y - grid_size_y; y += grid_size_y) { draw_line(raydata, grid_color,
+//                                                                                            (t_point) {
+//                                                                                                   (double) OFFSET_MAP_X ,
+//                                                                                                   (double) y},
+//                                                                                            (t_point) {
+//                                                                                                   (double) OFFSET_MAP_X +
+//                                                                                                   MAP_WIDTH ,
+//                                                                                                   (double) y});
+//    }
+//    for (int x = OFFSET_MAP_X; x < MAP_WIDTH + OFFSET_MAP_X - grid_size_x; x += grid_size_x) {
+//        draw_line(raydata, grid_color, (t_point) {(double) x, (double) OFFSET_MAP_Y},
+//                  (t_point) {(double) x, (double) OFFSET_MAP_Y + MAP_HEIGHT});
+//
+//    }
+
+
+    t_color nmi_color = {0xFFFF00};
     for (int i = 0; i < raydata->map_height;i++) {
         for (int j = 0; j < raydata->map_width;j ++) {
             if (raydata->map[i][j] == 1) {

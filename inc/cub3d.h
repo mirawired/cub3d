@@ -157,13 +157,12 @@ void	*gc_alloc(size_t nmemb, size_t size);
 # define BUFFER_SIZE 2048
 # define RADIAN 0.0174532925
 # define PI 3.14159265359
-# define WIDTH 600
-# define OFFSET_3D 0
-# define OFFSET_MAP_X 200
-# define MAP_WIDTH 200
-# define OFFSET_MAP_Y 600
-# define MAP_HEIGHT 200
-# define HEIGHT 800
+# define WIDTH 1024
+# define OFFSET_MAP_X 0
+# define MAP_WIDTH 383
+# define OFFSET_MAP_Y 0
+# define MAP_HEIGHT 256
+# define HEIGHT 1024
 # define SPRITENBR 2
 
 typedef struct s_point

@@ -42,8 +42,5 @@ void draw_player(t_raydata *raydata)
     right = clamp(right);
     draw_line(raydata, player_color, left, front);
     draw_line(raydata, player_color, right, front);
-    player_color.s_rgb.r -= 90;
-    player_color.s_rgb.g -= 90;
-    player_color.s_rgb.b -= 90;
-    draw_line(raydata, player_color, left, right);
+
 }
