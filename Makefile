@@ -6,7 +6,7 @@
 #    By: avassor <avassor@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 12:13:14 by mira              #+#    #+#              #
-#    Updated: 2023/08/25 16:25:06 by avassor          ###   ########.fr        #
+#    Updated: 2023/09/11 11:09:06 by jgarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC =				cub3d.c					\
 					rays.c					\
 					render.c				\
 					gc.c					\
+					gc_utils.c				\
 					sprites.c
 
 SRCS = $(shell find $(SRC_PATH) -type d)

@@ -1,6 +1,15 @@
-//
-// Created by corecaps on 27/07/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rays.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jgarcia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/11 10:55:55 by jgarcia           #+#    #+#             */
+/*   Updated: 2023/09/11 10:55:58 by jgarcia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./../../inc/raycast.h"
 void draw_slice (t_raydata *data, int texture_index, int draw_start, int draw_end, int x,double wall_x,double dist) {
     float texture_step;

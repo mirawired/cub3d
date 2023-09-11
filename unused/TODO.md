@@ -4,8 +4,9 @@
 - [ ] Enemies State Machine
 - [ ] Enemies AI
 - [ ] Enemies collision
-- [ ] Minimap
+- [X] Minimap
 - [ ] HUD
 - [ ] Leaks
 - [ ] Norme
+- [ ] Side from raycasting
 - [ ] Clamp player and nmi position to middle of raw and column
