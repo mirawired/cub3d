@@ -235,7 +235,14 @@ typedef struct s_spr
 	double		sprite_dist[SPRITENBR];
 	t_cs		cs;
 }	t_spr;
-
+typedef enum e_texture_index
+{
+	NO,
+	SO,
+	WE,
+	EA,
+	SPRITE
+}   t_texture_index;
 typedef struct s_raydata
 {
 	void		*mlx;
@@ -245,10 +252,7 @@ typedef struct s_raydata
     int        map_width;
     int        map_height;
 	int			**map;
-    t_texture    *NO;
-    t_texture    *SO;
-    t_texture    *WE;
-    t_texture    *EA;
+    t_texture   **texture;
     t_color     ceil_color;
     t_color     floor_color;
 	long		last_frame;

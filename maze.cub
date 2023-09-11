@@ -1,9 +1,9 @@
-NO ./tex.xpm
-SO ./tex.xpm
-WE ./tex.xpm
-EA ./tex.xpm
-F 30,0,30
-C 80,0,70
+NO ./metal1.xpm
+SO ./metal1.xpm
+WE ./metal1.xpm
+EA ./metal1.xpm
+F 47,44,42
+C 47,44,42
 11111111111111111111111111
 10000000000011000000000001
 10111101111011011110111101

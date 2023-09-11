@@ -62,10 +62,11 @@ int	raycast(t_arg *arg)
 												  &raydata->img_buffer->bit_per_pixel,
 												  &raydata->img_buffer->line_length,
 												  &raydata->img_buffer->endian);
-	raydata->EA = load_texture(raydata->mlx,arg->EA);
-	raydata->WE = load_texture(raydata->mlx,arg->WE);
-	raydata->NO = load_texture(raydata->mlx,arg->NO);
-	raydata->SO = load_texture(raydata->mlx,arg->SO);
+	raydata->texture = (t_texture **) gc_alloc(4,sizeof(t_raydata));
+	raydata->texture[NO] = load_texture(raydata->mlx,arg->NO);
+	raydata->texture[SO] = load_texture(raydata->mlx,arg->SO);
+	raydata->texture[WE] = load_texture(raydata->mlx,arg->WE);
+	raydata->texture[EA] = load_texture(raydata->mlx,arg->EA);
 	raydata->spr = (t_spr *)gc_alloc(1, sizeof(t_spr));
 	raydata->spr->sprite[0].texture = load_texture(raydata->mlx, "ghost.xpm");
 	raydata->spr->sprite[1].texture = load_texture(raydata->mlx, "ghost2.xpm");
