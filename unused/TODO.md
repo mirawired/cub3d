@@ -1,9 +1,18 @@
 - [ ] Sprite clipping on walls
+  - [ ] Clamp sprite position to middle of raw and column
+  - [ ] Clamp player position to middle of raw and column 
 - [ ] Pathfinding
+  - [ ] Queue Data Structure
+  - [ ] Current state MAP 
+  - [ ] Path Data Structure
+  - [ ] BFS
+  - [ ] Updated position ?
+    - [ ] Player
+    - [ ] Enemies
 - [ ] Sprite animation
 - [ ] Enemies State Machine
 - [ ] Enemies AI
-- [ ] Enemies collision
+- [ ] Enemies & Wall collision
 - [X] Minimap
 - [ ] HUD
 - [ ] Leaks

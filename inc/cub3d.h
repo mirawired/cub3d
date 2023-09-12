@@ -278,5 +278,6 @@ void	sort_sprites(t_spr	*spr, t_point pos);
 void	comp_sprites(t_raydata *data, t_sprite *curr, t_point pos);
 void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr);
 void	comp_long(t_raydata *data, t_cs *cs);
+t_int_point bfs(t_raydata *data, t_int_point start, t_int_point end);
 
 #endif

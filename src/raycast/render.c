@@ -22,6 +22,9 @@ int render(t_raydata *raydata) {
 	draw_minimap(raydata);
 	nmi_ai(raydata);
 	draw_player(raydata);
+	int grid_size_x = MAP_WIDTH / (raydata->map_width);
+	int grid_size_y = MAP_HEIGHT / (raydata->map_height);
+	bfs(raydata, (t_int_point) {12,12},(t_int_point){1,1});
 	mlx_put_image_to_window(raydata->mlx,
 							raydata->mlx_win,
 							raydata->img_buffer->img,

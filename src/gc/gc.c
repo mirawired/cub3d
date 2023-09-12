@@ -19,12 +19,12 @@ int	gc_check_double(t_garbage *gc, void *ptr)
 	t_garbage	*tmp;
 
 	tmp = gc;
-	while (tmp)
-	{
-		if (tmp->ptr == ptr)
-			return (1);
-		tmp = tmp->next;
-	}
+//	while (tmp)
+//	{
+//		if (tmp->ptr == ptr)
+//			return (1);
+//		tmp = tmp->next;
+//	}
 	return (0);
 }
 
