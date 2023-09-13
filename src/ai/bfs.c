@@ -26,14 +26,14 @@ t_int_point bfs(t_raydata *data, t_int_point start, t_int_point end) {
 						  {1, 0},
 						  {0, -1},
 						  {-1, 0}};
-	t_queue *queue = create_queue(100);
+	t_queue *queue = create_queue(1000);
 	int **map = data->map;
 	int map_width = data->map_width;
 	int map_height = data->map_height;
 	t_int_point parent[map_height][map_width];
-	int **visited = gc_alloc(map_height, sizeof(int *));
-	for (int i = 0; i < map_height; i++) {
-		visited[i] = gc_alloc(map_width, sizeof(int));
+	int **visited = gc_alloc(map_width, sizeof(int *));
+	for (int i = 0; i < map_width; i++) {
+		visited[i] = gc_alloc(map_height, sizeof(int));
 		for (int j = 0; j < map_width; j++)
 			visited[i][j] = 0;
 	}
@@ -45,7 +45,7 @@ t_int_point bfs(t_raydata *data, t_int_point start, t_int_point end) {
 			printf("Found path\n");
 			while (node.point.x != start.x || node.point.y != start.y) {
 				printf("x: %d y: %d\n", node.point.x, node.point.y);
-				t_int_point tmp = parent[node.point.y][node.point.x];
+				t_int_point tmp = parent[node.point.x][node.point.y];
 				node.point = tmp;
 			}
 			gc_del(queue);
@@ -54,10 +54,10 @@ t_int_point bfs(t_raydata *data, t_int_point start, t_int_point end) {
 		for (int i = 0; i < 4; i++) {
 			int x = node.point.x + dir[i].x;
 			int y = node.point.y + dir[i].y;
-			if (x >= 0 && x < map_width && y >= 0 && y < map_height && map[x][y] == 0 && visited[y][x] == 0) {
+			if (x >= 0 && x < map_width && y >= 0 && y < map_height && map[x][y] == 0 && visited[x][y] == 0) {
 				enqueue(queue, (t_queue_node) {{x, y}, node.distance + 1});
-				visited[y][x] = 1;
-				parent[y][x] = node.point;
+				visited[x][y] = 1;
+				parent[x][y] = node.point;
 			}
 		}
 	}
