@@ -14,7 +14,7 @@
 
 void draw_minimap(t_raydata *raydata);
 
-void nmi_ai(const t_raydata *raydata);
+void nmi_ai(t_raydata *raydata);
 
 int render(t_raydata *raydata) {
 	clear_buffer(raydata);
@@ -22,9 +22,10 @@ int render(t_raydata *raydata) {
 	draw_minimap(raydata);
 	nmi_ai(raydata);
 	draw_player(raydata);
-	int grid_size_x = MAP_WIDTH / (raydata->map_width);
-	int grid_size_y = MAP_HEIGHT / (raydata->map_height);
-	bfs(raydata, (t_int_point) {12,12},(t_int_point){1,1});
+
+//	printf("Player pos on map x:%d y: %d\n", (int) (raydata->player->pos.x / grid_size_x), (int) (raydata->player->pos.y/grid_size_y));
+//	printf("Ennemie pos on map x:%d y:%d\n", (int) (raydata->spr->sprite[0].x ), (int) (raydata->spr->sprite[0].y));
+//	bfs(raydata, (t_int_point) {(int)(raydata->player->pos.x / grid_size_x) ,(int)(raydata->player->pos.y / grid_size_y) },(t_int_point){(int)(raydata->spr->sprite[0].x) ,(int)(raydata->spr->sprite[0].y)});
 	mlx_put_image_to_window(raydata->mlx,
 							raydata->mlx_win,
 							raydata->img_buffer->img,
@@ -32,27 +33,20 @@ int render(t_raydata *raydata) {
 	return (0);
 }
 
-void nmi_ai(const t_raydata *raydata) {
-	if (raydata->map[(int) raydata->spr->sprite[0].y]
-		[(int) raydata->spr->sprite[0].x + 1] == 0)
-		raydata->spr->sprite[0].x += 0.01;
-	if (raydata->map[(int) raydata->spr->sprite[0].y + 1]
-		[(int) raydata->spr->sprite[0].x] == 0)
-		raydata->spr->sprite[0].y += 0.03;
-	if (raydata->map[(int) raydata->spr->sprite[1].y]
-		[(int) raydata->spr->sprite[1].x + 1] == 0)
-		raydata->spr->sprite[1].x += 0.03;
-	if (raydata->map[(int) raydata->spr->sprite[1].y + 1]
-		[(int) raydata->spr->sprite[1].x] == 0)
-		raydata->spr->sprite[1].y += 0.01;
-	if (raydata->spr->sprite[0].x > raydata->map_width)
-		raydata->spr->sprite[0].x = 0;
-	if (raydata->spr->sprite[0].y > raydata->map_height)
-		raydata->spr->sprite[0].y = 0;
-	if (raydata->spr->sprite[1].x > raydata->map_width)
-		raydata->spr->sprite[1].x = 0;
-	if (raydata->spr->sprite[1].y > raydata->map_height)
-		raydata->spr->sprite[1].y = 0;
+void nmi_ai(t_raydata *raydata) {
+	int grid_size_x = WIDTH / (raydata->map_width);
+	int grid_size_y = HEIGHT / (raydata->map_height);
+	for (int i = 0;i < SPRITENBR; i ++) {
+		t_int_point dest = bfs(raydata,(t_int_point){(int)(raydata->spr->sprite[i].x) , (int )(raydata->spr->sprite[i].y)},(t_int_point) {(int)(raydata->player->pos.x / grid_size_x),(int)(raydata->player->pos.y/grid_size_y)} );
+		if (dest.x == 0 && dest.y == 0)
+			continue;
+		printf("Nmi[%d] move from : [%f,%f] to",i,raydata->spr->sprite[i].x,raydata->spr->sprite[i].y);
+		raydata->spr->sprite[i].x += (dest.x - (int)raydata->spr->sprite[i].x) * 0.1;
+		raydata->spr->sprite[i].y += (dest.y - (int)raydata->spr->sprite[i].y) * 0.1;
+		printf("\t [%f,%f]\n",raydata->spr->sprite[i].x,raydata->spr->sprite[i].y);
+		printf("%d %d  is a %d case\n",(int)(raydata->spr->sprite[i].x),(int)(raydata->spr->sprite[i].y),raydata->map[(int)(raydata->spr->sprite[i].x)][(int)(raydata->spr->sprite[i].y)]);
+
+	}
 }
 
 void draw_minimap(t_raydata *raydata) {
@@ -83,6 +77,7 @@ void draw_minimap(t_raydata *raydata) {
 	t_color nmi_color = {0xFFFF00};
 	for (int i = 0; i < raydata->map_height; i++) {
 		for (int j = 0; j < raydata->map_width; j++) {
+			printf("%d ",raydata->map[i][j]);
 			if (raydata->map[i][j] == 1) {
 				fill_rectangle(raydata, grid_color,
 							   (t_point) {(double) (j * grid_size_x) + OFFSET_MAP_X,
@@ -105,5 +100,7 @@ void draw_minimap(t_raydata *raydata) {
 										  (double) ((i + 1) * grid_size_y - (double) grid_size_y / 3) + OFFSET_MAP_Y});
 			}
 		}
+		printf("\n");
 	}
+	printf("\n\n");
 }
