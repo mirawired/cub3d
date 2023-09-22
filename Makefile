@@ -52,6 +52,8 @@ SRC =				cub3d.c					\
 					textures.c				\
 					mlx_helpers.c			\
 					data_init.c				\
+					movements.c				\
+					movements_extra.c		\
 					sprites.c
 
 SRCS = $(shell find $(SRC_PATH) -type d)

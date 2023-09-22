@@ -274,6 +274,13 @@ void	draw_player(t_raydata *raydata);
 void	fill_rectangle(t_raydata *raydata, t_color color, t_point top_left, t_point bottom_right);
 void	draw_rays(t_raydata *raydata);
 t_point	calc_point(t_point from, double angle, double distance);
+void	clamp_player(t_raydata *raydata);
+void	move_forward(t_raydata *raydata);
+void	move_backward(t_raydata *raydata);
+void	turn_left(t_raydata *raydata);
+void	turn_right(t_raydata *raydata);
+void	stripe_right(t_raydata *raydata);
+void	stripe_left(t_raydata *raydata);
 
 int		raycast(t_arg *arg);
 void	grab_arg(t_raydata *raydata, t_arg *arg);
