@@ -40,11 +40,11 @@ void nmi_ai(t_raydata *raydata) {
 		t_int_point dest = bfs(raydata,(t_int_point){(int)(raydata->spr->sprite[i].x) , (int )(raydata->spr->sprite[i].y)},(t_int_point) {(int)(raydata->player->pos.x / grid_size_x),(int)(raydata->player->pos.y/grid_size_y)} );
 		if (dest.x == 0 && dest.y == 0)
 			continue;
-		printf("Nmi[%d] move from : [%f,%f] to",i,raydata->spr->sprite[i].x,raydata->spr->sprite[i].y);
+//		printf("Nmi[%d] move from : [%f,%f] to",i,raydata->spr->sprite[i].x,raydata->spr->sprite[i].y);
 		raydata->spr->sprite[i].x += (dest.x - (int)raydata->spr->sprite[i].x) * 0.1;
 		raydata->spr->sprite[i].y += (dest.y - (int)raydata->spr->sprite[i].y) * 0.1;
-		printf("\t [%f,%f]\n",raydata->spr->sprite[i].x,raydata->spr->sprite[i].y);
-		printf("%d %d  is a %d case\n",(int)(raydata->spr->sprite[i].x),(int)(raydata->spr->sprite[i].y),raydata->map[(int)(raydata->spr->sprite[i].x)][(int)(raydata->spr->sprite[i].y)]);
+//		printf("\t [%f,%f]\n",raydata->spr->sprite[i].x,raydata->spr->sprite[i].y);
+//		printf("%d %d  is a %d case\n",(int)(raydata->spr->sprite[i].x),(int)(raydata->spr->sprite[i].y),raydata->map[(int)(raydata->spr->sprite[i].x)][(int)(raydata->spr->sprite[i].y)]);
 
 	}
 }
@@ -77,7 +77,7 @@ void draw_minimap(t_raydata *raydata) {
 	t_color nmi_color = {0xFFFF00};
 	for (int i = 0; i < raydata->map_height; i++) {
 		for (int j = 0; j < raydata->map_width; j++) {
-			printf("%d ",raydata->map[i][j]);
+//			printf("%d ",raydata->map[i][j]);
 			if (raydata->map[i][j] == 1) {
 				fill_rectangle(raydata, grid_color,
 							   (t_point) {(double) (j * grid_size_x) + OFFSET_MAP_X,
@@ -100,7 +100,7 @@ void draw_minimap(t_raydata *raydata) {
 										  (double) ((i + 1) * grid_size_y - (double) grid_size_y / 3) + OFFSET_MAP_Y});
 			}
 		}
-		printf("\n");
+//		printf("\n");
 	}
-	printf("\n\n");
+//	printf("\n\n");
 }

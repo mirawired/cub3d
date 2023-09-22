@@ -39,11 +39,11 @@ t_int_point bfs(t_raydata *data, t_int_point start, t_int_point end) {
 	visited[start.x][start.y] = 1;
 	while (queue->front < queue->rear) {
 		t_queue_node node = dequeue(queue);
-		printf("Current Node : %d %d\n",node.point.x,node.point.y);
+//		printf("Current Node : %d %d\n",node.point.x,node.point.y);
 		if (node.point.x == end.x && node.point.y == end.y){
-			printf("Found path\n");
+//			printf("Found path\n");
 			while (node.point.x != start.x || node.point.y != start.y) {
-				printf("x: %d y: %d\n", node.point.x, node.point.y);
+//				printf("x: %d y: %d\n", node.point.x, node.point.y);
 				t_int_point tmp = parent[node.point.x][node.point.y];
 				if (tmp.x == start.x && tmp.y == start.y)
 					break;
@@ -62,7 +62,7 @@ t_int_point bfs(t_raydata *data, t_int_point start, t_int_point end) {
 			}
 		}
 	}
-	printf("No path found\n");
+//	printf("No path found\n");
 	gc_del(queue);
 	return ((t_int_point) {0, 0});
 }
