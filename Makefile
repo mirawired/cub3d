@@ -47,6 +47,11 @@ SRC =				cub3d.c					\
 					gc.c					\
 					gc_utils.c				\
 					bfs.c					\
+					minimap.c				\
+					ai.c					\
+					textures.c				\
+					mlx_helpers.c			\
+					data_init.c				\
 					sprites.c
 
 SRCS = $(shell find $(SRC_PATH) -type d)

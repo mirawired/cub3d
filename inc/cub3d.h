@@ -258,7 +258,12 @@ typedef struct s_raydata
 	long		last_frame;
 	t_spr		*spr;
 }	t_raydata;
-
+void	init_mlx(t_raydata *raydata);
+void	starting_data_init(t_arg *arg, t_raydata *raydata);
+void	ennemies_textures_init(t_raydata *raydata);
+void	wall_textures_init(t_arg *arg, t_raydata *raydata);
+void	player_init_position(t_arg *arg, t_raydata *raydata);
+void	launch_game_loop(t_raydata *raydata);
 int		render(t_raydata *raydata);
 int		key_pressed(int keycode, t_raydata *raydata);
 int		my_mlx_pixel_put(t_buffer *raydata, t_color color, t_int_point coord);
@@ -278,6 +283,10 @@ void	sort_sprites(t_spr	*spr, t_point pos);
 void	comp_sprites(t_raydata *data, t_sprite *curr, t_point pos);
 void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr);
 void	comp_long(t_raydata *data, t_cs *cs);
-t_int_point bfs(t_raydata *data, t_int_point start, t_int_point end);
+t_texture	*load_texture(void *mlx, char *path);
+void	draw_minimap(t_raydata *raydata);
+// ..................... Ennemies AI ...................................
+t_int_point	bfs(t_raydata *data, t_int_point start, t_int_point end);
+void		nmi_ai(t_raydata *raydata);
 
 #endif
