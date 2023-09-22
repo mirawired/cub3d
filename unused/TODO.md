@@ -1,21 +1,25 @@
+- [ ] Mandatory & Bonus part Separation
+- [ ] Floor and ceiling textures
+- [ ] Game Loop State Machine 
+  - [ ] Menu
+  - [ ] Game
+  - [ ] Game Over
 - [ ] Sprite clipping on walls
   - [ ] Clamp sprite position to middle of raw and column
-  - [ ] Clamp player position to middle of raw and column 
-- [ ] Pathfinding
-  - [ ] Queue Data Structure
-  - [ ] Current state MAP 
-  - [ ] Path Data Structure
-  - [ ] BFS
-  - [ ] Updated position ?
-    - [ ] Player
-    - [ ] Enemies
+- [X] Pathfinding
+  - [X] Queue Data Structure
+  - [X] Current state MAP 
+  - [X] Path Data Structure
+  - [X] BFS
+  - [X] Updated position ?
+    - [X] Player
+    - [X] Enemies
 - [ ] Sprite animation
-- [ ] Enemies State Machine
 - [ ] Enemies AI
-- [ ] Enemies & Wall collision
+  - [ ] Enemies State Machine
+  - [ ] Enemies & Wall collision
 - [X] Minimap
 - [ ] HUD
-- [ ] Leaks
+- [X] Leaks
 - [ ] Norme
-- [ ] Side from raycasting
-- [ ] Clamp player and nmi position to middle of raw and column
+- [X] Side from raycasting
