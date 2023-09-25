@@ -26,7 +26,7 @@ void clamp_player(t_raydata *raydata) {
 }
 
 
-void stripe_right(t_raydata *raydata) {
+void strafe_right(t_raydata *raydata) {
 	double stepSize = 10;
 	t_point perpVector = {-raydata->player->dir_vector.y,
 						  raydata->player->dir_vector.x};
@@ -35,7 +35,7 @@ void stripe_right(t_raydata *raydata) {
 	clamp_player(raydata);
 }
 
-void stripe_left(t_raydata *raydata) {
+void strafe_left(t_raydata *raydata) {
 	double stepSize = 10;
 	t_point perpVector = {raydata->player->dir_vector.y,
 						  -raydata->player->dir_vector.x};

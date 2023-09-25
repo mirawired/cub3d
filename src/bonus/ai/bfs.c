@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "bfs.h"
+#include "../../../inc/cub3d.h"
+#include "../../../inc/bfs.h"
 t_queue *create_queue(int capacity) {
 	t_queue *queue = gc_alloc(1, sizeof(t_queue));
 	queue->capacity = capacity;

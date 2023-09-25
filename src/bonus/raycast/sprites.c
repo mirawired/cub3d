@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycast.h"
+#include "../../../inc/raycast.h"
 
 void	sort_sprites(t_spr	*spr, t_point pos)
 {

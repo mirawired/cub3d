@@ -54,10 +54,16 @@ void ennemies_textures_init(t_raydata *raydata) {
 	raydata->spr = (t_spr *)gc_alloc(1, sizeof(t_spr));
 	raydata->spr->sprite[0].texture = load_texture(raydata->mlx, "ghost.xpm");
 	raydata->spr->sprite[1].texture = load_texture(raydata->mlx, "ghost2.xpm");
+	raydata->spr->sprite[2].texture = load_texture(raydata->mlx, "ghost.xpm");
+	raydata->spr->sprite[3].texture = load_texture(raydata->mlx, "ghost2.xpm");
 	raydata->spr->sprite[0].x = 1.0;
 	raydata->spr->sprite[0].y = 1.0;
-	raydata->spr->sprite[1].x = 1.0;
-	raydata->spr->sprite[1].y = 2.0;
+	raydata->spr->sprite[1].x = raydata->map_width - 2;
+	raydata->spr->sprite[1].y = 1.0;
+	raydata->spr->sprite[2].x = 1.0;
+	raydata->spr->sprite[2].y = raydata->map_height - 2;
+	raydata->spr->sprite[3].x = raydata->map_width - 2;
+	raydata->spr->sprite[3].y = raydata->map_height - 2;
 }
 
 void starting_data_init(t_arg *arg, t_raydata *raydata) {

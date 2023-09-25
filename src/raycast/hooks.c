@@ -29,9 +29,9 @@ int	key_pressed(int keycode, t_raydata *raydata) {
 	if (keycode == 100 || keycode == 65363)
 		turn_right(raydata);
 	if (keycode == 101)
-		stripe_right(raydata);
+		strafe_right(raydata);
 	if (keycode == 113)
-		stripe_left(raydata);
+		strafe_left(raydata);
 	if (keycode == 119 || keycode == 65362)
 		move_forward(raydata);
 	if (keycode == 115 || keycode == 65364)

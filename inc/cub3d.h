@@ -163,7 +163,7 @@ void	*gc_alloc(size_t nmemb, size_t size);
 # define OFFSET_MAP_Y 0
 # define MAP_HEIGHT 256
 # define HEIGHT 900
-# define SPRITENBR 2
+# define SPRITENBR 4
 
 typedef struct s_point
 {
@@ -279,8 +279,8 @@ void	move_forward(t_raydata *raydata);
 void	move_backward(t_raydata *raydata);
 void	turn_left(t_raydata *raydata);
 void	turn_right(t_raydata *raydata);
-void	stripe_right(t_raydata *raydata);
-void	stripe_left(t_raydata *raydata);
+void	strafe_right(t_raydata *raydata);
+void	strafe_left(t_raydata *raydata);
 
 int		raycast(t_arg *arg);
 void	grab_arg(t_raydata *raydata, t_arg *arg);

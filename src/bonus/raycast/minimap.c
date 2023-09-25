@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../../inc/cub3d.h"
 
 void draw_minimap(t_raydata *raydata) {
 	int grid_size_x = MAP_WIDTH / (raydata->map_width);
@@ -29,19 +29,14 @@ void draw_minimap(t_raydata *raydata) {
 							   (t_point) {(double) ((j + 1) * grid_size_x) + OFFSET_MAP_X,
 										  (double) ((i + 1) * grid_size_y) + OFFSET_MAP_Y});
 			}
-			if (j == (int) raydata->spr->sprite[0].x && i == (int) raydata->spr->sprite[0].y) {
-				fill_rectangle(raydata, nmi_color,
-							   (t_point) {(double) (j * grid_size_x + (double) grid_size_x / 3) + OFFSET_MAP_X,
-										  (double) (i * grid_size_y + (double) grid_size_y / 3) + OFFSET_MAP_Y},
-							   (t_point) {(double) ((j + 1) * grid_size_x - (double) grid_size_x / 3) + OFFSET_MAP_X,
-										  (double) ((i + 1) * grid_size_y - (double) grid_size_y / 3) + OFFSET_MAP_Y});
-			}
-			if (j == (int) raydata->spr->sprite[1].x && i == (int) raydata->spr->sprite[1].y) {
-				fill_rectangle(raydata, nmi_color,
-							   (t_point) {(double) (j * grid_size_x + (double) grid_size_x / 3 + OFFSET_MAP_X),
-										  (double) (i * grid_size_y + (double) grid_size_y / 3 + OFFSET_MAP_Y)},
-							   (t_point) {(double) ((j + 1) * grid_size_x - (double) grid_size_x / 3 + OFFSET_MAP_X),
-										  (double) ((i + 1) * grid_size_y - (double) grid_size_y / 3) + OFFSET_MAP_Y});
+			for (int k = 0; k < SPRITENBR; k++) {
+				if (j == (int) raydata->spr->sprite[k].x && i == (int) raydata->spr->sprite[k].y) {
+					fill_rectangle(raydata, nmi_color,
+								   (t_point) {(double) (j * grid_size_x + (double) grid_size_x / 3) + OFFSET_MAP_X,
+											  (double) (i * grid_size_y + (double) grid_size_y / 3) + OFFSET_MAP_Y},
+								   (t_point) {(double) ((j + 1) * grid_size_x - (double) grid_size_x / 3) + OFFSET_MAP_X,
+											  (double) ((i + 1) * grid_size_y - (double) grid_size_y / 3) + OFFSET_MAP_Y});
+				}
 			}
 		}
 	}
