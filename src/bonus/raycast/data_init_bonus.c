@@ -1,7 +1,7 @@
 //
 // Created by corecaps on 9/22/23.
 //
-#include "../../inc/cub3d.h"
+#include "../../../inc/cub3d.h"
 
 void player_init_position(t_arg *arg, t_raydata *raydata) {
 	int		found;

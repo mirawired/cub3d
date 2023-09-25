@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../inc/raycast.h"
+#include "../../../inc/raycast.h"
 
 void draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end, int x, double wall_x, double dist) {
 	float texture_step;

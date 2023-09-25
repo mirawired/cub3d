@@ -1,4 +1,4 @@
-- [ ] Mandatory & Bonus part Separation
+- [X] Mandatory & Bonus part Separation
 - [ ] Malloc Protection 
 - [ ] Floor and ceiling textures
 - [ ] Game Loop State Machine 

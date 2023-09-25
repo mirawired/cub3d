@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../inc/raycast.h"
+#include "../../../inc/raycast.h"
 
 int my_mlx_pixel_put(t_buffer *data, t_color color, t_int_point coord) {
 	char *dst;

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../inc/raycast.h"
+#include "../../../inc/raycast.h"
 
 int render(t_raydata *raydata) {
 	clear_buffer(raydata);
