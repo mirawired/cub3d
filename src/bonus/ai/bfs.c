@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corecaps </var/mail/corecaps>              +#+  +:+       +#+        */
+/*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 10:05:10 by corecaps          #+#    #+#             */
 /*   Updated: 2023/09/25 10:05:13 by corecaps         ###   ########.fr       */

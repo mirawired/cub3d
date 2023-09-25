@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_helpers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corecaps </var/mail/corecaps>              +#+  +:+       +#+        */
+/*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 10:04:04 by corecaps          #+#    #+#             */
 /*   Updated: 2023/09/25 10:04:07 by corecaps         ###   ########.fr       */

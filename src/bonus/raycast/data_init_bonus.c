@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   data_init_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corecaps </var/mail/corecaps>              +#+  +:+       +#+        */
+/*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 10:05:19 by corecaps          #+#    #+#             */
 /*   Updated: 2023/09/25 10:05:22 by corecaps         ###   ########.fr       */

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corecaps </var/mail/corecaps>              +#+  +:+       +#+        */
+/*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 10:04:46 by corecaps          #+#    #+#             */
 /*   Updated: 2023/09/25 10:04:49 by corecaps         ###   ########.fr       */
