@@ -21,7 +21,7 @@ void clean_exit(t_raydata *raydata) {
 	exit(0);
 }
 
-int key_pressed(int keycode, t_raydata *raydata) {
+int	key_pressed(int keycode, t_raydata *raydata) {
 	if (keycode == 65307)
 		clean_exit(raydata);
 	if (keycode == 97 || keycode == 65361)

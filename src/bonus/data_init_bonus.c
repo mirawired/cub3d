@@ -41,6 +41,16 @@ void wall_textures_init(t_arg *arg, t_raydata *raydata) {
 	raydata->texture[EA] = load_texture(raydata->mlx,arg->EA);
 }
 
+void ennemies_textures_init(t_raydata *raydata) {
+	raydata->spr = (t_spr *)gc_alloc(1, sizeof(t_spr));
+	raydata->spr->sprite[0].texture = load_texture(raydata->mlx, "ghost.xpm");
+	raydata->spr->sprite[1].texture = load_texture(raydata->mlx, "ghost2.xpm");
+	raydata->spr->sprite[0].x = 1.0;
+	raydata->spr->sprite[0].y = 1.0;
+	raydata->spr->sprite[1].x = 1.0;
+	raydata->spr->sprite[1].y = 2.0;
+}
+
 void starting_data_init(t_arg *arg, t_raydata *raydata) {
 	raydata->player->angle = 0;
 	raydata->player->size = 10;

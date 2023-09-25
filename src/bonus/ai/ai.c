@@ -1,7 +1,7 @@
 //
 // Created by corecaps on 9/22/23.
 //
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 void nmi_ai(t_raydata *raydata) {
 	int grid_size_x = WIDTH / (raydata->map_width);

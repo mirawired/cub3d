@@ -25,6 +25,7 @@ int	raycast(t_arg *arg)
 	raydata->mlx = NULL;
 	init_mlx(raydata);
 	wall_textures_init(arg, raydata);
+	ennemies_textures_init(raydata);
 	raydata->player = gc_alloc(1,sizeof (t_player));
 	player_init_position(arg, raydata);
 	starting_data_init(arg, raydata);
