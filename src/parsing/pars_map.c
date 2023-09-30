@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:43:37 by avassor           #+#    #+#             */
-/*   Updated: 2023/09/05 13:36:33 by avassor          ###   ########.fr       */
+/*   Updated: 2023/09/30 22:20:05 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ _Bool	copy_id(t_data *data, char **fill, char *raw)
 	int	i;
 
 	i = 0;
-	*fill = (char *)gc_alloc( (ft_strlen(&raw[5]) + 1),sizeof(char));
+	*fill = (char *)gc_alloc((ft_strlen(&raw[5]) + 1), sizeof(char));
 	if (!*fill)
 		return (data->err = MLLOC, 1);
 	ft_strcpy(&raw[5], *fill);

@@ -3,113 +3,148 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgarcia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:55 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/09/11 10:55:58 by jgarcia          ###   ########.fr       */
+/*   Updated: 2023/09/30 22:18:58 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../inc/raycast.h"
 
-void draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end, int x, double wall_x, double dist) {
-	float texture_step;
-	float texture_pos;
-	int y;
-	t_texture *texture;
+void	draw_slice(t_raydata *data, t_r *r, int x)
+{
+	float		texture_step;
+	float		texture_pos;
+	int			y;
+	t_texture	*texture;
+	t_color		color;
 
-	texture = data->texture[texture_index];
-	texture_step = 1.0 * texture->height / (draw_end - draw_start);
+	texture = data->texture[r->texture_index];
+	texture_step = 1.0 * texture->height / (r->drawEnd - r->drawStart);
 	y = 0;
-	while (y++ < draw_start)
-		my_mlx_pixel_put(data->img_buffer, data->ceil_color, (t_int_point) {x, y});
+	while (y++ < r->drawStart)
+		my_mlx_pixel_put(data->img_buffer, data->ceil_color,
+			(t_int_point){x, y});
 	texture_pos = 0;
-	wall_x *= texture->width;
-	while (y < draw_end) {
-		t_color color = texture->texture[(int) texture_pos * texture->width + (int) wall_x];
-		color.s_rgb.r -= (int) dist;
-		color.s_rgb.g -= (int) dist;
-		color.s_rgb.b -= (int) dist;
-		my_mlx_pixel_put(data->img_buffer, color, (t_int_point) {x, y});
+	r->wall_x *= texture->width;
+	while (y < r->drawEnd)
+	{
+		set_color(&color, texture, texture_pos, r);
+		my_mlx_pixel_put(data->img_buffer, color, (t_int_point){x, y});
 		y++;
 		texture_pos += texture_step;
 	}
 	while (y++ < HEIGHT)
-		my_mlx_pixel_put(data->img_buffer, data->floor_color, (t_int_point) {x, y});
+		my_mlx_pixel_put(data->img_buffer, data->floor_color,
+			(t_int_point){x, y});
 }
 
-void draw_rays(t_raydata *data) {
-	double perpWallDist;
-	t_color ray_color = {0x00FF00};
-	t_texture_index texture_index;
-	int grid_size_x = WIDTH / data->map_width;
-	int grid_size_y = HEIGHT / data->map_height;
-	t_point pos = {data->player->pos.x / grid_size_x, data->player->pos.y / grid_size_y};
+void	draw_rays(t_raydata *data)
+{
+	t_r	*r;
+	int	x;
 
-	for (int x = 0; x < WIDTH; x++) {
-		double cameraX = 2 * x / (double) WIDTH - 1;
-		t_point ray_dir = {data->player->dir_vector.x + data->player->plane_vector.x * cameraX,
-						   data->player->dir_vector.y + data->player->plane_vector.y * cameraX};
-		int MapX = (int) pos.x;
-		int MapY = (int) pos.y;
-		t_point sideDist;
-		t_point deltaDist = {fabs(1 / ray_dir.x), fabs(1 / ray_dir.y)};
-		// double perpWallDist;
-		int stepX;
-		int stepY;
-		int hit = 0;
-		int side;
-		if (ray_dir.x < 0) {
-			stepX = -1;
-			sideDist.x = (pos.x - MapX) * deltaDist.x;
-		} else {
-			stepX = 1;
-			sideDist.x = (MapX + 1.0 - pos.x) * deltaDist.x;
+	x = 0;
+	r = r_init(data);
+	while (x < WIDTH)
+	{
+		r->cameraX = 2 * x / (double) WIDTH - 1;
+		r->ray_dir.x = data->player->dir_vector.x + data->player->plane_vector.x
+			* r->cameraX;
+		r->ray_dir.y = data->player->dir_vector.y + data->player->plane_vector.y
+			* r->cameraX;
+		r->MapX = (int)r->pos.x;
+		r->MapY = (int)r->pos.y;
+		r->deltaDist.x = fabs(1 / r->ray_dir.x);
+		r->deltaDist.y = fabs(1 / r->ray_dir.y);
+		r->hit = 0;
+		ray_comp_1(r);
+		ray_comp_2(data, r);
+		ray_comp_3(r);
+		draw_slice(data, r, x);
+		x++;
+	}
+	free(r);
+}
+
+void	ray_comp_1(t_r *r)
+{
+	if (r->ray_dir.x < 0)
+	{
+		r->stepX = -1;
+		r->sideDist.x = (r->pos.x - r->MapX) * r->deltaDist.x;
+	}
+	else
+	{
+		r->stepX = 1;
+		r->sideDist.x = (r->MapX + 1.0 - r->pos.x) * r->deltaDist.x;
+	}
+	if (r->ray_dir.y < 0)
+	{
+		r->stepY = -1;
+		r->sideDist.y = (r->pos.y - r->MapY) * r->deltaDist.y;
+	}
+	else
+	{
+		r->stepY = 1;
+		r->sideDist.y = (r->MapY + 1.0 - r->pos.y) * r->deltaDist.y;
+	}
+}
+
+void	ray_comp_2(t_raydata *data, t_r *r)
+{
+	while (r->hit == 0)
+	{
+		if (r->sideDist.x < r->sideDist.y)
+		{
+			r->sideDist.x += r->deltaDist.x;
+			r->MapX += r->stepX;
+			r->side = 0;
+			r->ray_color = (t_color){0x0000FF};
 		}
-		if (ray_dir.y < 0) {
-			stepY = -1;
-			sideDist.y = (pos.y - MapY) * deltaDist.y;
-		} else {
-			stepY = 1;
-			sideDist.y = (MapY + 1.0 - pos.y) * deltaDist.y;
-		}
-		while (hit == 0) {
-			if (sideDist.x < sideDist.y) {
-				sideDist.x += deltaDist.x;
-				MapX += stepX;
-				side = 0;
-				ray_color = (t_color) {0x0000FF};
-			} else {
-				sideDist.y += deltaDist.y;
-				MapY += stepY;
-				side = 1;
-				ray_color = (t_color) {0x00FF00};
-			}
-			if (data->map[MapY][MapX] > 0)
-				hit = 1;
-		}
-		if (side == 0)
-			perpWallDist = sideDist.x - deltaDist.x;
 		else
-			perpWallDist = sideDist.y - deltaDist.y;
-		int lineHeight = (int) (HEIGHT / perpWallDist);
-		int drawStart = -lineHeight / 2 + HEIGHT / 2;
-		if (drawStart < 0)
-			drawStart = 0;
-		int drawEnd = lineHeight / 2 + HEIGHT / 2;
-		if (drawEnd >= HEIGHT)
-			drawEnd = HEIGHT - 1;
-		double wall_x;
-		if (side == 0) wall_x = pos.y + perpWallDist * ray_dir.y;
-		else wall_x = pos.x + perpWallDist * ray_dir.x;
-		wall_x -= floor((wall_x));
-		if (side == 0) {
-			if (ray_dir.x > 0) texture_index = WE;
-			else texture_index = EA;
-		} else {
-			if (ray_dir.y > 0) texture_index = NO;
-			else texture_index = SO;
+		{
+			r->sideDist.y += r->deltaDist.y;
+			r->MapY += r->stepY;
+			r->side = 1;
+			r->ray_color = (t_color){0x00FF00};
 		}
-		draw_slice(data, texture_index, drawStart, drawEnd, x, wall_x, perpWallDist);
+		if (data->map[r->MapY][r->MapX] > 0)
+			r->hit = 1;
+	}
+	if (r->side == 0)
+		r->perpWallDist = r->sideDist.x - r->deltaDist.x;
+	else
+		r->perpWallDist = r->sideDist.y - r->deltaDist.y;
+	r->lineHeight = (int)(HEIGHT / r->perpWallDist);
+}
+
+void	ray_comp_3(t_r *r)
+{
+	r->drawStart = -r->lineHeight / 2 + HEIGHT / 2;
+	if (r->drawStart < 0)
+		r->drawStart = 0;
+	r->drawEnd = r->lineHeight / 2 + HEIGHT / 2;
+	if (r->drawEnd >= HEIGHT)
+		r->drawEnd = HEIGHT - 1;
+	if (r->side == 0)
+		r->wall_x = r->pos.y + r->perpWallDist * r->ray_dir.y;
+	else
+		r->wall_x = r->pos.x + r->perpWallDist * r->ray_dir.x;
+	r->wall_x -= floor((r->wall_x));
+	if (r->side == 0)
+	{
+		if (r->ray_dir.x > 0)
+			r->texture_index = WE;
+		else
+			r->texture_index = EA;
+	}
+	else
+	{
+		if (r->ray_dir.y > 0)
+			r->texture_index = NO;
+		else
+			r->texture_index = SO;
 	}
 }

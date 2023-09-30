@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:34:28 by avassor           #+#    #+#             */
-/*   Updated: 2023/09/05 12:03:57 by avassor          ###   ########.fr       */
+/*   Updated: 2023/09/30 22:21:14 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 _Bool	copy_line(t_data *data, char *line)
 {
-	data->raw[data->lines] = (char *)gc_alloc((ft_strlen(line) + 1),sizeof(char));
+	data->raw[data->lines] = (char *)gc_alloc((ft_strlen(line) + 1),
+			sizeof(char));
 	if (!data->raw[data->lines])
 		return (data->err = MLLOC, clean_raw(data), 1);
 	ft_strcpy(line, data->raw[data->lines]);
@@ -27,12 +28,13 @@ _Bool	upscale_raw(t_data *data)
 	int		count;
 
 	count = 0;
-	new = (char **)gc_alloc((data->lines + 1),sizeof(char *) );
+	new = (char **)gc_alloc((data->lines + 1), sizeof(char *));
 	if (!new)
 		return (data->err = MLLOC, 1);
 	while (count < data->lines)
 	{
-		new[count] = (char *)gc_alloc((ft_strlen(data->raw[count]) + 1),sizeof(char));
+		new[count] = (char *)gc_alloc((
+					ft_strlen(data->raw[count]) + 1), sizeof(char));
 		if (!new[count])
 			return (data->err = MLLOC, clean_raw(data), 1);
 		ft_strcpy(data->raw[count], new[count]);

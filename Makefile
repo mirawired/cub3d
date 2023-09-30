@@ -6,7 +6,7 @@
 #    By: avassor <avassor@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 12:13:14 by mira              #+#    #+#              #
-#    Updated: 2023/09/11 11:09:06 by jgarcia          ###   ########.fr        #
+#    Updated: 2023/09/30 22:13:09 by avassor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ SRC =				cub3d.c					\
 					mlx_helpers.c			\
 					data_init.c				\
 					movements.c				\
-					movements_extra.c
+					movements_extra.c		\
+					rays_add.c
 
 BONUS_SRC = 		cub3d.c					\
 					clean.c					\
@@ -80,7 +81,8 @@ BONUS_SRC = 		cub3d.c					\
 					data_init_bonus.c		\
 					movements.c				\
 					movements_extra.c		\
-					sprites.c
+					sprites.c				\
+					rays_add.c
 
 SRCS = $(shell find $(SRC_PATH) -type d)
 BONUS_SRCS = $(shell find $(SRC_PATH) -type d)
