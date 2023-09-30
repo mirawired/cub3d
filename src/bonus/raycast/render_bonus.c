@@ -10,11 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../inc/raycast.h"
+#include "../../../inc/raycast.h"
 
 int render(t_raydata *raydata) {
 	clear_buffer(raydata);
 	draw_rays(raydata);
+	draw_minimap(raydata);
+	nmi_ai(raydata);
+	draw_player(raydata);
 	mlx_put_image_to_window(raydata->mlx,
 							raydata->mlx_win,
 							raydata->img_buffer->img,

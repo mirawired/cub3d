@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../inc/raycast.h"
+#include "../../../inc/raycast.h"
 
 void draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end, int x, double wall_x, double dist) {
 	float texture_step;
@@ -88,6 +88,7 @@ void draw_rays(t_raydata *data) {
 			if (data->map[MapY][MapX] > 0)
 				hit = 1;
 		}
+//        draw_line(data, ray_color, (t_point){pos.x * grid_size_x, pos.y * grid_size_y}, (t_point){MapX * grid_size_x, MapY * grid_size_y});
 		if (side == 0)
 			perpWallDist = sideDist.x - deltaDist.x;
 		else
@@ -111,5 +112,7 @@ void draw_rays(t_raydata *data) {
 			else texture_index = SO;
 		}
 		draw_slice(data, texture_index, drawStart, drawEnd, x, wall_x, perpWallDist);
+		data->spr->Zbuffer[x] = perpWallDist;
 	}
+	draw_sprites(data, pos);
 }

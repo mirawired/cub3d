@@ -1,0 +1,26 @@
+- [X] Mandatory & Bonus part Separation
+- [ ] Malloc Protection 
+- [ ] Floor and ceiling textures
+- [ ] Game Loop State Machine 
+  - [ ] Menu
+  - [ ] Game
+  - [ ] Game Over
+- [ ] Sprite clipping on walls
+  - [ ] Clamp sprite position to middle of raw and column
+- [X] Pathfinding
+  - [X] Queue Data Structure
+  - [X] Current state MAP 
+  - [X] Path Data Structure
+  - [X] BFS
+  - [X] Updated position ?
+    - [X] Player
+    - [X] Enemies
+- [ ] Sprite animation
+- [ ] Enemies AI
+  - [ ] Enemies State Machine
+  - [ ] Enemies & Wall collision
+- [X] Minimap
+- [ ] HUD
+- [X] Leaks
+- [ ] Norme
+- [X] Side from raycasting

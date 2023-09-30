@@ -1,5 +1,7 @@
 obj/*.o
+obj_bonus/*.o
 minilibx-linux/*.a
 minilibx-linux/*.o
 cub3d
+cub3d_bonus
 .idea/*

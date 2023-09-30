@@ -163,7 +163,7 @@ void	*gc_alloc(size_t nmemb, size_t size);
 # define OFFSET_MAP_Y 0
 # define MAP_HEIGHT 256
 # define HEIGHT 900
-# define SPRITENBR 2
+# define SPRITENBR 4
 
 typedef struct s_point
 {
@@ -258,7 +258,12 @@ typedef struct s_raydata
 	long		last_frame;
 	t_spr		*spr;
 }	t_raydata;
-
+void	init_mlx(t_raydata *raydata);
+void	starting_data_init(t_arg *arg, t_raydata *raydata);
+void	ennemies_textures_init(t_raydata *raydata);
+void	wall_textures_init(t_arg *arg, t_raydata *raydata);
+void	player_init_position(t_arg *arg, t_raydata *raydata);
+void	launch_game_loop(t_raydata *raydata);
 int		render(t_raydata *raydata);
 int		key_pressed(int keycode, t_raydata *raydata);
 int		my_mlx_pixel_put(t_buffer *raydata, t_color color, t_int_point coord);
@@ -269,6 +274,13 @@ void	draw_player(t_raydata *raydata);
 void	fill_rectangle(t_raydata *raydata, t_color color, t_point top_left, t_point bottom_right);
 void	draw_rays(t_raydata *raydata);
 t_point	calc_point(t_point from, double angle, double distance);
+void	clamp_player(t_raydata *raydata);
+void	move_forward(t_raydata *raydata);
+void	move_backward(t_raydata *raydata);
+void	turn_left(t_raydata *raydata);
+void	turn_right(t_raydata *raydata);
+void	strafe_right(t_raydata *raydata);
+void	strafe_left(t_raydata *raydata);
 
 int		raycast(t_arg *arg);
 void	grab_arg(t_raydata *raydata, t_arg *arg);
@@ -278,6 +290,10 @@ void	sort_sprites(t_spr	*spr, t_point pos);
 void	comp_sprites(t_raydata *data, t_sprite *curr, t_point pos);
 void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr);
 void	comp_long(t_raydata *data, t_cs *cs);
-t_int_point bfs(t_raydata *data, t_int_point start, t_int_point end);
+t_texture	*load_texture(void *mlx, char *path);
+void	draw_minimap(t_raydata *raydata);
+// ..................... Ennemies AI ...................................
+t_int_point	bfs(t_raydata *data, t_int_point start, t_int_point end);
+void		nmi_ai(t_raydata *raydata);
 
 #endif

@@ -1,9 +1,17 @@
-//
-// Created by corecaps on 9/13/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bfs.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/25 10:05:10 by corecaps          #+#    #+#             */
+/*   Updated: 2023/09/25 10:05:13 by corecaps         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
-#include "../../inc/bfs.h"
+#include "../../../inc/cub3d.h"
+#include "../../../inc/bfs.h"
 t_queue *create_queue(int capacity) {
 	t_queue *queue = gc_alloc(1, sizeof(t_queue));
 	queue->capacity = capacity;
@@ -30,22 +38,20 @@ t_int_point bfs(t_raydata *data, t_int_point start, t_int_point end) {
 	int **map = data->map;
 	int map_width = data->map_width;
 	int map_height = data->map_height;
-	t_int_point parent[map_height][map_width];
-	int **visited = gc_alloc(map_width, sizeof(int *));
+	t_int_point parent[map_width][map_height];
+	int **visited = gc_alloc(map_width + 1, sizeof(int *));
 	for (int i = 0; i < map_width; i++) {
-		visited[i] = gc_alloc(map_height, sizeof(int));
-		for (int j = 0; j < map_width; j++)
-			visited[i][j] = 0;
+		visited[i] = gc_alloc(map_height + 1, sizeof(int));
 	}
 	enqueue(queue, (t_queue_node) {start, 0});
-	visited[start.y][start.x] = 1;
+	visited[start.x][start.y] = 1;
 	while (queue->front < queue->rear) {
 		t_queue_node node = dequeue(queue);
 		if (node.point.x == end.x && node.point.y == end.y){
-			printf("Found path\n");
 			while (node.point.x != start.x || node.point.y != start.y) {
-				printf("x: %d y: %d\n", node.point.x, node.point.y);
 				t_int_point tmp = parent[node.point.x][node.point.y];
+				if (tmp.x == start.x && tmp.y == start.y)
+					break;
 				node.point = tmp;
 			}
 			gc_del(queue);
@@ -54,12 +60,13 @@ t_int_point bfs(t_raydata *data, t_int_point start, t_int_point end) {
 		for (int i = 0; i < 4; i++) {
 			int x = node.point.x + dir[i].x;
 			int y = node.point.y + dir[i].y;
-			if (x >= 0 && x < map_width && y >= 0 && y < map_height && map[x][y] == 0 && visited[x][y] == 0) {
+			if (x >= 0 && x < map_width && y >= 0 && y < map_height && map[y][x] == 0 && visited[x][y] == 0) {
 				enqueue(queue, (t_queue_node) {{x, y}, node.distance + 1});
 				visited[x][y] = 1;
 				parent[x][y] = node.point;
 			}
 		}
 	}
+	gc_del(queue);
 	return ((t_int_point) {0, 0});
 }

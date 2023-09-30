@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../inc/raycast.h"
+#include "../../../inc/raycast.h"
 
 int	raycast(t_arg *arg)
 {
@@ -24,7 +24,10 @@ int	raycast(t_arg *arg)
 		return (1);
 	raydata->mlx = NULL;
 	init_mlx(raydata);
+	raydata->map_width = arg->width;
+	raydata->map_height = arg->height;
 	wall_textures_init(arg, raydata);
+	ennemies_textures_init(raydata);
 	raydata->player = gc_alloc(1,sizeof (t_player));
 	player_init_position(arg, raydata);
 	starting_data_init(arg, raydata);
