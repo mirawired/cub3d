@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgarcia <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:56:05 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/09/11 10:56:09 by jgarcia          ###   ########.fr       */
+/*   Updated: 2023/10/02 15:38:22 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/raycast.h"
 
-int render(t_raydata *raydata) {
+int render(t_raydata *raydata)
+{
 	clear_buffer(raydata);
 	draw_rays(raydata);
 	draw_minimap(raydata);

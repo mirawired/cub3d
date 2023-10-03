@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/09/30 22:15:48 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/03 13:10:58 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_data
 
 // ..................... PARSING ............................................
 
+_Bool	init_alloc(t_data *data);
 t_data	*init_data(void);
 _Bool	is_cub(char *arg);
 _Bool	is_dir(char *arg);
