@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:36:22 by avassor           #+#    #+#             */
-/*   Updated: 2023/09/05 13:36:18 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/03 16:11:51 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	sort_sprites(t_spr	*spr, t_point pos)
 		{
 			spr->sprite_order[i] = i + 1;
 			spr->sprite_order[i + 1] = i;
-            break;
+			break ;
 		}
 		i++;
 	}
@@ -98,7 +98,7 @@ void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr)
 			color = curr->texture->texture[64 * texy + texx];
 			if (color.color != BLACK)
 				my_mlx_pixel_put(data->img_buffer, color,
-					(t_int_point){cs->stripe , y});
+					(t_int_point){cs->stripe, y});
 			y++;
 		}
 	}

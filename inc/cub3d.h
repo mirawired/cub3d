@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/09/30 22:15:48 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/03 15:52:19 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,6 +285,14 @@ typedef struct s_r
 	int				drawEnd;
 	double			wall_x;
 } t_r;
+
+typedef struct s_map
+{
+	double	grid_size_x;
+	double	grid_size_y;
+	t_color	grid_color;
+	t_color	nmi_color;
+} t_map;
 
 void	init_mlx(t_raydata *raydata);
 void	starting_data_init(t_arg *arg, t_raydata *raydata);
