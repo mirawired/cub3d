@@ -6,10 +6,10 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 22:12:06 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/02 16:32:17 by corecaps         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:45:39 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../../inc/cub3d.h"
+
 t_r	*r_init(t_raydata *data)
 {
 	t_r	*r;
