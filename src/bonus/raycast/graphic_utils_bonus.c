@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:05 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/03 15:43:02 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/04 15:52:35 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	my_mlx_pixel_put(t_buffer *data, t_color color, t_int_point coord)
 
 	if (coord.x < 0 || coord.x > WIDTH || coord.y < 0 || coord.y > HEIGHT)
 		return (-1);
-	if (coord.x > OFFSET_MAP_X && coord.x < OFFSET_MAP_X + MAP_WIDTH
-		&& coord.y > OFFSET_MAP_Y && coord.y < OFFSET_MAP_Y + MAP_HEIGHT)
+	if (coord.x > OFFSET_MAP_X && coord.x < OFFSET_MAP_X + ((WIDTH / 4) / 26)
+		&& coord.y > OFFSET_MAP_Y && coord.y < OFFSET_MAP_Y + ((HEIGHT / 3) / 23))
 	{
 		color.s_rgb.r /= 2;
 		color.s_rgb.g /= 2;

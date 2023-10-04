@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:34 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/03 16:09:50 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/04 15:47:01 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@ t_point	calc_point(t_point from, double angle, double distance)
 	return (result);
 }
 
-t_point	clamp(t_point point)
+t_point	clamp(t_point point, t_raydata *raydata)
 {
 	t_point	result;
 
 	result.x = point.x;
 	result.y = point.y;
-	result.x = (result.x / WIDTH) * MAP_WIDTH + OFFSET_MAP_X;
-	result.y = (result.y / HEIGHT) * MAP_HEIGHT + OFFSET_MAP_Y;
+	// result.x = (result.x / WIDTH) * MAP_WIDTH + OFFSET_MAP_X;
+	// result.y = (result.y / HEIGHT) * MAP_HEIGHT + OFFSET_MAP_Y;
+	result.x = (result.x / WIDTH) * ((WIDTH / 4) / raydata->map_width) * raydata->map_width + OFFSET_MAP_X;
+	result.y = (result.y / HEIGHT) * ((HEIGHT / 3) / raydata->map_height) * raydata->map_height + OFFSET_MAP_Y;
 	if (result.x < OFFSET_MAP_X)
 		result.x = OFFSET_MAP_X;
 	if (result.x > OFFSET_MAP_X + MAP_WIDTH)
@@ -58,9 +60,11 @@ void	draw_player(t_raydata *raydata)
 	right = calc_point(player_pos, player_angle - 90
 			* RADIAN, raydata->player->size);
 	front = calc_point(player_pos, player_angle, raydata->player->size * 2);
-	front = clamp(front);
-	left = clamp(left);
-	right = clamp(right);
+	front = clamp(front, raydata);
+	left = clamp(left, raydata);
+	right = clamp(right, raydata);
 	draw_line(raydata, player_color, left, front);
 	draw_line(raydata, player_color, right, front);
 }
+
+// 23/26
