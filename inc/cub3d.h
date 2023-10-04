@@ -321,7 +321,7 @@ void	strafe_left(t_raydata *raydata);
 
 int		raycast(t_arg *arg);
 void	grab_arg(t_raydata *raydata, t_arg *arg);
-
+_Bool	init_alloc(t_data *data);
 void	draw_sprites(t_raydata * data, t_point pos);
 void	sort_sprites(t_spr	*spr, t_point pos);
 void	comp_sprites(t_raydata *data, t_sprite *curr, t_point pos);
