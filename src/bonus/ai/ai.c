@@ -19,10 +19,10 @@ void	nmi_ai(t_raydata *raydata)
 	int			grid_size_y;
 	t_int_point	dest;
 
-	i = 0;
+	i = -1;
 	grid_size_x = WIDTH / (raydata->map_width);
 	grid_size_y = HEIGHT / (raydata->map_height);
-	while (i < SPRITENBR)
+	while (i++ < SPRITENBR)
 	{
 		dest = bfs(raydata, (t_int_point){(int)(raydata->spr->sprite[i].x),
 				(int)(raydata->spr->sprite[i].y)}, (t_int_point)
@@ -34,6 +34,5 @@ void	nmi_ai(t_raydata *raydata)
 			+= (dest.x - (int)raydata->spr->sprite[i].x) * 0.05;
 		raydata->spr->sprite[i].y
 			+= (dest.y - (int)raydata->spr->sprite[i].y) * 0.05;
-		i++;
 	}
 }

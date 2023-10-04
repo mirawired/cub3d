@@ -49,10 +49,10 @@ t_int_point	bfs(t_raydata *data, t_int_point start, t_int_point end)
 	bfs->map_height = data->map_height;
 	// t_int_point		**parent[bfs->map_width][bfs->map_height];
 	// gc_alloc(bfs->map_width, sizeof(t_int_point *));
-	bfs->parent = malloc(bfs->map_width * sizeof(t_int_point *));
+	bfs->parent = gc_alloc(sizeof(t_int_point *),bfs->map_width );
 	i = 0;
 	while (i < bfs->map_width)
-		bfs->parent[i++] = malloc(bfs->map_width * sizeof(t_int_point));
+		bfs->parent[i++] = gc_alloc(sizeof(t_int_point),bfs->map_width );
 	i = 0;
 
 
