@@ -14,14 +14,16 @@
 
 void	clamp_player(t_raydata *raydata)
 {
-	if (raydata->player->pos.x < 0 + (raydata->player->size * 2))
-		raydata->player->pos.x = (double)(0 + (raydata->player->size * 2));
-	if (raydata->player->pos.y < 0 + (raydata->player->size * 2))
-		raydata->player->pos.y = (double)(0 + (raydata->player->size * 2));
-	if (raydata->player->pos.x > (double)(WIDTH - (raydata->player->size * 2)))
-		raydata->player->pos.x = (double)(WIDTH - (raydata->player->size * 2));
-	if (raydata->player->pos.y > (double)(HEIGHT - (raydata->player->size * 2)))
-		raydata->player->pos.y = (double)(HEIGHT - (raydata->player->size * 2));
+	int grid_size_x = MAP_WIDTH / (raydata->map_width);
+	int grid_size_y = MAP_HEIGHT / (raydata->map_height);
+	if (raydata->player->pos.x < 0 + grid_size_x + (raydata->player->size * 2))
+		raydata->player->pos.x = (double)(0 + grid_size_x +(raydata->player->size * 2));
+	if (raydata->player->pos.y < 0 + grid_size_y +(raydata->player->size * 2))
+		raydata->player->pos.y = (double)(0 + grid_size_y + (raydata->player->size * 2));
+	if (raydata->player->pos.x > (double)(WIDTH - grid_size_x - (raydata->player->size * 2)))
+		raydata->player->pos.x = (double)(WIDTH - grid_size_x - (raydata->player->size * 2));
+	if (raydata->player->pos.y > (double)(HEIGHT - grid_size_y - (raydata->player->size * 2)))
+		raydata->player->pos.y = (double)(HEIGHT - grid_size_y - (raydata->player->size * 2));
 }
 
 void	strafe_right(t_raydata *raydata)

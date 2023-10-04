@@ -77,11 +77,15 @@ void draw_rays(t_raydata *data) {
 			if (sideDist.x < sideDist.y) {
 				sideDist.x += deltaDist.x;
 				MapX += stepX;
+				if (MapX < 0 || MapX >= data->map_width )
+					break;
 				side = 0;
 				ray_color = (t_color) {0x0000FF};
 			} else {
 				sideDist.y += deltaDist.y;
 				MapY += stepY;
+				if (MapY < 0 || MapY >= data->map_height)
+					break;
 				side = 1;
 				ray_color = (t_color) {0x00FF00};
 			}

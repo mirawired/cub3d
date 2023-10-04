@@ -100,6 +100,8 @@ void	ray_comp_2(t_raydata *data, t_r *r)
 		{
 			r->sideDist.x += r->deltaDist.x;
 			r->MapX += r->stepX;
+			if (r->MapX < 0 || r->MapX >= data->map_width)
+				break ;
 			r->side = 0;
 			r->ray_color = (t_color){0x0000FF};
 		}
@@ -107,6 +109,8 @@ void	ray_comp_2(t_raydata *data, t_r *r)
 		{
 			r->sideDist.y += r->deltaDist.y;
 			r->MapY += r->stepY;
+			if (r->MapY < 0 || r->MapY >= data->map_height)
+				break ;
 			r->side = 1;
 			r->ray_color = (t_color){0x00FF00};
 		}
