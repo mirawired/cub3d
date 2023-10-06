@@ -27,18 +27,18 @@ t_point	clamp(t_point point, t_raydata *raydata)
 
 	result.x = point.x;
 	result.y = point.y;
-	// result.x = (result.x / WIDTH) * MAP_WIDTH + OFFSET_MAP_X;
-	// result.y = (result.y / HEIGHT) * MAP_HEIGHT + OFFSET_MAP_Y;
+//     result.x = (result.x / WIDTH) * MAP_WIDTH + OFFSET_MAP_X;
+//     result.y = (result.y / HEIGHT) * MAP_HEIGHT + OFFSET_MAP_Y;
 	result.x = (result.x / WIDTH) * ((WIDTH / 4) / raydata->map_width) * raydata->map_width + OFFSET_MAP_X;
 	result.y = (result.y / HEIGHT) * ((HEIGHT / 3) / raydata->map_height) * raydata->map_height + OFFSET_MAP_Y;
-	if (result.x < OFFSET_MAP_X)
-		result.x = OFFSET_MAP_X;
-	if (result.x > OFFSET_MAP_X + MAP_WIDTH)
-		result.x = OFFSET_MAP_X + MAP_WIDTH;
-	if (result.y < OFFSET_MAP_Y)
-		result.y = OFFSET_MAP_Y;
-	if (result.y > OFFSET_MAP_Y + MAP_HEIGHT)
-		result.y = OFFSET_MAP_Y + MAP_HEIGHT;
+//	if (result.x < OFFSET_MAP_X)
+//		result.x = OFFSET_MAP_X;
+//	if (result.x > OFFSET_MAP_X + MAP_WIDTH)
+//		result.x = OFFSET_MAP_X + MAP_WIDTH;
+//	if (result.y < OFFSET_MAP_Y)
+//		result.y = OFFSET_MAP_Y;
+//	if (result.y > OFFSET_MAP_Y + MAP_HEIGHT)
+//		result.y = OFFSET_MAP_Y + MAP_HEIGHT;
 	return (result);
 }
 
