@@ -18,8 +18,10 @@ void draw_menu(t_raydata * raydata) {
 													  &raydata->img_menu->line_length,
 													  &raydata->img_menu->endian);
 	}
-	mlx_put_image_to_window(raydata->mlx,
-							raydata->mlx_win,
-							raydata->img_menu->img,
-							0, 0);
+	else {
+		mlx_put_image_to_window(raydata->mlx,
+								raydata->mlx_win,
+								raydata->img_menu->img,
+								0, 0);
+	}
 }
