@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/04 15:25:38 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/08 17:58:19 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ typedef struct s_sprite
 {
 	double		x;
 	double		y;
-	t_texture	*texture;
+	t_texture	**texture;
 }	t_sprite;
 
 typedef struct s_cs
@@ -234,6 +234,7 @@ typedef struct s_spr
 	int			sprite_order[SPRITENBR];
 	double		sprite_dist[SPRITENBR];
 	t_cs		cs;
+	int			spr_i;
 }	t_spr;
 
 typedef enum e_texture_index
@@ -284,7 +285,26 @@ typedef struct s_r
 	int				drawStart;
 	int				drawEnd;
 	double			wall_x;
-} t_r;
+}	t_r;
+
+typedef struct s_h
+{
+	float	raydirx0;
+	float	raydiry0;
+	float	raydirx1;
+	float	raydiry1;
+	int		p;
+	float	posz;
+	float	rawdist;
+	float	floorstepx;
+	float	floorstepy;
+	float	floorx;
+	float	floory;
+	int		cellx;
+	int		celly;
+	int		tx;
+	int		ty;
+}	t_h;
 
 typedef struct s_map
 {
@@ -292,7 +312,7 @@ typedef struct s_map
 	double	grid_size_y;
 	t_color	grid_color;
 	t_color	nmi_color;
-} t_map;
+}	t_map;
 
 void	init_mlx(t_raydata *raydata);
 void	starting_data_init(t_arg *arg, t_raydata *raydata);
