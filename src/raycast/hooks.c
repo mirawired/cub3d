@@ -58,7 +58,6 @@ void key_end(int keycode, t_raydata *raydata)
 int	key_pressed(int keycode, t_raydata *raydata)
 {
 	void (*hook_state[4])(int keycode,t_raydata *raydata);
-	printf("keycode: %d\n", keycode);
 	hook_state[MENU] = key_menu;
 	hook_state[PLAYING] = key_playing;
 	hook_state[GAME_OVER] = key_end;
