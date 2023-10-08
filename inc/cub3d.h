@@ -165,6 +165,24 @@ void	*gc_alloc(size_t nmemb, size_t size);
 # define HEIGHT 900
 # define SPRITENBR 4
 
+typedef enum e_game_state {
+	MENU,
+	PLAYING,
+	GAME_OVER,
+	WIN
+}t_game_state;
+typedef enum e_keys {
+	KEY_W = 119,
+	KEY_A = 97,
+	KEY_S = 115,
+	KEY_D = 100,
+	KEY_LEFT = 65361,
+	KEY_RIGHT = 65363,
+	KEY_UP = 65362,
+	KEY_DOWN = 65364,
+	KEY_ESC = 65307
+}	t_keys;
+
 typedef struct s_point
 {
 	double x;
@@ -250,6 +268,7 @@ typedef struct s_raydata
 	void		*mlx;
 	void		*mlx_win;
 	t_buffer	*img_buffer;
+	t_buffer	*img_menu;
 	t_player	*player;
 	int			map_width;
 	int			map_height;
@@ -260,6 +279,7 @@ typedef struct s_raydata
 	long		last_frame;
 	t_spr		*spr;
 	t_arg		*arg;
+	t_game_state game_state;
 }	t_raydata;
 
 typedef struct s_r
@@ -293,6 +313,8 @@ typedef struct s_map
 	t_color	grid_color;
 	t_color	nmi_color;
 } t_map;
+
+
 
 void	init_mlx(t_raydata *raydata);
 void	starting_data_init(t_arg *arg, t_raydata *raydata);
@@ -335,7 +357,7 @@ void	ray_comp_3(t_r *r);
 t_r		*r_init(t_raydata *data);
 void	set_color(t_color *color, t_texture *texture, float txtr_pos, t_r *r);
 int check_collision(t_raydata *raydata, t_point new_pos);
-
+void draw_menu(t_raydata * raydata);
 // ..................... Ennemies AI ...................................
 t_int_point	bfs(t_raydata *data, t_int_point start, t_int_point end);
 void		nmi_ai(t_raydata *raydata);

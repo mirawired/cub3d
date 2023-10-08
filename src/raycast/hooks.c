@@ -21,8 +21,14 @@ void	clean_exit(t_raydata *raydata)
 	gc_free();
 	exit(0);
 }
-
-int	key_pressed(int keycode, t_raydata *raydata)
+void key_menu(int keycode, t_raydata *raydata)
+{
+	if (keycode == 65307)
+		clean_exit(raydata);
+	if (keycode == 32)
+		raydata->game_state = PLAYING;
+}
+void key_playing(int keycode, t_raydata *raydata)
 {
 	if (keycode == 65307)
 		clean_exit(raydata);
@@ -38,5 +44,25 @@ int	key_pressed(int keycode, t_raydata *raydata)
 		move_forward(raydata);
 	if (keycode == 115 || keycode == 65364)
 		move_backward(raydata);
+	if (keycode == 32)
+		raydata->game_state = MENU;
+}
+void key_end(int keycode, t_raydata *raydata)
+{
+	if (keycode == 65307)
+		clean_exit(raydata);
+	if (keycode == 32)
+		raydata->game_state = MENU;
+}
+
+int	key_pressed(int keycode, t_raydata *raydata)
+{
+	void (*hook_state[4])(int keycode,t_raydata *raydata);
+	printf("keycode: %d\n", keycode);
+	hook_state[MENU] = key_menu;
+	hook_state[PLAYING] = key_playing;
+	hook_state[GAME_OVER] = key_end;
+	hook_state[WIN] = key_end;
+	hook_state[raydata->game_state](keycode, raydata);
 	return (0);
 }

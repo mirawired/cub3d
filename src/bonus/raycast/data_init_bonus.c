@@ -79,4 +79,6 @@ void	starting_data_init(t_arg *arg, t_raydata *raydata)
 	raydata->floor_color.s_rgb.r = arg->F[0];
 	raydata->floor_color.s_rgb.g = arg->F[1];
 	raydata->floor_color.s_rgb.b = arg->F[2];
+	raydata->game_state = MENU;
+	raydata->img_menu = NULL;
 }
