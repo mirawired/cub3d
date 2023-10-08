@@ -171,6 +171,13 @@ typedef enum e_game_state {
 	GAME_OVER,
 	WIN
 }t_game_state;
+
+typedef enum e_ai_state {
+	AI_IDLE,
+	AI_CHASE,
+	AI_FLEE
+}t_ai_state;
+
 typedef enum e_keys {
 	KEY_W = 119,
 	KEY_A = 97,
