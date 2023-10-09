@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 10:05:29 by corecaps          #+#    #+#             */
-/*   Updated: 2023/10/03 16:05:08 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/04 15:33:24 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ void	draw_minimap(t_raydata *raydata)
 	int		i;
 
 	i = 0;
-	map.grid_size_x = MAP_WIDTH / (raydata->map_width);
-	map.grid_size_y = MAP_HEIGHT / (raydata->map_height);
+	// map.grid_size_x = MAP_WIDTH / (raydata->map_width);
+	// map.grid_size_y = MAP_HEIGHT / (raydata->map_height);
+	map.grid_size_x = (WIDTH / 4) / raydata->map_width;
+	map.grid_size_y = (HEIGHT / 3) / raydata->map_height;
 	map.grid_color.s_rgb.r = (char) 255;
 	map.grid_color.s_rgb.g = (char) 0;
 	map.grid_color.s_rgb.b = (char) 0;

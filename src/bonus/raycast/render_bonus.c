@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:56:05 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/03 16:11:08 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/08 17:06:29 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void render_menu(t_raydata *raydata) {
 
 void render_game(t_raydata *raydata) {
 	clear_buffer(raydata);
+	draw_horiz(raydata);
 	draw_rays(raydata);
 	draw_minimap(raydata);
 	nmi_ai(raydata);

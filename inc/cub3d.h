@@ -259,6 +259,7 @@ typedef struct s_spr
 	int			sprite_order[SPRITENBR];
 	double		sprite_dist[SPRITENBR];
 	t_cs		cs;
+	int			spr_i;
 }	t_spr;
 
 typedef enum e_texture_index
@@ -312,6 +313,25 @@ typedef struct s_r
 	int				drawEnd;
 	double			wall_x;
 } t_r;
+
+typedef struct s_h
+{
+	float	raydirx0;
+	float	raydiry0;
+	float	raydirx1;
+	float	raydiry1;
+	int		p;
+	float	posz;
+	float	rawdist;
+	float	floorstepx;
+	float	floorstepy;
+	float	floorx;
+	float	floory;
+	int		cellx;
+	int		celly;
+	int		tx;
+	int		ty;
+}	t_h;
 
 typedef struct s_map
 {
