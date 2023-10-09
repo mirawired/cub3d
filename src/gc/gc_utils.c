@@ -14,6 +14,12 @@
 #include "./../../inc/gc.h"
 #include <limits.h>
 
+/* **************************************************************************
+ * ft_memset:
+ * - Fills the first n bytes of the memory area pointed to by s with the
+ * constant byte c.
+ ************************************************************************** */
+
 void	*ft_memset(void *s, int c, size_t n)
 {
 	char	*ptr;
@@ -28,6 +34,15 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
+
+/* **************************************************************************
+ * ft_calloc:
+ * - Allocates memory for an array of nmemb elements of size bytes each and
+ * returns a pointer to the allocated memory. The memory is set to zero.
+ * - If the multiplication of nmemb and size would result in integer
+ * overflow, then calloc() returns an error.
+ * - If nmemb or size is equal to zero, then calloc() returns NULL,
+ ************************************************************************** */
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {

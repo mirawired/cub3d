@@ -3,6 +3,12 @@
 //
 
 #include "../../../inc/cub3d.h"
+
+/* **************************************************************************
+ * clamp_idx:
+ * - clamps the sprite to the center of the cell if it is surrounded by walls
+ ************************************************************************** */
+
 void clamp_idx(t_raydata *raydata, int index)
 {
 	int x;
@@ -21,6 +27,12 @@ void clamp_idx(t_raydata *raydata, int index)
 		&& raydata->map[y - 1][x] == 1)
 			raydata->spr->sprite[index].y = y + 0.5;
 }
+
+/* **************************************************************************
+ * clamp_sprites:
+ * - clamps all sprites to the center of the cell if they are surrounded by
+ *  walls
+ ************************************************************************** */
 
 void clamp_sprites(t_raydata *raydata)
 {

@@ -12,6 +12,13 @@
 
 #include "../../../inc/cub3d.h"
 
+/* **************************************************************************
+ * find_player:
+ * - find the player in the map and set its position
+ * - set the player's initial position
+ * - return 1 if found, 0 if not
+ ************************************************************************** */
+
 int	find_player(t_raydata *raydata, int i, double gs_x, double gs_y)
 {
 	int	j;
@@ -34,6 +41,13 @@ int	find_player(t_raydata *raydata, int i, double gs_x, double gs_y)
 	}
 	return (found);
 }
+
+/* **************************************************************************
+ * data_reset:
+ * - reset the player's position
+ * - reset the sprite's position
+ * - reset the player's vectors and angle
+ ************************************************************************** */
 
 void data_reset(t_raydata *raydata)
 {

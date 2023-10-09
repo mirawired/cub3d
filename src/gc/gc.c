@@ -14,6 +14,11 @@
 #include "./../../inc/gc.h"
 #include <limits.h>
 
+/* **************************************************************************
+ * gc_check_double:
+ * - Check if the pointer is already in the garbage collector.
+ ************************************************************************** */
+
 int	gc_check_double(t_garbage *gc, void *ptr)
 {
 	t_garbage	*tmp;
@@ -27,6 +32,11 @@ int	gc_check_double(t_garbage *gc, void *ptr)
 	}
 	return (0);
 }
+
+/* **************************************************************************
+ * gc_add:
+ * - add a pointer to the garbage collector.
+ ************************************************************************** */
 
 t_garbage	**gc_add(t_garbage *ptr)
 {
@@ -49,6 +59,11 @@ t_garbage	**gc_add(t_garbage *ptr)
 	return (&garbage);
 }
 
+/* **************************************************************************
+ * gc_free:
+ * - free all the pointers in the garbage collector.
+ ************************************************************************** */
+
 void	gc_free(void)
 {
 	t_garbage	*tmp;
@@ -68,6 +83,11 @@ void	gc_free(void)
 	}
 	(*garbage) = NULL;
 }
+
+/* **************************************************************************
+ * gc_del:
+ * - delete a pointer from the garbage collector.
+ ************************************************************************** */
 
 int	gc_del(void *ptr)
 {
@@ -97,6 +117,12 @@ int	gc_del(void *ptr)
 	}
 	return (0);
 }
+
+/* **************************************************************************
+ * gc_alloc:
+ * - allocate memory and add it to the garbage collector.
+ * - memory is initialized to 0.
+ ************************************************************************** */
 
 void	*gc_alloc(size_t nmemb, size_t size)
 {

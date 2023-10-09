@@ -12,6 +12,11 @@
 
 #include "../../../inc/cub3d.h"
 
+/* **************************************************************************
+ * minispr:
+ * - draw ennemies on the minimap
+ ************************************************************************** */
+
 void	mini_spr(t_raydata *raydata, t_map map, int i, int j)
 {
 	int	k;
@@ -35,6 +40,11 @@ void	mini_spr(t_raydata *raydata, t_map map, int i, int j)
 	}
 }
 
+/* **************************************************************************
+ * comp_minimap:
+ * - draw walls on the minimap
+ ************************************************************************** */
+
 void	comp_minimap(t_raydata *raydata, t_map map, int i)
 {
 	int	j;
@@ -54,6 +64,11 @@ void	comp_minimap(t_raydata *raydata, t_map map, int i)
 		j++;
 	}
 }
+
+/* **************************************************************************
+ * draw_minimap:
+ * - draw the minimap
+ ************************************************************************** */
 
 void	draw_minimap(t_raydata *raydata)
 {

@@ -11,6 +11,13 @@
 /* ************************************************************************** */
 
 #include "../../../inc/cub3d.h"
+
+/* **************************************************************************
+ * nmi_chase :
+ * - determine the shortest path to the player with bfs
+ * - move the sprite to the next node of the path
+ ************************************************************************** */
+
 void nmi_chase(t_raydata *raydata, int index)
 {
 	int			grid_size_x;
@@ -30,6 +37,11 @@ void nmi_chase(t_raydata *raydata, int index)
 	raydata->spr->sprite[index].y
 			+= (dest.y - (int)raydata->spr->sprite[index].y) * 0.05;
 }
+
+/* **************************************************************************
+ * nmi_idle :
+ * - patrol mode for the sprite
+ ************************************************************************** */
 
 void nmi_idle(t_raydata *raydata,int index) {
 	int x;
@@ -82,12 +94,23 @@ void nmi_idle(t_raydata *raydata,int index) {
 			+= k * 0.05;
 }
 
+/* **************************************************************************
+ * nmi_flee :
+ * - TODO : flee from the player
+ ************************************************************************** */
+
 void nmi_flee(t_raydata *raydata,int index)
 {
 	(void) raydata;
 	(void) index;
 	return ;
 }
+
+/* **************************************************************************
+ * check_ai_state :
+ * - check the distance between the player and the sprite
+ * - return the state of the sprite in function of distance to the player
+ ************************************************************************** */
 
 t_ai_state check_ai_state(t_raydata *raydata, int index)
 {
@@ -104,6 +127,11 @@ t_ai_state check_ai_state(t_raydata *raydata, int index)
 	else
 		return (AI_IDLE);
 }
+
+/* **************************************************************************
+ * nm_ai :
+ * - determine the behavior of the sprite using a state machine
+ ************************************************************************** */
 
 void	nmi_ai(t_raydata *raydata)
 {

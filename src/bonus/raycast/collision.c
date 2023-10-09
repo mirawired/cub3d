@@ -1,7 +1,15 @@
 //
 // Created by corecaps on 10/9/23.
 //
+
 #include "../../../inc/cub3d.h"
+
+/* **************************************************************************
+ * check_nm_collision:
+ * - check if the player is on a sprite
+ * - return 1 if true, 0 if false
+ ************************************************************************** */
+
 int check_nmi_collision(t_raydata *raydata)
 {
 	t_int_point player;

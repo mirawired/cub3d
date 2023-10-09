@@ -12,6 +12,11 @@
 
 #include "../../../inc/raycast.h"
 
+/* **************************************************************************
+ * clean_exit :
+ * - Free all allocated memory
+ * - Exit the program
+ ************************************************************************** */
 void	clean_exit(t_raydata *raydata)
 {
 	mlx_destroy_image(raydata->mlx, raydata->img_buffer->img);
@@ -23,6 +28,12 @@ void	clean_exit(t_raydata *raydata)
 	gc_free();
 	exit(0);
 }
+
+/* **************************************************************************
+ * key_menu :
+ * - Handle key pressed in MENU state
+ ************************************************************************** */
+
 void key_menu(int keycode, t_raydata *raydata)
 {
 	if (keycode == 65307)
@@ -30,6 +41,12 @@ void key_menu(int keycode, t_raydata *raydata)
 	if (keycode == 32)
 		raydata->game_state = PLAYING;
 }
+
+/* **************************************************************************
+ * key_playing :
+ * - Handle key pressed in PLAYING state
+ ************************************************************************** */
+
 void key_playing(int keycode, t_raydata *raydata)
 {
 	if (keycode == 65307)
@@ -49,6 +66,12 @@ void key_playing(int keycode, t_raydata *raydata)
 	if (keycode == 32)
 		raydata->game_state = MENU;
 }
+
+/* **************************************************************************
+ * key_end :
+ * - Handle key pressed in GAME_OVER or WIN state
+ ************************************************************************** */
+
 void key_end(int keycode, t_raydata *raydata)
 {
 	if (keycode == 65307)
@@ -56,6 +79,11 @@ void key_end(int keycode, t_raydata *raydata)
 	if (keycode == 32)
 		raydata->game_state = MENU;
 }
+
+/* **************************************************************************
+ * key_pressed :
+ * - call the right keypressed handling function depending on the game state
+ ************************************************************************** */
 
 int	key_pressed(int keycode, t_raydata *raydata)
 {

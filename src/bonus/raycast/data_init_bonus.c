@@ -12,6 +12,12 @@
 
 #include "../../../inc/cub3d.h"
 
+/* **************************************************************************
+ * player_init_position:
+ * - find the player position in the map
+ * - if not found, set the player position to the center of the map
+ ************************************************************************** */
+
 void	player_init_position(t_arg *arg, t_raydata *raydata)
 {
 	int		found;
@@ -36,6 +42,12 @@ void	player_init_position(t_arg *arg, t_raydata *raydata)
 	}
 }
 
+/* **************************************************************************
+ * wall_textures_init:
+ * - allocate memory for the textures
+ * - load the textures for the walls
+ ************************************************************************** */
+
 void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 {
 	raydata->texture = (t_texture **)gc_alloc(4, sizeof(t_raydata));
@@ -44,6 +56,13 @@ void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 	raydata->texture[WE] = load_texture(raydata->mlx, arg->WE);
 	raydata->texture[EA] = load_texture(raydata->mlx, arg->EA);
 }
+
+/* **************************************************************************
+ * ennemies_textures_init:
+ * - allocate memory for the textures
+ * - load the textures for the ennemies
+ * - set the position of the ennemies
+ ************************************************************************** */
 
 void	ennemies_textures_init(t_raydata *raydata)
 {
@@ -70,6 +89,11 @@ void	ennemies_textures_init(t_raydata *raydata)
 	raydata->spr->sprite[3].y = raydata->map_height - 2;
 	raydata->spr->spr_i = 0;
 }
+
+/* **************************************************************************
+ * starting_data_init:
+ * - initialize the data for the game
+ ************************************************************************** */
 
 void	starting_data_init(t_arg *arg, t_raydata *raydata)
 {

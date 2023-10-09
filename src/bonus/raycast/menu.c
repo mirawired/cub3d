@@ -3,6 +3,13 @@
 //
 
 #include "../../../inc/cub3d.h"
+
+/* **************************************************************************
+ * draw_menu:
+ * - if the menu is not loaded, load it
+ * - draw the menu
+ ************************************************************************** */
+
 void draw_menu(t_raydata * raydata) {
 	static int width = 0;
 	static int height = 0;
