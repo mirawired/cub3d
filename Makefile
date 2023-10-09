@@ -6,7 +6,7 @@
 #    By: avassor <avassor@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 12:13:14 by mira              #+#    #+#              #
-#    Updated: 2023/10/03 14:45:01 by avassor          ###   ########.fr        #
+#    Updated: 2023/10/08 17:02:02 by avassor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,11 @@ BONUS_SRC = 		cub3d.c					\
 					data_init_bonus.c		\
 					movements.c				\
 					movements_extra.c		\
-					sprites.c
+					sprites.c				\
+					data_init_add_bonus.c	\
+					horiz.c
+					menu.c				\
+					data_init_add_bonus.c
 
 SRCS = $(shell find $(SRC_PATH) -type d)
 BONUS_SRCS = $(shell find $(SRC_PATH) -type d)

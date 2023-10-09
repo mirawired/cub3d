@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/09/30 22:15:48 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/03 15:52:19 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,31 @@ void	*gc_alloc(size_t nmemb, size_t size);
 # define HEIGHT 900
 # define SPRITENBR 4
 
+typedef enum e_game_state {
+	MENU,
+	PLAYING,
+	GAME_OVER,
+	WIN
+}t_game_state;
+
+typedef enum e_ai_state {
+	AI_IDLE,
+	AI_CHASE,
+	AI_FLEE
+}t_ai_state;
+
+typedef enum e_keys {
+	KEY_W = 119,
+	KEY_A = 97,
+	KEY_S = 115,
+	KEY_D = 100,
+	KEY_LEFT = 65361,
+	KEY_RIGHT = 65363,
+	KEY_UP = 65362,
+	KEY_DOWN = 65364,
+	KEY_ESC = 65307
+}	t_keys;
+
 typedef struct s_point
 {
 	double x;
@@ -234,6 +259,7 @@ typedef struct s_spr
 	int			sprite_order[SPRITENBR];
 	double		sprite_dist[SPRITENBR];
 	t_cs		cs;
+	int			spr_i;
 }	t_spr;
 
 typedef enum e_texture_index
@@ -250,6 +276,7 @@ typedef struct s_raydata
 	void		*mlx;
 	void		*mlx_win;
 	t_buffer	*img_buffer;
+	t_buffer	*img_menu;
 	t_player	*player;
 	int			map_width;
 	int			map_height;
@@ -260,6 +287,7 @@ typedef struct s_raydata
 	long		last_frame;
 	t_spr		*spr;
 	t_arg		*arg;
+	t_game_state game_state;
 }	t_raydata;
 
 typedef struct s_r
@@ -285,6 +313,35 @@ typedef struct s_r
 	int				drawEnd;
 	double			wall_x;
 } t_r;
+
+typedef struct s_h
+{
+	float	raydirx0;
+	float	raydiry0;
+	float	raydirx1;
+	float	raydiry1;
+	int		p;
+	float	posz;
+	float	rawdist;
+	float	floorstepx;
+	float	floorstepy;
+	float	floorx;
+	float	floory;
+	int		cellx;
+	int		celly;
+	int		tx;
+	int		ty;
+}	t_h;
+
+typedef struct s_map
+{
+	double	grid_size_x;
+	double	grid_size_y;
+	t_color	grid_color;
+	t_color	nmi_color;
+} t_map;
+
+
 
 void	init_mlx(t_raydata *raydata);
 void	starting_data_init(t_arg *arg, t_raydata *raydata);
@@ -313,7 +370,7 @@ void	strafe_left(t_raydata *raydata);
 
 int		raycast(t_arg *arg);
 void	grab_arg(t_raydata *raydata, t_arg *arg);
-
+_Bool	init_alloc(t_data *data);
 void	draw_sprites(t_raydata * data, t_point pos);
 void	sort_sprites(t_spr	*spr, t_point pos);
 void	comp_sprites(t_raydata *data, t_sprite *curr, t_point pos);
@@ -326,7 +383,8 @@ void	ray_comp_2(t_raydata *data, t_r *r);
 void	ray_comp_3(t_r *r);
 t_r		*r_init(t_raydata *data);
 void	set_color(t_color *color, t_texture *texture, float txtr_pos, t_r *r);
-
+int check_collision(t_raydata *raydata, t_point new_pos);
+void draw_menu(t_raydata * raydata);
 // ..................... Ennemies AI ...................................
 t_int_point	bfs(t_raydata *data, t_int_point start, t_int_point end);
 void		nmi_ai(t_raydata *raydata);

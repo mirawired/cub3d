@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:55 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/09/30 22:18:58 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/04 14:43:34 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	ray_comp_2(t_raydata *data, t_r *r)
 		{
 			r->sideDist.x += r->deltaDist.x;
 			r->MapX += r->stepX;
+			if (r->MapX < 0 || r->MapX >= data->map_width)
+				break ;
 			r->side = 0;
 			r->ray_color = (t_color){0x0000FF};
 		}
@@ -107,6 +109,8 @@ void	ray_comp_2(t_raydata *data, t_r *r)
 		{
 			r->sideDist.y += r->deltaDist.y;
 			r->MapY += r->stepY;
+			if (r->MapY < 0 || r->MapY >= data->map_height)
+				break ;
 			r->side = 1;
 			r->ray_color = (t_color){0x00FF00};
 		}

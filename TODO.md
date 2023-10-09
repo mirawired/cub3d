@@ -1,9 +1,9 @@
 - [X] Mandatory & Bonus part Separation
 - [ ] Malloc Protection 
 - [ ] Floor and ceiling textures
-- [ ] Game Loop State Machine 
-  - [ ] Menu
-  - [ ] Game
+- [X] Game Loop State Machine 
+  - [X] Menu
+  - [X] Game
   - [ ] Game Over
 - [ ] Sprite clipping on walls
   - [ ] Clamp sprite position to middle of raw and column
