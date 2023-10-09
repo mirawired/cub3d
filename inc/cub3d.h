@@ -209,6 +209,7 @@ typedef struct s_player {
 	double angle;
     t_point dir_vector;
     t_point plane_vector;
+	t_point	init_pos;
 	double size;
 }	t_player;
 
@@ -391,4 +392,6 @@ void draw_menu(t_raydata * raydata);
 t_int_point	bfs(t_raydata *data, t_int_point start, t_int_point end);
 void		nmi_ai(t_raydata *raydata);
 void	draw_horiz(t_raydata *data);
+int	check_nmi_collision(t_raydata *raydata);
+void data_reset(t_raydata *raydata);
 #endif

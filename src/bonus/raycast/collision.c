@@ -1,0 +1,24 @@
+//
+// Created by corecaps on 10/9/23.
+//
+#include "../../../inc/cub3d.h"
+int check_nmi_collision(t_raydata *raydata)
+{
+	t_int_point player;
+	t_point grid_size;
+	int i;
+
+	grid_size.x = WIDTH / raydata->map_width;
+	grid_size.y = HEIGHT / raydata->map_height;
+	player.x = (int)(raydata->player->pos.x / grid_size.x);
+	player.y = (int)(raydata->player->pos.y / grid_size.y);
+	i = 0;
+	while (i < SPRITENBR)
+	{
+		if (player.x == (int)raydata->spr->sprite[i].x
+			&& player.y == (int)raydata->spr->sprite[i].y)
+			return (1);
+		i++;
+	}
+	return (0);
+}

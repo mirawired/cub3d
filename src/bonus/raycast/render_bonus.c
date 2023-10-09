@@ -24,6 +24,10 @@ void render_game(t_raydata *raydata) {
 	draw_rays(raydata);
 	draw_minimap(raydata);
 	nmi_ai(raydata);
+	if (check_nmi_collision(raydata)) {
+		raydata->game_state = GAME_OVER;
+		data_reset(raydata);
+	}
 	draw_player(raydata);
 	mlx_put_image_to_window(raydata->mlx,
 							raydata->mlx_win,
@@ -31,9 +35,18 @@ void render_game(t_raydata *raydata) {
 							0, 0);
 }
 void render_game_over(t_raydata *raydata) {
+	clear_buffer(raydata);
+	mlx_put_image_to_window(raydata->mlx,
+							raydata->mlx_win,
+							raydata->img_buffer->img,
+							0, 0);
+	mlx_string_put(raydata->mlx, raydata->mlx_win, 100, 100, 0x00FFFFFF, "GAME OVER");
+
 	return ;
 }
 void render_win(t_raydata *raydata) {
+	clear_buffer(raydata);
+	mlx_string_put(raydata->mlx, raydata->mlx_win, 100, 100, 0x00FFFFFF, "YOU WIN");
 	return ;
 }
 
