@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/03 15:52:19 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/08 17:58:19 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,7 @@ typedef struct s_sprite
 {
 	double		x;
 	double		y;
-	t_texture	*texture;
+	t_texture	**texture;
 }	t_sprite;
 
 typedef struct s_cs
@@ -312,7 +312,7 @@ typedef struct s_r
 	int				drawStart;
 	int				drawEnd;
 	double			wall_x;
-} t_r;
+}	t_r;
 
 typedef struct s_h
 {
@@ -339,7 +339,7 @@ typedef struct s_map
 	double	grid_size_y;
 	t_color	grid_color;
 	t_color	nmi_color;
-} t_map;
+}	t_map;
 
 
 
@@ -388,5 +388,5 @@ void draw_menu(t_raydata * raydata);
 // ..................... Ennemies AI ...................................
 t_int_point	bfs(t_raydata *data, t_int_point start, t_int_point end);
 void		nmi_ai(t_raydata *raydata);
-
+void	draw_horiz(t_raydata *data);
 #endif
