@@ -31,7 +31,7 @@ void	strafe_right(t_raydata *raydata)
 	double	stepsize;
 	t_point	perpvector;
 
-	stepsize = 10;
+	stepsize = PLAYERSPEED;
 	perpvector.x = -raydata->player->dir_vector.y;
 	perpvector.y = raydata->player->dir_vector.x;
 	raydata->player->pos.x += perpvector.x * stepsize;
@@ -44,7 +44,7 @@ void	strafe_left(t_raydata *raydata)
 	double	stepsize;
 	t_point	perpvector;
 
-	stepsize = 10;
+	stepsize = PLAYERSPEED;
 	perpvector.x = raydata->player->dir_vector.y;
 	perpvector.y = -raydata->player->dir_vector.x;
 	raydata->player->pos.x += perpvector.x * stepsize;

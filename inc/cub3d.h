@@ -164,6 +164,8 @@ void	*gc_alloc(size_t nmemb, size_t size);
 # define MAP_HEIGHT 256
 # define HEIGHT 900
 # define SPRITENBR 4
+# define ROTSPEED 6
+# define PLAYERSPEED 10
 
 typedef enum e_game_state {
 	MENU,
