@@ -22,7 +22,7 @@ void draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end
 	texture_step = 1.0 * texture->height / (draw_end - draw_start);
 	y = 0;
 	while (y++ < draw_start)
-		my_mlx_pixel_put(data->img_buffer, data->ceil_color, (t_int_point) {x, y});
+		;//my_mlx_pixel_put(data->img_buffer, data->ceil_color, (t_int_point) {x, y});
 	texture_pos = 0;
 	wall_x *= texture->width;
 	while (y < draw_end) {
@@ -35,12 +35,11 @@ void draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end
 		texture_pos += texture_step;
 	}
 	while (y++ < HEIGHT)
-		my_mlx_pixel_put(data->img_buffer, data->floor_color, (t_int_point) {x, y});
+		; // my_mlx_pixel_put(data->img_buffer, data->floor_color, (t_int_point) {x, y});
 }
 
 void draw_rays(t_raydata *data) {
 	double perpWallDist;
-	t_color ray_color = {0x00FF00};
 	t_texture_index texture_index;
 	int grid_size_x = WIDTH / data->map_width;
 	int grid_size_y = HEIGHT / data->map_height;
@@ -80,19 +79,16 @@ void draw_rays(t_raydata *data) {
 				if (MapX < 0 || MapX >= data->map_width )
 					break;
 				side = 0;
-				ray_color = (t_color) {0x0000FF};
 			} else {
 				sideDist.y += deltaDist.y;
 				MapY += stepY;
 				if (MapY < 0 || MapY >= data->map_height)
 					break;
 				side = 1;
-				ray_color = (t_color) {0x00FF00};
 			}
 			if (data->map[MapY][MapX] > 0)
 				hit = 1;
 		}
-//        draw_line(data, ray_color, (t_point){pos.x * grid_size_x, pos.y * grid_size_y}, (t_point){MapX * grid_size_x, MapY * grid_size_y});
 		if (side == 0)
 			perpWallDist = sideDist.x - deltaDist.x;
 		else
