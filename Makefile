@@ -67,7 +67,7 @@ BONUS_SRC = 		cub3d.c					\
 					raycast_bonus.c			\
 					draw_line.c				\
 					graphic_utils_bonus.c	\
-					hooks.c					\
+					hooks_bonus.c			\
 					player_bonus.c			\
 					rays_bonus.c			\
 					render_bonus.c			\
