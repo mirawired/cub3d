@@ -34,42 +34,52 @@ void nmi_chase(t_raydata *raydata, int index)
 void nmi_idle(t_raydata *raydata,int index) {
 	int x;
 	int y;
+	int k;
 	static t_int_point dest[SPRITENBR] = {0};
 
 	x = (int)raydata->spr->sprite[index].x;
 	y = (int)raydata->spr->sprite[index].y;
+	k = 1;
 	if ((dest[index].x == 0 && dest[index].y == 0)
 		|| (dest[index].x == x && dest[index].y == y))
 	{
 		if (x < raydata->map_width - 1 && raydata->map[y][x + 1] == 0)
 		{
-			raydata->spr->sprite[index].x += 0.05;
+			while (x + k < raydata->map_width - 1 && raydata->map[y][x + k] == 0)
+				k++;
 			dest[index].y = y;
-			dest[index].x = x + 1;
+			dest[index].x = x + k - 1;
 		}
 		else if (y < raydata->map_height - 1 && raydata->map[y + 1][x] == 0)
 		{
-			raydata->spr->sprite[index].y += 0.05;
-			dest[index].y = y + 1;
+			while (y + k < raydata->map_height - 1 && raydata->map[y + k][x] == 0)
+				k++;
+			dest[index].y = y + k - 1;
 			dest[index].x = x;
 		}
 		else if (x > 1 && raydata->map[y][x - 1] == 0)
 		{
-			raydata->spr->sprite[index].x -= 0.05;
+			while (x - k > 1 && raydata->map[y][x - k] == 0)
+				k++;
 			dest[index].y = y;
-			dest[index].x = x - 1;
+			dest[index].x = x - k + 1;
 		}
 		else if (y > 1 && raydata->map[y - 1][x] == 0)
 		{
-			raydata->spr->sprite[index].y -= 0.05;
-			dest[index].y = y - 1;
+			while (y - k > 1 && raydata->map[y - k][x] == 0)
+				k++;
+			dest[index].y = y - k + 1;
 			dest[index].x = x;
 		}
 	}
+	k = ((dest[index].x - (int)raydata->spr->sprite[index].x) >> (sizeof(int) * 8 - 1))
+		| (!!((dest[index].x - (int)raydata->spr->sprite[index].x)));
 	raydata->spr->sprite[index].x
-			+= (dest[index].x - (int)raydata->spr->sprite[index].x) * 0.05;
+			+= k * 0.05;
+	k = ((dest[index].y - (int)raydata->spr->sprite[index].y) >>(sizeof(int) * 8 - 1))
+		| (!!((dest[index].y - (int)raydata->spr->sprite[index].y)));
 	raydata->spr->sprite[index].y
-			+= (dest[index].y - (int)raydata->spr->sprite[index].y) * 0.05;
+			+= k * 0.05;
 }
 
 void nmi_flee(t_raydata *raydata,int index)
@@ -105,7 +115,7 @@ void	nmi_ai(t_raydata *raydata)
 	ai_state[AI_CHASE] = nmi_chase;
 	ai_state[AI_FLEE] = nmi_flee;
 	index = -1;
-	while (index ++ < SPRITENBR)
+	while (index ++ < SPRITENBR - 1)
 	{
 		state = check_ai_state(raydata, index);
 		ai_state[state](raydata,index);
