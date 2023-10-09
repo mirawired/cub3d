@@ -394,4 +394,5 @@ void		nmi_ai(t_raydata *raydata);
 void	draw_horiz(t_raydata *data);
 int	check_nmi_collision(t_raydata *raydata);
 void data_reset(t_raydata *raydata);
+void clamp_sprites(t_raydata *raydata);
 #endif

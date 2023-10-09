@@ -85,6 +85,7 @@ BONUS_SRC = 		cub3d.c					\
 					data_init_add_bonus.c	\
 					horiz.c					\
 					collision.c				\
+					sprites_utils.c			\
 					menu.c
 
 SRCS = $(shell find $(SRC_PATH) -type d)
