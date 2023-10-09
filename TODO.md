@@ -4,9 +4,9 @@
 - [X] Game Loop State Machine 
   - [X] Menu
   - [X] Game
-  - [ ] Game Over
-- [ ] Sprite clipping on walls
-  - [ ] Clamp sprite position to middle of raw and column
+  - [X] Game Over
+- [X] Sprite clipping on walls
+  - [X] Clamp sprite position to middle of raw and column
 - [X] Pathfinding
   - [X] Queue Data Structure
   - [X] Current state MAP 
@@ -15,10 +15,10 @@
   - [X] Updated position ?
     - [X] Player
     - [X] Enemies
-- [ ] Sprite animation
-- [ ] Enemies AI
-  - [ ] Enemies State Machine
-  - [ ] Enemies & Wall collision
+- [X] Sprite animation
+- [X] Enemies AI
+  - [X] Enemies State Machine
+  - [X] Enemies & Wall collision
 - [X] Minimap
 - [ ] HUD
 - [X] Leaks
