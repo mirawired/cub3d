@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 12:14:38 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:16:55 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -394,7 +394,6 @@ void draw_menu(t_raydata * raydata);
 // ..................... Ennemies AI ...................................
 t_int_point	bfs(t_raydata *data, t_int_point start, t_int_point end);
 void		nmi_ai(t_raydata *raydata);
-void	draw_horiz(t_raydata *data);
 int	check_nmi_collision(t_raydata *raydata);
 void data_reset(t_raydata *raydata);
 void clamp_sprites(t_raydata *raydata);
