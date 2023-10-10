@@ -49,7 +49,7 @@ int	find_player(t_raydata *raydata, int i, double gs_x, double gs_y)
  * - reset the player's vectors and angle
  ************************************************************************** */
 
-void data_reset(t_raydata *raydata)
+void	data_reset(t_raydata *raydata)
 {
 	raydata->player->pos.x = raydata->player->init_pos.x;
 	raydata->player->pos.y = raydata->player->init_pos.y;

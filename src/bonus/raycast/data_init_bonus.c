@@ -68,27 +68,30 @@ void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 
 void	ennemies_textures_init(t_raydata *raydata)
 {
+	t_spr	*spr;
+
 	raydata->spr = (t_spr *)gc_alloc(1, sizeof(t_spr));
-	raydata->spr->sprite[0].texture = (t_texture **)gc_alloc(2, sizeof(t_texture *));
-	raydata->spr->sprite[1].texture = (t_texture **)gc_alloc(2, sizeof(t_texture *));
-	raydata->spr->sprite[2].texture = (t_texture **)gc_alloc(2, sizeof(t_texture *));
-	raydata->spr->sprite[3].texture = (t_texture **)gc_alloc(2, sizeof(t_texture *));
-	raydata->spr->sprite[0].texture[0] = load_texture(raydata->mlx, "ghost.xpm");
-	raydata->spr->sprite[0].texture[1] = load_texture(raydata->mlx, "ghost2.xpm");
-	raydata->spr->sprite[1].texture[0] = load_texture(raydata->mlx, "ghost2.xpm");
-	raydata->spr->sprite[1].texture[1] = load_texture(raydata->mlx, "ghost.xpm");
-	raydata->spr->sprite[2].texture[0] = load_texture(raydata->mlx, "ghost.xpm");
-	raydata->spr->sprite[2].texture[1] = load_texture(raydata->mlx, "ghost2.xpm");
-	raydata->spr->sprite[3].texture[0] = load_texture(raydata->mlx, "ghost2.xpm");
-	raydata->spr->sprite[3].texture[1] = load_texture(raydata->mlx, "ghost.xpm");
-	raydata->spr->sprite[0].x = 1.0;
-	raydata->spr->sprite[0].y = 1.0;
-	raydata->spr->sprite[1].x = raydata->map_width - 2;
-	raydata->spr->sprite[1].y = 1.0;
-	raydata->spr->sprite[2].x = 1.0;
-	raydata->spr->sprite[2].y = raydata->map_height - 2;
-	raydata->spr->sprite[3].x = raydata->map_width - 2;
-	raydata->spr->sprite[3].y = raydata->map_height - 2;
+	spr = raydata->spr;
+	spr->sprite[0].texture = gc_alloc(2, sizeof(t_texture *));
+	spr->sprite[1].texture = gc_alloc(2, sizeof(t_texture *));
+	spr->sprite[2].texture = gc_alloc(2, sizeof(t_texture *));
+	spr->sprite[3].texture = gc_alloc(2, sizeof(t_texture *));
+	spr->sprite[0].texture[0] = load_texture(raydata->mlx, "ghost.xpm");
+	spr->sprite[0].texture[1] = load_texture(raydata->mlx, "ghost2.xpm");
+	spr->sprite[1].texture[0] = load_texture(raydata->mlx, "ghost2.xpm");
+	spr->sprite[1].texture[1] = load_texture(raydata->mlx, "ghost.xpm");
+	spr->sprite[2].texture[0] = load_texture(raydata->mlx, "ghost.xpm");
+	spr->sprite[2].texture[1] = load_texture(raydata->mlx, "ghost2.xpm");
+	spr->sprite[3].texture[0] = load_texture(raydata->mlx, "ghost2.xpm");
+	spr->sprite[3].texture[1] = load_texture(raydata->mlx, "ghost.xpm");
+	spr->sprite[0].x = 1.0;
+	spr->sprite[0].y = 1.0;
+	spr->sprite[1].x = raydata->map_width - 2;
+	spr->sprite[1].y = 1.0;
+	spr->sprite[2].x = 1.0;
+	spr->sprite[2].y = raydata->map_height - 2;
+	spr->sprite[3].x = raydata->map_width - 2;
+	spr->sprite[3].y = raydata->map_height - 2;
 	raydata->spr->spr_i = 0;
 }
 
