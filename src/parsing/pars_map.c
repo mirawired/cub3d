@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:43:37 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 21:13:11 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 22:21:09 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 _Bool	copy_id(t_data *data, char **fill, char *raw)
 {
-	int	i;
+	int		i;
+	int		fd;
 
 	i = 0;
+	fd = 0;
 	*fill = (char *)gc_alloc((ft_strlen(&raw[5]) + 1), sizeof(char));
 	if (!*fill)
 		return (data->err = MLLOC, 1);
@@ -27,6 +29,11 @@ _Bool	copy_id(t_data *data, char **fill, char *raw)
 	raw[i++] = '\n';
 	while (raw[i])
 		raw[i++] = '\0';
+	fd = open(*fill, O_RDONLY);
+	if (fd == -1)
+		return (data->err = RFD, 1);
+	else
+		close(fd);
 	return (0);
 }
 
@@ -83,7 +90,7 @@ _Bool	search_id_nbr(t_data *data, int *arr, char *id)
 			return (copy_nbr(data, arr, &data->raw[i][2]));
 		i++;
 	}
-	return (1);
+	return (data->err = ARGRR, 1);
 }
 
 _Bool	pars_map(t_data *data)

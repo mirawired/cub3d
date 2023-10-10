@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:34:08 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 21:19:25 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 22:19:41 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define RFD 135
 # define NOID 136
 # define MAPERROR 137
+# define RRGB 138
 # define BLACK -16777216
 # include "gc.h"
 # include "enums.h"

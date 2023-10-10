@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:23:01 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 21:12:54 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 22:01:26 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int	main(int argc, char **argv)
 	if (get_arg(data))
 		return (rror(data->err, data));
 	if (pars_map(data) || convert_map(data, data->arg))
-		return (rror(1, data));
+		return (rror(data->err, data));
 	if (raycast(data->arg))
 		return (rror(1, data));
 	gc_free();
