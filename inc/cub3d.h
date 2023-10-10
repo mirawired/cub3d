@@ -408,4 +408,6 @@ void clamp_sprites(t_raydata *raydata);
 int	is_within_bounds(t_raydata *raydata, int x, int y);
 t_int_point	find_direction(t_raydata *raydata, int x, int y, t_int_point inc);
 int	find_inc(int dest, int src);
+void	ray_inc_h(t_r *r);
+void	ray_inc_v(t_r *r);
 #endif

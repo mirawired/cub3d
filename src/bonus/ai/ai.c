@@ -47,7 +47,6 @@ void	nmi_idle(t_raydata *raydata, int index)
 {
 	int					x;
 	int					y;
-	int					k;
 	static t_int_point	dest[SPRITENBR] = {0};
 
 	x = (int)raydata->spr->sprite[index].x;

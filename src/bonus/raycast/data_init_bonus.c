@@ -60,7 +60,7 @@ void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 }
 
 /* **************************************************************************
- * ennemies_textures_init:
+ * enemies_textures_init:
  * - allocate memory for the textures
  * - load the textures for the ennemies
  * - set the position of the ennemies

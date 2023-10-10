@@ -98,21 +98,15 @@ void	ray_comp_2(t_raydata *data, t_r *r)
 	{
 		if (r->sideDist.x < r->sideDist.y)
 		{
-			r->sideDist.x += r->deltaDist.x;
-			r->MapX += r->stepX;
+			ray_inc_h(r);
 			if (r->MapX < 0 || r->MapX >= data->map_width)
 				break ;
-			r->side = 0;
-			r->ray_color = (t_color){0x0000FF};
 		}
 		else
 		{
-			r->sideDist.y += r->deltaDist.y;
-			r->MapY += r->stepY;
+			ray_inc_v(r);
 			if (r->MapY < 0 || r->MapY >= data->map_height)
 				break ;
-			r->side = 1;
-			r->ray_color = (t_color){0x00FF00};
 		}
 		if (data->map[r->MapY][r->MapX] > 0)
 			r->hit = 1;
