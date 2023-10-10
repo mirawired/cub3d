@@ -28,8 +28,8 @@ void	mini_spr(t_raydata *raydata, t_map map, int i, int j)
 			&& i == (int) raydata->spr->sprite[k].y)
 		{
 			fill_rectangle(raydata, map.nmi_color, (t_point){(double)
-				(j * map.grid_size_x + (double)map.grid_size_x / 3)
-				, (double)(i * map.grid_size_y
+				(j * map.grid_size_x + (double)map.grid_size_x / 3),
+				(double)(i * map.grid_size_y
 					+ (double)map.grid_size_y / 3)},
 				(t_point){(double)((j + 1) * map.grid_size_x
 					- (double)map.grid_size_x / 3),
