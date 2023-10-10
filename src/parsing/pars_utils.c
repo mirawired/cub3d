@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:33:29 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 15:57:23 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 22:34:31 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ _Bool	search_map(t_data *data, char **raw)
 	data->arg->map[data->mlines] = NULL;
 	while (i <= data->lines)
 	{
-		if (map_op(data, raw, i, j))
-			return (1);
+		if (raw[i][0] == '\n' || map_op(data, raw, i, j))
+			return (data->err = MAPERROR, 1);
 		i++;
 		j++;
 	}

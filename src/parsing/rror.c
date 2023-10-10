@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:30:04 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 22:22:49 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 23:02:20 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,14 @@ int	rror(int err, t_data *data)
 		write(STDERR_FILENO, "MAP must be closed by walls {1}\n", 33);
 	}
 	return (gc_free(), EXIT_FAILURE);
+}
+
+int	find_id(char *raw)
+{
+	int	i;
+
+	i = 0;
+	while (raw[i] && raw[i] == ' ')
+		i++;
+	return (i);
 }
