@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.h                                          :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: corecaps <corecaps@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 23:50:53 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/08/16 14:39:54 by avassor          ###   ########.fr       */
+/*   Created: 2023/10/10 16:00:37 by corecaps          #+#    #+#             */
+/*   Updated: 2023/10/10 16:00:39 by corecaps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAYCAST_H
-# define RAYCAST_H
-
-# include "./../minilibx-linux/mlx.h"
-# include "./cub3d.h"
-
+#ifndef CONFIG_H
+# define CONFIG_H
+# define WIDTH 1600
+# define HEIGHT 900
+# define ROTSPEED 6
+# define PLAYERSPEED 10
 #endif

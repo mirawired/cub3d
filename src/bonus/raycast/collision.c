@@ -1,6 +1,14 @@
-//
-// Created by corecaps on 10/9/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   collision.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: corecaps <corecaps@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/10 13:28:57 by corecaps          #+#    #+#             */
+/*   Updated: 2023/10/10 13:29:01 by corecaps         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../../inc/cub3d.h"
 
@@ -10,11 +18,11 @@
  * - return 1 if true, 0 if false
  ************************************************************************** */
 
-int check_nmi_collision(t_raydata *raydata)
+int	check_nmi_collision(t_raydata *raydata)
 {
-	t_int_point player;
-	t_point grid_size;
-	int i;
+	t_int_point	player;
+	t_point		grid_size;
+	int			i;
 
 	grid_size.x = WIDTH / raydata->map_width;
 	grid_size.y = HEIGHT / raydata->map_height;

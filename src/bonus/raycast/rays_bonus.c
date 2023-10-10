@@ -6,17 +6,18 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:55 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/10 16:07:35 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 19:10:54 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/raycast.h"
 
-void draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end, int x, double wall_x, double dist) {
-	float texture_step;
-	float texture_pos;
-	int y;
-	t_texture *texture;
+void	draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end, int x, double wall_x, double dist)
+{
+	float		texture_step;
+	float		texture_pos;
+	int			y;
+	t_texture	*texture;
 
 	texture = data->texture[texture_index];
 	texture_step = 1.0 * texture->height / (draw_end - draw_start);
@@ -107,8 +108,8 @@ void draw_rays(t_raydata *data) {
 			if (ray_dir.y > 0) texture_index = NO;
 			else texture_index = SO;
 		}
-		draw_slice(data, texture_index, drawstart, drawend, x, wall_x, perpwalldist);
-		data->spr->zbuffer[x] = perpwalldist;
+		draw_slice(data, texture_index, drawStart, drawEnd, x, wall_x, perpWallDist);
+		data->spr->zbuffer[x] = perpWallDist;
 	}
 	clamp_sprites(data);
 	draw_sprites(data, pos);

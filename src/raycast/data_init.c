@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 10:03:41 by corecaps          #+#    #+#             */
-/*   Updated: 2023/10/10 15:59:50 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 21:13:25 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ void	starting_data_init(t_arg *arg, t_raydata *raydata)
 	raydata->map = arg->fmap;
 	raydata->map_height = arg->height;
 	raydata->map_width = arg->width;
-	raydata->ceil_color.s_rgb.r = arg->c[0];
-	raydata->ceil_color.s_rgb.g = arg->c[1];
-	raydata->ceil_color.s_rgb.b = arg->c[2];
-	raydata->floor_color.s_rgb.r = arg->f[0];
-	raydata->floor_color.s_rgb.g = arg->f[1];
-	raydata->floor_color.s_rgb.b = arg->f[2];
+	raydata->ceil_color.s_rgb.r = arg->c_color[0];
+	raydata->ceil_color.s_rgb.g = arg->c_color[1];
+	raydata->ceil_color.s_rgb.b = arg->c_color[2];
+	raydata->floor_color.s_rgb.r = arg->f_color[0];
+	raydata->floor_color.s_rgb.g = arg->f_color[1];
+	raydata->floor_color.s_rgb.b = arg->f_color[2];
 }

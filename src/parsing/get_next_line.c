@@ -12,6 +12,11 @@
 
 #include "./../../inc/cub3d.h"
 
+/* **************************************************************************
+ * ft_recover:
+ * - recover the last line of the buffer
+ ************************************************************************** */
+
 void	ft_recover(t_stash **stash)
 {
 	char	*p1;
@@ -34,6 +39,11 @@ void	ft_recover(t_stash **stash)
 		p2++;
 	ft_left(stash, new, p1, p2);
 }
+
+/* **************************************************************************
+ * ft_addbuff:
+ * - add a buffer to the stash
+ ************************************************************************** */
 
 void	ft_addbuff(char *buf, t_stash **stash, int i)
 {
@@ -63,6 +73,11 @@ void	ft_addbuff(char *buf, t_stash **stash, int i)
 	current->next = new;
 }
 
+/* **************************************************************************
+ * ft_reader:
+ * - read the file and add the buffer to the stash
+ ************************************************************************** */
+
 void	ft_reader(int fd, t_stash **stash)
 {
 	char	*buf;
@@ -85,6 +100,11 @@ void	ft_reader(int fd, t_stash **stash)
 		free(buf);
 	}
 }
+
+/* **************************************************************************
+ * ft_addline:
+ * - add the stash to the line
+ ************************************************************************** */
 
 void	ft_addline(t_stash *stash, char **line)
 {
@@ -113,6 +133,12 @@ void	ft_addline(t_stash *stash, char **line)
 	}
 	*p1 = '\0';
 }
+
+/* **************************************************************************
+ * get_next_line:
+ * - read the file and return the line
+ * - return NULL if there is an error
+ ************************************************************************** */
 
 char	*get_next_line(int fd)
 {

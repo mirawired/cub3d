@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 10:05:29 by corecaps          #+#    #+#             */
-/*   Updated: 2023/10/10 15:27:24 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 19:10:05 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	mini_spr(t_raydata *raydata, t_map map, int i, int j)
 		{
 			fill_rectangle(raydata, map.nmi_color, (t_point){(double)
 				(j * map.grid_size_x + (double)map.grid_size_x / 3)
-				+ OFFSET_MAP_X, (double)(i * map.grid_size_y
-					+ (double)map.grid_size_y / 3) + OFFSET_MAP_Y},
+				, (double)(i * map.grid_size_y
+					+ (double)map.grid_size_y / 3)},
 				(t_point){(double)((j + 1) * map.grid_size_x
-					- (double)map.grid_size_x / 3) + OFFSET_MAP_X,
+					- (double)map.grid_size_x / 3),
 				(double)((i + 1) * map.grid_size_y
-					- (double)map.grid_size_y / 3) + OFFSET_MAP_Y});
+					- (double)map.grid_size_y / 3)});
 		}
 		k++;
 	}
@@ -55,10 +55,10 @@ void	comp_minimap(t_raydata *raydata, t_map map, int i)
 		if (raydata->map[i][j] == 1)
 		{
 			fill_rectangle(raydata, map.grid_color, (t_point)
-			{(double)(j * map.grid_size_x) + OFFSET_MAP_X,
-				(double)(i * map.grid_size_y) + OFFSET_MAP_Y},
-				(t_point){(double)((j + 1) * map.grid_size_x) + OFFSET_MAP_X,
-				(double)((i + 1) * map.grid_size_y) + OFFSET_MAP_Y});
+			{(double)(j * map.grid_size_x),
+				(double)(i * map.grid_size_y)},
+				(t_point){(double)((j + 1) * map.grid_size_x),
+				(double)((i + 1) * map.grid_size_y)});
 		}
 		mini_spr(raydata, map, i, j);
 		j++;

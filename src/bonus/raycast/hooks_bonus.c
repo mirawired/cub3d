@@ -21,7 +21,7 @@ void	clean_exit(t_raydata *raydata)
 {
 	mlx_destroy_image(raydata->mlx, raydata->img_buffer->img);
 	if (raydata->img_menu)
-		mlx_destroy_image(raydata->mlx,raydata->img_menu->img);
+		mlx_destroy_image(raydata->mlx, raydata->img_menu->img);
 	mlx_destroy_window(raydata->mlx, raydata->mlx_win);
 	mlx_destroy_display(raydata->mlx);
 	free(raydata->mlx);
@@ -34,7 +34,7 @@ void	clean_exit(t_raydata *raydata)
  * - Handle key pressed in MENU state
  ************************************************************************** */
 
-void key_menu(int keycode, t_raydata *raydata)
+void	key_menu(int keycode, t_raydata *raydata)
 {
 	if (keycode == 65307)
 		clean_exit(raydata);
@@ -47,7 +47,7 @@ void key_menu(int keycode, t_raydata *raydata)
  * - Handle key pressed in PLAYING state
  ************************************************************************** */
 
-void key_playing(int keycode, t_raydata *raydata)
+void	key_playing(int keycode, t_raydata *raydata)
 {
 	if (keycode == 65307)
 		clean_exit(raydata);
@@ -72,7 +72,7 @@ void key_playing(int keycode, t_raydata *raydata)
  * - Handle key pressed in GAME_OVER or WIN state
  ************************************************************************** */
 
-void key_end(int keycode, t_raydata *raydata)
+void	key_end(int keycode, t_raydata *raydata)
 {
 	if (keycode == 65307)
 		clean_exit(raydata);
@@ -87,7 +87,8 @@ void key_end(int keycode, t_raydata *raydata)
 
 int	key_pressed(int keycode, t_raydata *raydata)
 {
-	void (*hook_state[4])(int keycode,t_raydata *raydata);
+	void	(*hook_state[4])(int keycode, t_raydata *raydata);
+
 	hook_state[MENU] = key_menu;
 	hook_state[PLAYING] = key_playing;
 	hook_state[GAME_OVER] = key_end;

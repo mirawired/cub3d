@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:43:37 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 15:56:21 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 21:13:11 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ _Bool	pars_map(t_data *data)
 		return (1);
 	if (search_id(data, &data->arg->ea, "EA ./"))
 		return (1);
-	if (search_id_nbr(data, data->arg->f, "F "))
+	if (search_id_nbr(data, data->arg->f_color, "F "))
 		return (1);
-	if (search_id_nbr(data, data->arg->c, "C "))
+	if (search_id_nbr(data, data->arg->c_color, "C "))
 		return (1);
 	if (search_map(data, data->raw))
 		return (1);

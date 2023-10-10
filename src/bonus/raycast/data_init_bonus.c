@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 10:05:19 by corecaps          #+#    #+#             */
-/*   Updated: 2023/10/10 16:01:35 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 19:09:48 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,18 @@ void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 	raydata->texture[SO] = load_texture(raydata->mlx, arg->so);
 	raydata->texture[WE] = load_texture(raydata->mlx, arg->we);
 	raydata->texture[EA] = load_texture(raydata->mlx, arg->ea);
+	raydata->texture[CEIL] = load_texture(raydata->mlx, "bluestone.xpm");
+	raydata->texture[FLOOR] = load_texture(raydata->mlx, "purplestone.xpm");
+	raydata->texture[NO] = load_texture(raydata->mlx, arg->no);
+	raydata->texture[SO] = load_texture(raydata->mlx, arg->so);
+	raydata->texture[WE] = load_texture(raydata->mlx, arg->we);
+	raydata->texture[EA] = load_texture(raydata->mlx, arg->ea);
 	raydata->texture[CEIL] = load_texture(raydata->mlx, "steel.xpm");
 	raydata->texture[FLOOR] = load_texture(raydata->mlx, "floor.xpm");
 }
 
 /* **************************************************************************
- * ennemies_textures_init:
+ * enemies_textures_init:
  * - allocate memory for the textures
  * - load the textures for the ennemies
  * - set the position of the ennemies
@@ -68,27 +74,30 @@ void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 
 void	ennemies_textures_init(t_raydata *raydata)
 {
+	t_spr	*spr;
+
 	raydata->spr = (t_spr *)gc_alloc(1, sizeof(t_spr));
-	raydata->spr->sprite[0].texture = (t_texture **)gc_alloc(2, sizeof(t_texture *));
-	raydata->spr->sprite[1].texture = (t_texture **)gc_alloc(2, sizeof(t_texture *));
-	raydata->spr->sprite[2].texture = (t_texture **)gc_alloc(2, sizeof(t_texture *));
-	raydata->spr->sprite[3].texture = (t_texture **)gc_alloc(2, sizeof(t_texture *));
-	raydata->spr->sprite[0].texture[0] = load_texture(raydata->mlx, "ghost.xpm");
-	raydata->spr->sprite[0].texture[1] = load_texture(raydata->mlx, "ghost2.xpm");
-	raydata->spr->sprite[1].texture[0] = load_texture(raydata->mlx, "ghost2.xpm");
-	raydata->spr->sprite[1].texture[1] = load_texture(raydata->mlx, "ghost.xpm");
-	raydata->spr->sprite[2].texture[0] = load_texture(raydata->mlx, "ghost.xpm");
-	raydata->spr->sprite[2].texture[1] = load_texture(raydata->mlx, "ghost2.xpm");
-	raydata->spr->sprite[3].texture[0] = load_texture(raydata->mlx, "ghost2.xpm");
-	raydata->spr->sprite[3].texture[1] = load_texture(raydata->mlx, "ghost.xpm");
-	raydata->spr->sprite[0].x = 1.0;
-	raydata->spr->sprite[0].y = 1.0;
-	raydata->spr->sprite[1].x = raydata->map_width - 2;
-	raydata->spr->sprite[1].y = 1.0;
-	raydata->spr->sprite[2].x = 1.0;
-	raydata->spr->sprite[2].y = raydata->map_height - 2;
-	raydata->spr->sprite[3].x = raydata->map_width - 2;
-	raydata->spr->sprite[3].y = raydata->map_height - 2;
+	spr = raydata->spr;
+	spr->sprite[0].texture = gc_alloc(2, sizeof(t_texture *));
+	spr->sprite[1].texture = gc_alloc(2, sizeof(t_texture *));
+	spr->sprite[2].texture = gc_alloc(2, sizeof(t_texture *));
+	spr->sprite[3].texture = gc_alloc(2, sizeof(t_texture *));
+	spr->sprite[0].texture[0] = load_texture(raydata->mlx, "ghost.xpm");
+	spr->sprite[0].texture[1] = load_texture(raydata->mlx, "ghost2.xpm");
+	spr->sprite[1].texture[0] = load_texture(raydata->mlx, "ghost2.xpm");
+	spr->sprite[1].texture[1] = load_texture(raydata->mlx, "ghost.xpm");
+	spr->sprite[2].texture[0] = load_texture(raydata->mlx, "ghost.xpm");
+	spr->sprite[2].texture[1] = load_texture(raydata->mlx, "ghost2.xpm");
+	spr->sprite[3].texture[0] = load_texture(raydata->mlx, "ghost2.xpm");
+	spr->sprite[3].texture[1] = load_texture(raydata->mlx, "ghost.xpm");
+	spr->sprite[0].x = 1.0;
+	spr->sprite[0].y = 1.0;
+	spr->sprite[1].x = raydata->map_width - 2;
+	spr->sprite[1].y = 1.0;
+	spr->sprite[2].x = 1.0;
+	spr->sprite[2].y = raydata->map_height - 2;
+	spr->sprite[3].x = raydata->map_width - 2;
+	spr->sprite[3].y = raydata->map_height - 2;
 	raydata->spr->spr_i = 0;
 }
 
@@ -108,12 +117,12 @@ void	starting_data_init(t_arg *arg, t_raydata *raydata)
 	raydata->map = arg->fmap;
 	raydata->map_height = arg->height;
 	raydata->map_width = arg->width;
-	raydata->ceil_color.s_rgb.r = arg->c[0];
-	raydata->ceil_color.s_rgb.g = arg->c[1];
-	raydata->ceil_color.s_rgb.b = arg->c[2];
-	raydata->floor_color.s_rgb.r = arg->f[0];
-	raydata->floor_color.s_rgb.g = arg->f[1];
-	raydata->floor_color.s_rgb.b = arg->f[2];
+	raydata->ceil_color.s_rgb.r = arg->c_color[0];
+	raydata->ceil_color.s_rgb.g = arg->c_color[1];
+	raydata->ceil_color.s_rgb.b = arg->c_color[2];
+	raydata->floor_color.s_rgb.r = arg->f_color[0];
+	raydata->floor_color.s_rgb.g = arg->f_color[1];
+	raydata->floor_color.s_rgb.b = arg->f_color[2];
 	raydata->game_state = MENU;
 	raydata->img_menu = NULL;
 }

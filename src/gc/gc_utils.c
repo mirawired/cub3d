@@ -30,7 +30,7 @@ void	*ft_memset(void *s, int c, size_t n)
 	while (pos < n)
 	{
 		ptr[pos] = c;
-	pos ++;
+		pos ++;
 	}
 	return (s);
 }

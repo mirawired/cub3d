@@ -43,6 +43,7 @@ SRC =				cub3d.c					\
 					graphic_utils.c			\
 					hooks.c					\
 					rays.c					\
+					rays_utils.c			\
 					render.c				\
 					gc.c					\
 					gc_utils.c				\
@@ -76,6 +77,9 @@ BONUS_SRC = 		cub3d.c					\
 					bfs.c					\
 					minimap.c				\
 					ai.c					\
+					ai_utils_bonus.c		\
+					bfs_utils_bonus.c		\
+					queue.c					\
 					textures.c				\
 					mlx_helpers.c			\
 					data_init_bonus.c		\

@@ -19,8 +19,8 @@ void	ft_strcpy(char *prev, char *new)
 	i = 0;
 	while (prev[i])
 	{
-			new[i] = prev[i];
-			i++;
+		new[i] = prev[i];
+		i++;
 	}
 	new[i] = '\0';
 }
@@ -32,9 +32,9 @@ void	ft_strncpy(char *prev, char *new, int nbr)
 	i = 0;
 	while (nbr && prev[i])
 	{
-			new[i] = prev[i];
-			nbr--;
-			i++;
+		new[i] = prev[i];
+		nbr--;
+		i++;
 	}
 	new[i] = '\0';
 }
