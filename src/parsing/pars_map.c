@@ -88,17 +88,17 @@ _Bool	search_id_nbr(t_data *data, int *arr, char *id)
 
 _Bool	pars_map(t_data *data)
 {
-	if (search_id(data, &data->arg->NO, "NO ./"))
+	if (search_id(data, &data->arg->no, "NO ./"))
 		return (1);
-	if (search_id(data, &data->arg->SO, "SO ./"))
+	if (search_id(data, &data->arg->so, "SO ./"))
 		return (1);
-	if (search_id(data, &data->arg->WE, "WE ./"))
+	if (search_id(data, &data->arg->we, "WE ./"))
 		return (1);
-	if (search_id(data, &data->arg->EA, "EA ./"))
+	if (search_id(data, &data->arg->ea, "EA ./"))
 		return (1);
-	if (search_id_nbr(data, data->arg->F, "F "))
+	if (search_id_nbr(data, data->arg->f_color, "F "))
 		return (1);
-	if (search_id_nbr(data, data->arg->C, "C "))
+	if (search_id_nbr(data, data->arg->c_color, "C "))
 		return (1);
 	if (search_map(data, data->raw))
 		return (1);

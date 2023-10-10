@@ -39,9 +39,9 @@ t_point	clamp(t_point point, t_raydata *raydata)
 	result.x = point.x;
 	result.y = point.y;
 	result.x = (result.x / WIDTH) * ((WIDTH / 4) / raydata->map_width)
-		* raydata->map_width + OFFSET_MAP_X;
+		* raydata->map_width;
 	result.y = (result.y / HEIGHT) * ((HEIGHT / 3) / raydata->map_height)
-		* raydata->map_height + OFFSET_MAP_Y;
+		* raydata->map_height;
 	return (result);
 }
 

@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rays_utils.c                                       :+:      :+:    :+:   */
+/*   enums.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: corecaps <corecaps@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 15:49:31 by corecaps          #+#    #+#             */
-/*   Updated: 2023/10/10 15:49:33 by corecaps         ###   ########.fr       */
+/*   Created: 2023/10/10 16:10:34 by corecaps          #+#    #+#             */
+/*   Updated: 2023/10/10 16:10:39 by corecaps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../inc/cub3d.h"
+#ifndef ENUMS_H
+# define ENUMS_H
 
-void	ray_inc_v(t_r *r)
-{
-	r->side_dist.y += r->delta_dist.y;
-	r->map_y += r->step_y;
-	r->side = 1;
-}
+typedef enum e_game_state {
+	MENU,
+	PLAYING,
+	GAME_OVER,
+	WIN
+}t_game_state;
+typedef enum e_ai_state {
+	AI_IDLE,
+	AI_CHASE,
+	AI_FLEE
+}t_ai_state;
 
-void	ray_inc_h(t_r *r)
+typedef enum e_texture_index
 {
-	r->side_dist.x += r->delta_dist.x;
-	r->map_x += r->step_x;
-	r->side = 0;
-}
+	NO,
+	SO,
+	WE,
+	EA,
+	FLOOR,
+	CEIL,
+	SPRITE
+}	t_texture_index;
+#endif //CUB3D_ENUMS_H

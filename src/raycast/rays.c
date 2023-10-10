@@ -21,14 +21,14 @@ void	draw_slice(t_raydata *data, t_r *r, int x)
 	t_color		color;
 
 	texture = data->texture[r->texture_index];
-	texture_step = 1.0 * texture->height / (r->drawEnd - r->drawStart);
+	texture_step = 1.0 * texture->height / (r->draw_end - r->draw_start);
 	y = 0;
-	while (y++ < r->drawStart)
+	while (y++ < r->draw_start)
 		my_mlx_pixel_put(data->img_buffer, data->ceil_color,
 			(t_int_point){x, y});
 	texture_pos = 0;
 	r->wall_x *= texture->width;
-	while (y < r->drawEnd)
+	while (y < r->draw_end)
 	{
 		set_color(&color, texture, texture_pos, r);
 		my_mlx_pixel_put(data->img_buffer, color, (t_int_point){x, y});
@@ -49,15 +49,15 @@ void	draw_rays(t_raydata *data)
 	r = r_init(data);
 	while (x < WIDTH)
 	{
-		r->cameraX = 2 * x / (double) WIDTH - 1;
+		r->camerax = 2 * x / (double) WIDTH - 1;
 		r->ray_dir.x = data->player->dir_vector.x + data->player->plane_vector.x
-			* r->cameraX;
+			* r->camerax;
 		r->ray_dir.y = data->player->dir_vector.y + data->player->plane_vector.y
-			* r->cameraX;
-		r->MapX = (int)r->pos.x;
-		r->MapY = (int)r->pos.y;
-		r->deltaDist.x = fabs(1 / r->ray_dir.x);
-		r->deltaDist.y = fabs(1 / r->ray_dir.y);
+			* r->camerax;
+		r->map_x = (int)r->pos.x;
+		r->map_y = (int)r->pos.y;
+		r->delta_dist.x = fabs(1 / r->ray_dir.x);
+		r->delta_dist.y = fabs(1 / r->ray_dir.y);
 		r->hit = 0;
 		ray_comp_1(r);
 		ray_comp_2(data, r);
@@ -72,23 +72,23 @@ void	ray_comp_1(t_r *r)
 {
 	if (r->ray_dir.x < 0)
 	{
-		r->stepX = -1;
-		r->sideDist.x = (r->pos.x - r->MapX) * r->deltaDist.x;
+		r->step_x = -1;
+		r->side_dist.x = (r->pos.x - r->map_x) * r->delta_dist.x;
 	}
 	else
 	{
-		r->stepX = 1;
-		r->sideDist.x = (r->MapX + 1.0 - r->pos.x) * r->deltaDist.x;
+		r->step_x = 1;
+		r->side_dist.x = (r->map_x + 1.0 - r->pos.x) * r->delta_dist.x;
 	}
 	if (r->ray_dir.y < 0)
 	{
-		r->stepY = -1;
-		r->sideDist.y = (r->pos.y - r->MapY) * r->deltaDist.y;
+		r->step_y = -1;
+		r->side_dist.y = (r->pos.y - r->map_y) * r->delta_dist.y;
 	}
 	else
 	{
-		r->stepY = 1;
-		r->sideDist.y = (r->MapY + 1.0 - r->pos.y) * r->deltaDist.y;
+		r->step_y = 1;
+		r->side_dist.y = (r->map_y + 1.0 - r->pos.y) * r->delta_dist.y;
 	}
 }
 
@@ -96,40 +96,40 @@ void	ray_comp_2(t_raydata *data, t_r *r)
 {
 	while (r->hit == 0)
 	{
-		if (r->sideDist.x < r->sideDist.y)
+		if (r->side_dist.x < r->side_dist.y)
 		{
 			ray_inc_h(r);
-			if (r->MapX < 0 || r->MapX >= data->map_width)
+			if (r->map_x < 0 || r->map_x >= data->map_width)
 				break ;
 		}
 		else
 		{
 			ray_inc_v(r);
-			if (r->MapY < 0 || r->MapY >= data->map_height)
+			if (r->map_y < 0 || r->map_y >= data->map_height)
 				break ;
 		}
-		if (data->map[r->MapY][r->MapX] > 0)
+		if (data->map[r->map_y][r->map_x] > 0)
 			r->hit = 1;
 	}
 	if (r->side == 0)
-		r->perpWallDist = r->sideDist.x - r->deltaDist.x;
+		r->perp_wall_dist = r->side_dist.x - r->delta_dist.x;
 	else
-		r->perpWallDist = r->sideDist.y - r->deltaDist.y;
-	r->lineHeight = (int)(HEIGHT / r->perpWallDist);
+		r->perp_wall_dist = r->side_dist.y - r->delta_dist.y;
+	r->line_height = (int)(HEIGHT / r->perp_wall_dist);
 }
 
 void	ray_comp_3(t_r *r)
 {
-	r->drawStart = -r->lineHeight / 2 + HEIGHT / 2;
-	if (r->drawStart < 0)
-		r->drawStart = 0;
-	r->drawEnd = r->lineHeight / 2 + HEIGHT / 2;
-	if (r->drawEnd >= HEIGHT)
-		r->drawEnd = HEIGHT - 1;
+	r->draw_start = -r->line_height / 2 + HEIGHT / 2;
+	if (r->draw_start < 0)
+		r->draw_start = 0;
+	r->draw_end = r->line_height / 2 + HEIGHT / 2;
+	if (r->draw_end >= HEIGHT)
+		r->draw_end = HEIGHT - 1;
 	if (r->side == 0)
-		r->wall_x = r->pos.y + r->perpWallDist * r->ray_dir.y;
+		r->wall_x = r->pos.y + r->perp_wall_dist * r->ray_dir.y;
 	else
-		r->wall_x = r->pos.x + r->perpWallDist * r->ray_dir.x;
+		r->wall_x = r->pos.x + r->perp_wall_dist * r->ray_dir.x;
 	r->wall_x -= floor((r->wall_x));
 	if (r->side == 0)
 	{

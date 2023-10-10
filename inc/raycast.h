@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARKANOID_H
-# define ARKANOID_H
+#ifndef RAYCAST_H
+# define RAYCAST_H
 
 # include "./../minilibx-linux/mlx.h"
 # include "./cub3d.h"

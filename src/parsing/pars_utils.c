@@ -76,7 +76,7 @@ _Bool	search_map(t_data *data, char **raw)
 		i++;
 		j++;
 	}
-	if (!data->pars.N && !data->pars.S && !data->pars.E && !data->pars.W)
+	if (!data->pars.n && !data->pars.s && !data->pars.e && !data->pars.w)
 		return (data->err = MAPERROR, 1);
 	return (0);
 }
@@ -102,16 +102,16 @@ _Bool	chk_origin(t_data *data, char *line, char id, int i)
 {
 	if (!i || i == ft_strlen(line) - 1)
 		return (data->err = MAPERROR, 1);
-	if (data->pars.N || data->pars.S || data->pars.E || data->pars.W)
+	if (data->pars.n || data->pars.s || data->pars.e || data->pars.w)
 		return (data->err = MAPERROR, 1);
 	if (id == 'N')
-		return (data->pars.N = 1, 0);
+		return (data->pars.n = 1, 0);
 	else if (id == 'S')
-		return (data->pars.S = 1, 0);
+		return (data->pars.s = 1, 0);
 	else if (id == 'E')
-		return (data->pars.E = 1, 0);
+		return (data->pars.e = 1, 0);
 	else if (id == 'W')
-		return (data->pars.W = 1, 0);
+		return (data->pars.w = 1, 0);
 	else
 		return (data->err = MAPERROR, 1);
 }

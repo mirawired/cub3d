@@ -29,7 +29,7 @@ void	set_color(t_color *color, t_texture *texture, float txtr_pos, t_r *r)
 {
 	*color = texture->texture[(int)txtr_pos * texture->width
 		+ (int)r->wall_x];
-	color->s_rgb.r -= (int)r->perpWallDist;
-	color->s_rgb.g -= (int)r->perpWallDist;
-	color->s_rgb.b -= (int)r->perpWallDist;
+	color->s_rgb.r -= (int)r->perp_wall_dist;
+	color->s_rgb.g -= (int)r->perp_wall_dist;
+	color->s_rgb.b -= (int)r->perp_wall_dist;
 }

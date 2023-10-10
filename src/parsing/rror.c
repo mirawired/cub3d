@@ -35,7 +35,7 @@ int	rror(int err, t_data *data)
 	else if (err == MAPERROR)
 	{
 		write(STDERR_FILENO, "Invalid MAP, valid characters: {0,1,' '}", 41);
-		write(STDERR_FILENO, " and one starting position {N,S,E,W}\n", 38);
+		write(STDERR_FILENO, " and one starting position {n,s,e,w}\n", 38);
 		write(STDERR_FILENO, "MAP must be closed by walls {1}\n", 33);
 	}
 	return (EXIT_FAILURE);
