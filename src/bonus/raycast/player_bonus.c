@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:34 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/04 15:47:01 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 14:02:39 by corecaps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ t_point	clamp(t_point point, t_raydata *raydata)
 
 	result.x = point.x;
 	result.y = point.y;
-	result.x = (result.x / WIDTH) * ((WIDTH / 4) / raydata->map_width) * raydata->map_width + OFFSET_MAP_X;
-	result.y = (result.y / HEIGHT) * ((HEIGHT / 3) / raydata->map_height) * raydata->map_height + OFFSET_MAP_Y;
+	result.x = (result.x / WIDTH) * ((WIDTH / 4) / raydata->map_width)
+		* raydata->map_width + OFFSET_MAP_X;
+	result.y = (result.y / HEIGHT) * ((HEIGHT / 3) / raydata->map_height)
+		* raydata->map_height + OFFSET_MAP_Y;
 	return (result);
 }
 
@@ -50,25 +52,21 @@ t_point	clamp(t_point point, t_raydata *raydata)
 
 void	draw_player(t_raydata *raydata)
 {
-	t_color	player_color;
-	t_point	player_pos;
-	double	player_angle;
-	t_point	front;
-	t_point	left;
-	t_point	right;
+	t_draw_player	d;
 
-	player_color.color = 0xFFFFFF;
-	player_pos.x = raydata->player->pos.x;
-	player_pos.y = raydata->player->pos.y;
-	player_angle = raydata->player->angle * RADIAN;
-	left = calc_point(player_pos, player_angle + 90
+	d.player_color.color = 0xFFFFFF;
+	d.player_pos.x = raydata->player->pos.x;
+	d.player_pos.y = raydata->player->pos.y;
+	d.player_angle = raydata->player->angle * RADIAN;
+	d.left = calc_point(d.player_pos, d.player_angle + 90
 			* RADIAN, raydata->player->size);
-	right = calc_point(player_pos, player_angle - 90
+	d.right = calc_point(d.player_pos, d.player_angle - 90
 			* RADIAN, raydata->player->size);
-	front = calc_point(player_pos, player_angle, raydata->player->size * 2);
-	front = clamp(front, raydata);
-	left = clamp(left, raydata);
-	right = clamp(right, raydata);
-	draw_line(raydata, player_color, left, front);
-	draw_line(raydata, player_color, right, front);
+	d.front = calc_point(d.player_pos, d.player_angle,
+			raydata->player->size * 2);
+	d.front = clamp(d.front, raydata);
+	d.left = clamp(d.left, raydata);
+	d.right = clamp(d.right, raydata);
+	draw_line(raydata, d.player_color, d.left, d.front);
+	draw_line(raydata, d.player_color, d.right, d.front);
 }

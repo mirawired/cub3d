@@ -115,7 +115,8 @@ void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr)
 			d = (y - cs->vMoveScreen) * 256 - HEIGHT * 128
 				+ cs->spriteHeight * 128;
 			texy = ((d * 64) / cs->spriteHeight) / 256;
-			color = curr->texture[data->spr->spr_i % 2]->texture[64 * texy + texx];
+			color = curr->texture[data->spr->spr_i % 2]
+				->texture[64 * texy + texx];
 			if (color.color != BLACK)
 				my_mlx_pixel_put(data->img_buffer, color,
 					(t_int_point){cs->stripe, y});

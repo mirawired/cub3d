@@ -12,17 +12,17 @@
 
 #include "../../../inc/raycast.h"
 
-void draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end, int x, double wall_x, double dist) {
-	float texture_step;
-	float texture_pos;
-	int y;
-	t_texture *texture;
+void	draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end, int x, double wall_x, double dist)
+{
+	float		texture_step;
+	float		texture_pos;
+	int			y;
+	t_texture	*texture;
 
 	texture = data->texture[texture_index];
 	texture_step = 1.0 * texture->height / (draw_end - draw_start);
 	y = 0;
-	while (y++ < draw_start)
-		;//; my_mlx_pixel_put(data->img_buffer, data->ceil_color, (t_int_point) {x, y});
+	while (y++ < draw_start) ;
 	texture_pos = 0;
 	wall_x *= texture->width;
 	while (y < draw_end) {
@@ -34,8 +34,6 @@ void draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end
 		y++;
 		texture_pos += texture_step;
 	}
-	// while (y++ < HEIGHT)
-	// 	my_mlx_pixel_put(data->img_buffer, data->floor_color, (t_int_point) {x, y});
 }
 
 void draw_rays(t_raydata *data) {

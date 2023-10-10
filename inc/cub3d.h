@@ -346,7 +346,15 @@ typedef struct s_map
 	t_color	nmi_color;
 }	t_map;
 
-
+typedef struct s_draw_player
+{
+	t_point	front;
+	t_point	left;
+	t_point	right;
+	double	player_angle;
+	t_point	player_pos;
+	t_color	player_color;
+}	t_draw_player;
 
 void	init_mlx(t_raydata *raydata);
 void	starting_data_init(t_arg *arg, t_raydata *raydata);

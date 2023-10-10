@@ -76,8 +76,6 @@ void	draw_minimap(t_raydata *raydata)
 	int		i;
 
 	i = 0;
-	// map.grid_size_x = MAP_WIDTH / (raydata->map_width);
-	// map.grid_size_y = MAP_HEIGHT / (raydata->map_height);
 	map.grid_size_x = (WIDTH / 4) / raydata->map_width;
 	map.grid_size_y = (HEIGHT / 3) / raydata->map_height;
 	map.grid_color.s_rgb.r = (char) 255;
