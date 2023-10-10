@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:55 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/10 19:10:54 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 21:17:21 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ void draw_rays(t_raydata *data) {
 			if (ray_dir.y > 0) texture_index = NO;
 			else texture_index = SO;
 		}
-		draw_slice(data, texture_index, drawStart, drawEnd, x, wall_x, perpWallDist);
-		data->spr->zbuffer[x] = perpWallDist;
+		draw_slice(data, texture_index, drawstart, drawend, x, wall_x, perpwalldist);
+		data->spr->zbuffer[x] = perpwalldist;
 	}
 	clamp_sprites(data);
 	draw_sprites(data, pos);
