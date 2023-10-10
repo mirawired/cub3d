@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:34 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/10 21:20:27 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 21:26:51 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ t_point	clamp(t_point point, t_raydata *raydata)
 
 	result.x = point.x;
 	result.y = point.y;
-	result.x = (result.x / WIDTH) * (MAP_WIDTH / raydata->map_width) * raydata->map_width + OFFSET_MAP_X;
-	result.y = (result.y / HEIGHT) * (MAP_HEIGHT / raydata->map_height) * raydata->map_height + OFFSET_MAP_Y;
+	result.x = (result.x / WIDTH) * (MAP_WIDTH / raydata->map_width)
+		* raydata->map_width + OFFSET_MAP_X;
+	result.y = (result.y / HEIGHT) * (MAP_HEIGHT / raydata->map_height)
+		* raydata->map_height + OFFSET_MAP_Y;
 	return (result);
 }
 
@@ -68,4 +70,3 @@ void	draw_player(t_raydata *raydata)
 	draw_line(raydata, d.player_color, d.left, d.front);
 	draw_line(raydata, d.player_color, d.right, d.front);
 }
-

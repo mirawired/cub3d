@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:55 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/10 21:20:27 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 21:25:24 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	draw_rays(t_raydata *data)
 		draw_slice(data, r, x);
 		x++;
 	}
-	free(r);
 }
 
 void	ray_comp_1(t_r *r)
