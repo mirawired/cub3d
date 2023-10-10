@@ -1,9 +1,9 @@
-no ./tex.xpm
-so ./tex.xpm
-we ./tex.xpm
-ea ./tex.xpm
-f_color 30,0,30
-c_color 80,0,70
+NO ./tex.xpm
+SO ./tex.xpm
+WE ./tex.xpm
+EA ./tex.xpm
+F 30,0,30
+C 80,0,70
 11111111111111111111111111
 10000000000E00000000000001
 10000000000000000000000001
