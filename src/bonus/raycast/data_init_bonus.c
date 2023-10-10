@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 10:05:19 by corecaps          #+#    #+#             */
-/*   Updated: 2023/10/10 12:00:49 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:01:35 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void	player_init_position(t_arg *arg, t_raydata *raydata)
 void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 {
 	raydata->texture = (t_texture **)gc_alloc(6, sizeof(t_raydata));
-	raydata->texture[NO] = load_texture(raydata->mlx, arg->NO);
-	raydata->texture[SO] = load_texture(raydata->mlx, arg->SO);
-	raydata->texture[WE] = load_texture(raydata->mlx, arg->WE);
-	raydata->texture[EA] = load_texture(raydata->mlx, arg->EA);
-	raydata->texture[CEIL] = load_texture(raydata->mlx, "bluestone.xpm");
-	raydata->texture[FLOOR] = load_texture(raydata->mlx, "purplestone.xpm");
+	raydata->texture[NO] = load_texture(raydata->mlx, arg->no);
+	raydata->texture[SO] = load_texture(raydata->mlx, arg->so);
+	raydata->texture[WE] = load_texture(raydata->mlx, arg->we);
+	raydata->texture[EA] = load_texture(raydata->mlx, arg->ea);
+	raydata->texture[CEIL] = load_texture(raydata->mlx, "steel.xpm");
+	raydata->texture[FLOOR] = load_texture(raydata->mlx, "floor.xpm");
 }
 
 /* **************************************************************************
@@ -111,12 +111,12 @@ void	starting_data_init(t_arg *arg, t_raydata *raydata)
 	raydata->map = arg->fmap;
 	raydata->map_height = arg->height;
 	raydata->map_width = arg->width;
-	raydata->ceil_color.s_rgb.r = arg->C[0];
-	raydata->ceil_color.s_rgb.g = arg->C[1];
-	raydata->ceil_color.s_rgb.b = arg->C[2];
-	raydata->floor_color.s_rgb.r = arg->F[0];
-	raydata->floor_color.s_rgb.g = arg->F[1];
-	raydata->floor_color.s_rgb.b = arg->F[2];
+	raydata->ceil_color.s_rgb.r = arg->c[0];
+	raydata->ceil_color.s_rgb.g = arg->c[1];
+	raydata->ceil_color.s_rgb.b = arg->c[2];
+	raydata->floor_color.s_rgb.r = arg->f[0];
+	raydata->floor_color.s_rgb.g = arg->f[1];
+	raydata->floor_color.s_rgb.b = arg->f[2];
 	raydata->game_state = MENU;
 	raydata->img_menu = NULL;
 }

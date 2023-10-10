@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:43:37 by avassor           #+#    #+#             */
-/*   Updated: 2023/09/30 22:20:05 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 15:56:21 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,17 @@ _Bool	search_id_nbr(t_data *data, int *arr, char *id)
 
 _Bool	pars_map(t_data *data)
 {
-	if (search_id(data, &data->arg->NO, "NO ./"))
+	if (search_id(data, &data->arg->no, "NO ./"))
 		return (1);
-	if (search_id(data, &data->arg->SO, "SO ./"))
+	if (search_id(data, &data->arg->so, "SO ./"))
 		return (1);
-	if (search_id(data, &data->arg->WE, "WE ./"))
+	if (search_id(data, &data->arg->we, "WE ./"))
 		return (1);
-	if (search_id(data, &data->arg->EA, "EA ./"))
+	if (search_id(data, &data->arg->ea, "EA ./"))
 		return (1);
-	if (search_id_nbr(data, data->arg->F, "F "))
+	if (search_id_nbr(data, data->arg->f, "F "))
 		return (1);
-	if (search_id_nbr(data, data->arg->C, "C "))
+	if (search_id_nbr(data, data->arg->c, "C "))
 		return (1);
 	if (search_map(data, data->raw))
 		return (1);
