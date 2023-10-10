@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:23:01 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 16:00:03 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 21:12:54 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_data	*init_data(void)
 	data->arg->no = NULL;
 	data->arg->so = NULL;
 	data->arg->we = NULL;
+	data->arg->ea = NULL;
 	data->arg->ea = NULL;
 	data->arg->map = NULL;
 	data->arg->fmap = NULL;
@@ -51,8 +52,10 @@ t_data	*init_data(void)
 
 _Bool	convert_rgb(t_arg *arg)
 {
-	arg->rgbc->color = ((arg->c[0] << 16) | (arg->c[1] << 8) | arg->c[2]);
-	arg->rgbf->color = ((arg->f[0] << 16) | (arg->f[1] << 8) | arg->f[2]);
+	arg->rgb_c->color = ((arg->c_color[0] << 16)
+			| (arg->c_color[1] << 8) | arg->c_color[2]);
+	arg->rgb_f->color = ((arg->f_color[0] << 16)
+			| (arg->f_color[1] << 8) | arg->f_color[2]);
 	return (0);
 }
 

@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rays_utils.c                                       :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 15:49:31 by corecaps          #+#    #+#             */
-/*   Updated: 2023/10/10 21:20:27 by avassor          ###   ########.fr       */
+/*   Created: 2023/10/10 16:00:37 by corecaps          #+#    #+#             */
+/*   Updated: 2023/10/10 21:16:41 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../inc/cub3d.h"
-
-void	ray_inc_v(t_r *r)
-{
-	r->side_dist.y += r->delta_dist.y;
-	r->map_y += r->step_y;
-	r->side = 1;
-}
-
-void	ray_inc_h(t_r *r)
-{
-	r->side_dist.x += r->delta_dist.x;
-	r->map_x += r->step_x;
-	r->side = 0;
-}
+#ifndef CONFIG_H
+# define CONFIG_H
+# define WIDTH 1600
+# define HEIGHT 900
+# define MAP_WIDTH 480
+# define MAP_HEIGHT 270
+# define OFFSET_MAP_X 0
+# define OFFSET_MAP_Y 0
+# define ROTSPEED 6
+# define PLAYERSPEED 10
+#endif

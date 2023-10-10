@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 22:12:06 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 16:05:23 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 21:13:34 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_color(t_color *color, t_texture *texture, float txtr_pos, t_r *r)
 {
 	*color = texture->texture[(int)txtr_pos * texture->width
 		+ (int)r->wall_x];
-	color->s_rgb.r -= (int)r->perpwalldist;
-	color->s_rgb.g -= (int)r->perpwalldist;
-	color->s_rgb.b -= (int)r->perpwalldist;
+	color->s_rgb.r -= (int)r->perp_wall_dist;
+	color->s_rgb.g -= (int)r->perp_wall_dist;
+	color->s_rgb.b -= (int)r->perp_wall_dist;
 }

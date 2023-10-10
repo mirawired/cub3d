@@ -43,6 +43,7 @@ SRC =				cub3d.c					\
 					graphic_utils.c			\
 					hooks.c					\
 					rays.c					\
+					rays_utils.c			\
 					render.c				\
 					gc.c					\
 					gc_utils.c				\
