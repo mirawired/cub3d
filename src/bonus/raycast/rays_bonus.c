@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:55 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/04 14:56:56 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:08:50 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end
 	texture_step = 1.0 * texture->height / (draw_end - draw_start);
 	y = 0;
 	while (y++ < draw_start)
-		my_mlx_pixel_put(data->img_buffer, data->ceil_color, (t_int_point) {x, y});
+		;//; my_mlx_pixel_put(data->img_buffer, data->ceil_color, (t_int_point) {x, y});
 	texture_pos = 0;
 	wall_x *= texture->width;
 	while (y < draw_end) {
@@ -34,8 +34,8 @@ void draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end
 		y++;
 		texture_pos += texture_step;
 	}
-	while (y++ < HEIGHT)
-		my_mlx_pixel_put(data->img_buffer, data->floor_color, (t_int_point) {x, y});
+	// while (y++ < HEIGHT)
+	// 	my_mlx_pixel_put(data->img_buffer, data->floor_color, (t_int_point) {x, y});
 }
 
 void draw_rays(t_raydata *data) {
@@ -46,6 +46,7 @@ void draw_rays(t_raydata *data) {
 	int grid_size_y = HEIGHT / data->map_height;
 	t_point pos = {data->player->pos.x / grid_size_x, data->player->pos.y / grid_size_y};
 
+	draw_horiz(data, pos, grid_size_x, grid_size_y);
 	for (int x = 0; x < WIDTH; x++) {
 		double cameraX = 2 * x / (double) WIDTH - 1;
 		t_point ray_dir = {data->player->dir_vector.x + data->player->plane_vector.x * cameraX,
@@ -54,7 +55,6 @@ void draw_rays(t_raydata *data) {
 		int MapY = (int) pos.y;
 		t_point sideDist;
 		t_point deltaDist = {fabs(1 / ray_dir.x), fabs(1 / ray_dir.y)};
-		// double perpWallDist;
 		int stepX;
 		int stepY;
 		int hit = 0;
@@ -92,7 +92,6 @@ void draw_rays(t_raydata *data) {
 			if (data->map[MapY][MapX] > 0)
 				hit = 1;
 		}
-//        draw_line(data, ray_color, (t_point){pos.x * grid_size_x, pos.y * grid_size_y}, (t_point){MapX * grid_size_x, MapY * grid_size_y});
 		if (side == 0)
 			perpWallDist = sideDist.x - deltaDist.x;
 		else

@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:36:22 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/08 18:04:29 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/09 12:32:52 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr)
 			d = (y - cs->vMoveScreen) * 256 - HEIGHT * 128
 				+ cs->spriteHeight * 128;
 			texy = ((d * 64) / cs->spriteHeight) / 256;
-			// color = curr->texture->texture[data->spr->spr_i % 2][64 * texy + texx];
 			color = curr->texture[data->spr->spr_i % 2]->texture[64 * texy + texx];
 			if (color.color != BLACK)
 				my_mlx_pixel_put(data->img_buffer, color,

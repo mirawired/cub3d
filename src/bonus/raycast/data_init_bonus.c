@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 10:05:19 by corecaps          #+#    #+#             */
-/*   Updated: 2023/10/08 18:02:52 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:00:49 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ void	player_init_position(t_arg *arg, t_raydata *raydata)
 
 void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 {
-	raydata->texture = (t_texture **)gc_alloc(4, sizeof(t_raydata));
+	raydata->texture = (t_texture **)gc_alloc(6, sizeof(t_raydata));
 	raydata->texture[NO] = load_texture(raydata->mlx, arg->NO);
 	raydata->texture[SO] = load_texture(raydata->mlx, arg->SO);
 	raydata->texture[WE] = load_texture(raydata->mlx, arg->WE);
 	raydata->texture[EA] = load_texture(raydata->mlx, arg->EA);
+	raydata->texture[CEIL] = load_texture(raydata->mlx, "bluestone.xpm");
+	raydata->texture[FLOOR] = load_texture(raydata->mlx, "purplestone.xpm");
 }
 
 void	ennemies_textures_init(t_raydata *raydata)

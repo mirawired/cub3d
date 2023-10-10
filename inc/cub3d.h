@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/08 17:58:19 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 10:09:38 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,6 +243,8 @@ typedef enum e_texture_index
 	SO,
 	WE,
 	EA,
+	FLOOR,
+	CEIL,
 	SPRITE
 }	t_texture_index;
 
@@ -354,7 +356,8 @@ void	ray_comp_2(t_raydata *data, t_r *r);
 void	ray_comp_3(t_r *r);
 t_r		*r_init(t_raydata *data);
 void	set_color(t_color *color, t_texture *texture, float txtr_pos, t_r *r);
-int check_collision(t_raydata *raydata, t_point new_pos);
+int		check_collision(t_raydata *raydata, t_point new_pos);
+void	draw_horiz(t_raydata *data, t_point pos, int grid_size_x, int grid_size_y);
 
 // ..................... Ennemies AI ...................................
 t_int_point	bfs(t_raydata *data, t_int_point start, t_int_point end);
