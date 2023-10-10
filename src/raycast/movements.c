@@ -15,14 +15,14 @@
 void	move_forward(t_raydata *raydata)
 {
 	t_point new_pos;
-	new_pos.x = raydata->player->pos.x + 10 * cos(raydata->player->angle * RADIAN);
+	new_pos.x = raydata->player->pos.x + PLAYERSPEED * cos(raydata->player->angle * RADIAN);
 	new_pos.y = raydata->player->pos.y;
 	if (!check_collision(raydata,new_pos))
 	{
 		raydata->player->pos.x = new_pos.x;
 	}
 	new_pos.x = raydata->player->pos.x;
-	new_pos.y = raydata->player->pos.y + 10 * (sin(raydata->player->angle * RADIAN));
+	new_pos.y = raydata->player->pos.y + PLAYERSPEED * (sin(raydata->player->angle * RADIAN));
 	if (!check_collision(raydata,new_pos))
 	{
 		raydata->player->pos.y = new_pos.y;
@@ -57,16 +57,16 @@ void	turn_left(t_raydata *raydata)
 	old_dir = raydata->player->dir_vector;
 	old_plane = raydata->player->plane_vector;
 	raydata->player->dir_vector.x = raydata->player->dir_vector.x
-		* cos(-3 * RADIAN)
-		- raydata->player->dir_vector.y * sin(-3 * RADIAN);
-	raydata->player->dir_vector.y = old_dir.x * sin(-3 * RADIAN)
-		+ raydata->player->dir_vector.y * cos(-3 * RADIAN);
+		* cos(-ROTSPEED * RADIAN)
+		- raydata->player->dir_vector.y * sin(-ROTSPEED * RADIAN);
+	raydata->player->dir_vector.y = old_dir.x * sin(-ROTSPEED * RADIAN)
+		+ raydata->player->dir_vector.y * cos(-ROTSPEED * RADIAN);
 	raydata->player->plane_vector.x = raydata->player->plane_vector.x
-		* cos(-3 * RADIAN) - raydata->player->plane_vector.y
-		* sin(-3 * RADIAN);
-	raydata->player->plane_vector.y = old_plane.x * sin(-3 * RADIAN)
-		+ raydata->player->plane_vector.y * cos(-3 * RADIAN);
-	raydata->player->angle -= 3;
+		* cos(-ROTSPEED * RADIAN) - raydata->player->plane_vector.y
+		* sin(-ROTSPEED * RADIAN);
+	raydata->player->plane_vector.y = old_plane.x * sin(-ROTSPEED * RADIAN)
+		+ raydata->player->plane_vector.y * cos(-ROTSPEED * RADIAN);
+	raydata->player->angle -= ROTSPEED;
 	if (raydata->player->angle < 0)
 		raydata->player->angle = 359;
 }
@@ -79,14 +79,14 @@ void	turn_right(t_raydata *raydata)
 	old_dir = raydata->player->dir_vector;
 	old_plane = raydata->player->plane_vector;
 	raydata->player->dir_vector.x = raydata->player->dir_vector.x
-		* cos(3 * RADIAN) - raydata->player->dir_vector.y * sin(3 * RADIAN);
-	raydata->player->dir_vector.y = old_dir.x * sin(3 * RADIAN)
-		+ raydata->player->dir_vector.y * cos(3 * RADIAN);
+		* cos(ROTSPEED * RADIAN) - raydata->player->dir_vector.y * sin(ROTSPEED * RADIAN);
+	raydata->player->dir_vector.y = old_dir.x * sin(ROTSPEED * RADIAN)
+		+ raydata->player->dir_vector.y * cos(ROTSPEED * RADIAN);
 	raydata->player->plane_vector.x = raydata->player->plane_vector.x
-		* cos(3 * RADIAN) - raydata->player->plane_vector.y * sin(3 * RADIAN);
-	raydata->player->plane_vector.y = old_plane.x * sin(3 * RADIAN)
-		+ raydata->player->plane_vector.y * cos(3 * RADIAN);
-	raydata->player->angle += 3;
+		* cos(ROTSPEED * RADIAN) - raydata->player->plane_vector.y * sin(ROTSPEED * RADIAN);
+	raydata->player->plane_vector.y = old_plane.x * sin(ROTSPEED * RADIAN)
+		+ raydata->player->plane_vector.y * cos(ROTSPEED * RADIAN);
+	raydata->player->angle += ROTSPEED;
 	if (raydata->player->angle > 359)
 		raydata->player->angle = 0;
 }

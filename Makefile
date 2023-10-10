@@ -67,7 +67,7 @@ BONUS_SRC = 		cub3d.c					\
 					raycast_bonus.c			\
 					draw_line.c				\
 					graphic_utils_bonus.c	\
-					hooks.c					\
+					hooks_bonus.c			\
 					player_bonus.c			\
 					rays_bonus.c			\
 					render_bonus.c			\
@@ -83,7 +83,10 @@ BONUS_SRC = 		cub3d.c					\
 					movements_extra.c		\
 					sprites.c				\
 					data_init_add_bonus.c	\
-					horiz.c
+					horiz.c					\
+					collision.c				\
+					sprites_utils.c			\
+					menu.c
 
 SRCS = $(shell find $(SRC_PATH) -type d)
 BONUS_SRCS = $(shell find $(SRC_PATH) -type d)

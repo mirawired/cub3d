@@ -12,6 +12,12 @@
 
 #include "../../../inc/cub3d.h"
 
+/* **************************************************************************
+ * player_init_position:
+ * - find the player position in the map
+ * - if not found, set the player position to the center of the map
+ ************************************************************************** */
+
 void	player_init_position(t_arg *arg, t_raydata *raydata)
 {
 	int		found;
@@ -36,6 +42,12 @@ void	player_init_position(t_arg *arg, t_raydata *raydata)
 	}
 }
 
+/* **************************************************************************
+ * wall_textures_init:
+ * - allocate memory for the textures
+ * - load the textures for the walls
+ ************************************************************************** */
+
 void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 {
 	raydata->texture = (t_texture **)gc_alloc(6, sizeof(t_raydata));
@@ -46,6 +58,13 @@ void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 	raydata->texture[CEIL] = load_texture(raydata->mlx, "bluestone.xpm");
 	raydata->texture[FLOOR] = load_texture(raydata->mlx, "purplestone.xpm");
 }
+
+/* **************************************************************************
+ * ennemies_textures_init:
+ * - allocate memory for the textures
+ * - load the textures for the ennemies
+ * - set the position of the ennemies
+ ************************************************************************** */
 
 void	ennemies_textures_init(t_raydata *raydata)
 {
@@ -73,6 +92,11 @@ void	ennemies_textures_init(t_raydata *raydata)
 	raydata->spr->spr_i = 0;
 }
 
+/* **************************************************************************
+ * starting_data_init:
+ * - initialize the data for the game
+ ************************************************************************** */
+
 void	starting_data_init(t_arg *arg, t_raydata *raydata)
 {
 	raydata->player->angle = 0;
@@ -90,4 +114,6 @@ void	starting_data_init(t_arg *arg, t_raydata *raydata)
 	raydata->floor_color.s_rgb.r = arg->F[0];
 	raydata->floor_color.s_rgb.g = arg->F[1];
 	raydata->floor_color.s_rgb.b = arg->F[2];
+	raydata->game_state = MENU;
+	raydata->img_menu = NULL;
 }

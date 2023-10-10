@@ -12,6 +12,11 @@
 
 #include "../../../inc/raycast.h"
 
+/* **************************************************************************
+ * sort_sprites:
+ * - Sorts the sprites by distance from the player.
+ ************************************************************************** */
+
 void	sort_sprites(t_spr	*spr, t_point pos)
 {
 	int	i;
@@ -38,6 +43,11 @@ void	sort_sprites(t_spr	*spr, t_point pos)
 	}
 }
 
+/* **************************************************************************
+ * comp_long:
+ * - Computes the long values needed for the sprite calculations.
+ ************************************************************************** */
+
 void	comp_long(t_raydata *data, t_cs *cs)
 {
 	cs->invDet = 1.0 / (data->player->plane_vector.x
@@ -49,6 +59,11 @@ void	comp_long(t_raydata *data, t_cs *cs)
 			+ data->player->plane_vector.x + data->player->plane_vector.x
 			* cs->spriteY);
 }
+
+/* **************************************************************************
+ * comp_sprites:
+ * - Computes the values needed for the sprite calculations.
+ ************************************************************************** */
 
 void	comp_sprites(t_raydata *data, t_sprite *curr, t_point pos)
 {
@@ -77,6 +92,11 @@ void	comp_sprites(t_raydata *data, t_sprite *curr, t_point pos)
 	cs->stripe = cs->drawStartX;
 }
 
+/* **************************************************************************
+ * sprite_pxl:
+ * - Draws the sprite pixels.
+ ************************************************************************** */
+
 void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr)
 {
 	t_color	color;
@@ -103,6 +123,11 @@ void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr)
 		}
 	}
 }
+
+/* **************************************************************************
+ * draw_sprites:
+ * - Draws the sprites.
+ ************************************************************************** */
 
 void	draw_sprites(t_raydata *data, t_point pos)
 {

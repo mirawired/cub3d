@@ -12,6 +12,14 @@
 
 #include "../../../inc/raycast.h"
 
+/* **************************************************************************
+ * raycast:
+ * - allocate memory for raydata
+ * - initialize mlx and raydata
+ * - initialize textures
+ * - register & launch game loop
+ ************************************************************************** */
+
 int	raycast(t_arg *arg)
 {
 	t_raydata	*raydata;

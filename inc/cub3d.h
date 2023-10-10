@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:15:14 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 10:09:38 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:14:38 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,33 @@ void	*gc_alloc(size_t nmemb, size_t size);
 # define MAP_HEIGHT 256
 # define HEIGHT 900
 # define SPRITENBR 4
+# define ROTSPEED 6
+# define PLAYERSPEED 10
+
+typedef enum e_game_state {
+	MENU,
+	PLAYING,
+	GAME_OVER,
+	WIN
+}t_game_state;
+
+typedef enum e_ai_state {
+	AI_IDLE,
+	AI_CHASE,
+	AI_FLEE
+}t_ai_state;
+
+typedef enum e_keys {
+	KEY_W = 119,
+	KEY_A = 97,
+	KEY_S = 115,
+	KEY_D = 100,
+	KEY_LEFT = 65361,
+	KEY_RIGHT = 65363,
+	KEY_UP = 65362,
+	KEY_DOWN = 65364,
+	KEY_ESC = 65307
+}	t_keys;
 
 typedef struct s_point
 {
@@ -182,6 +209,7 @@ typedef struct s_player {
 	double angle;
     t_point dir_vector;
     t_point plane_vector;
+	t_point	init_pos;
 	double size;
 }	t_player;
 
@@ -253,6 +281,7 @@ typedef struct s_raydata
 	void		*mlx;
 	void		*mlx_win;
 	t_buffer	*img_buffer;
+	t_buffer	*img_menu;
 	t_player	*player;
 	int			map_width;
 	int			map_height;
@@ -263,6 +292,7 @@ typedef struct s_raydata
 	long		last_frame;
 	t_spr		*spr;
 	t_arg		*arg;
+	t_game_state game_state;
 }	t_raydata;
 
 typedef struct s_r
@@ -316,6 +346,8 @@ typedef struct s_map
 	t_color	nmi_color;
 }	t_map;
 
+
+
 void	init_mlx(t_raydata *raydata);
 void	starting_data_init(t_arg *arg, t_raydata *raydata);
 void	ennemies_textures_init(t_raydata *raydata);
@@ -358,9 +390,12 @@ t_r		*r_init(t_raydata *data);
 void	set_color(t_color *color, t_texture *texture, float txtr_pos, t_r *r);
 int		check_collision(t_raydata *raydata, t_point new_pos);
 void	draw_horiz(t_raydata *data, t_point pos, int grid_size_x, int grid_size_y);
-
+void draw_menu(t_raydata * raydata);
 // ..................... Ennemies AI ...................................
 t_int_point	bfs(t_raydata *data, t_int_point start, t_int_point end);
 void		nmi_ai(t_raydata *raydata);
-
+void	draw_horiz(t_raydata *data);
+int	check_nmi_collision(t_raydata *raydata);
+void data_reset(t_raydata *raydata);
+void clamp_sprites(t_raydata *raydata);
 #endif

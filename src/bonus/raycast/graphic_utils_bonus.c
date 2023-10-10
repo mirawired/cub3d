@@ -12,6 +12,12 @@
 
 #include "../../../inc/raycast.h"
 
+/* **************************************************************************
+ * my_mlx_pixel_put:
+ * - put a pixel in the image buffer
+ * - if the pixel is in the map, make it darker
+ ************************************************************************** */
+
 int	my_mlx_pixel_put(t_buffer *data, t_color color, t_int_point coord)
 {
 	char	*dst;
@@ -31,12 +37,22 @@ int	my_mlx_pixel_put(t_buffer *data, t_color color, t_int_point coord)
 	return (0);
 }
 
+/* **************************************************************************
+ * ft_abs:
+ * - return the absolute value of a number
+ ************************************************************************** */
+
 int	ft_abs(int n)
 {
 	if (n < 0)
 		return (-n);
 	return (n);
 }
+
+/* **************************************************************************
+ * fill_rectangle:
+ * - fill a rectangle in the image buffer
+ ************************************************************************** */
 
 void	fill_rectangle(t_raydata *raydata, t_color color, t_point top_left,
 	t_point bottom_right)
@@ -55,6 +71,11 @@ void	fill_rectangle(t_raydata *raydata, t_color color, t_point top_left,
 		coord.y++;
 	}
 }
+
+/* **************************************************************************
+ * clear_buffer:
+ * - fill the image buffer with black
+ ************************************************************************** */
 
 void	clear_buffer(t_raydata *raydata)
 {

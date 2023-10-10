@@ -12,6 +12,12 @@
 
 #include "../../../inc/raycast.h"
 
+/* **************************************************************************
+ * calc_point:
+ * - determine the position of a point from a starting point, an angle
+ * and a distance.
+ ************************************************************************** */
+
 t_point	calc_point(t_point from, double angle, double distance)
 {
 	t_point	result;
@@ -21,26 +27,26 @@ t_point	calc_point(t_point from, double angle, double distance)
 	return (result);
 }
 
+/* **************************************************************************
+ * clamp:
+ * - clamp a point to the map.
+ ************************************************************************** */
+
 t_point	clamp(t_point point, t_raydata *raydata)
 {
 	t_point	result;
 
 	result.x = point.x;
 	result.y = point.y;
-//     result.x = (result.x / WIDTH) * MAP_WIDTH + OFFSET_MAP_X;
-//     result.y = (result.y / HEIGHT) * MAP_HEIGHT + OFFSET_MAP_Y;
 	result.x = (result.x / WIDTH) * ((WIDTH / 4) / raydata->map_width) * raydata->map_width + OFFSET_MAP_X;
 	result.y = (result.y / HEIGHT) * ((HEIGHT / 3) / raydata->map_height) * raydata->map_height + OFFSET_MAP_Y;
-//	if (result.x < OFFSET_MAP_X)
-//		result.x = OFFSET_MAP_X;
-//	if (result.x > OFFSET_MAP_X + MAP_WIDTH)
-//		result.x = OFFSET_MAP_X + MAP_WIDTH;
-//	if (result.y < OFFSET_MAP_Y)
-//		result.y = OFFSET_MAP_Y;
-//	if (result.y > OFFSET_MAP_Y + MAP_HEIGHT)
-//		result.y = OFFSET_MAP_Y + MAP_HEIGHT;
 	return (result);
 }
+
+/* **************************************************************************
+ * draw_player:
+ * - draw the player on the map.
+ ************************************************************************** */
 
 void	draw_player(t_raydata *raydata)
 {
@@ -66,5 +72,3 @@ void	draw_player(t_raydata *raydata)
 	draw_line(raydata, player_color, left, front);
 	draw_line(raydata, player_color, right, front);
 }
-
-// 23/26
