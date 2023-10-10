@@ -12,6 +12,12 @@
 
 #include "./../../inc/cub3d.h"
 
+/* **************************************************************************
+ * init_data:
+ * - allocate the data structure
+ * - initialize the data structure
+ ************************************************************************** */
+
 t_data	*init_data(void)
 {
 	t_data	*data;
@@ -39,12 +45,24 @@ t_data	*init_data(void)
 	return (data);
 }
 
+/* **************************************************************************
+ * convert_rgb:
+ * - convert the rgb values to an integer
+ ************************************************************************** */
+
 _Bool	convert_rgb(t_arg *arg)
 {
 	arg->rgbC->color = ((arg->C[0] << 16) | (arg->C[1] << 8) | arg->C[2]);
 	arg->rgbF->color = ((arg->F[0] << 16) | (arg->F[1] << 8) | arg->F[2]);
 	return (0);
 }
+
+/* **************************************************************************
+ * to_integers:
+ * - fill the integer map
+ * - fill the integer map with 1 if the map is not closed
+ * - convert the rgb values to an integer
+ ************************************************************************** */
 
 _Bool	to_integers(t_data *data, t_arg *arg)
 {
@@ -73,6 +91,11 @@ _Bool	to_integers(t_data *data, t_arg *arg)
 	return (convert_rgb(arg));
 }
 
+/* **************************************************************************
+ * convert_map:
+ * - convert the map to integers
+ ************************************************************************** */
+
 _Bool	convert_map(t_data *data, t_arg *arg)
 {
 	int	i;
@@ -94,6 +117,16 @@ _Bool	convert_map(t_data *data, t_arg *arg)
 	arg->width = k;
 	return (to_integers(data, arg));
 }
+
+/* **************************************************************************
+ * main:
+ * - initialize the data structure
+ * - check the arguments
+ * - get the arguments
+ * - parse the map
+ * - convert the map to integers
+ * - start the raycasting engine and launch the game
+ ************************************************************************** */
 
 int	main(int argc, char **argv)
 {

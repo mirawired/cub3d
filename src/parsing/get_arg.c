@@ -12,6 +12,11 @@
 
 #include "./../../inc/cub3d.h"
 
+/* **************************************************************************
+ * is_dir:
+ * - check if the argument is a directory
+ ************************************************************************** */
+
 _Bool	is_dir(char *arg)
 {
 	int	fd;
@@ -26,6 +31,11 @@ _Bool	is_dir(char *arg)
 	return (0);
 }
 
+/* **************************************************************************
+ * is_cub:
+ * - check if the argument is a .cub file
+ ************************************************************************** */
+
 _Bool	is_cub(char *arg)
 {
 	while (*arg)
@@ -35,6 +45,11 @@ _Bool	is_cub(char *arg)
 		return (0);
 	return (1);
 }
+
+/* **************************************************************************
+ * chk_arg:
+ * - check the argument
+ ************************************************************************** */
 
 _Bool	chk_arg(t_data *data, char *arg)
 {
@@ -47,6 +62,11 @@ _Bool	chk_arg(t_data *data, char *arg)
 		return (close(data->fd), data->err = RFD, 1);
 	return (0);
 }
+
+/* **************************************************************************
+ * get_arg:
+ * - read the .cub file
+ ************************************************************************** */
 
 _Bool	get_arg(t_data *data)
 {
@@ -67,6 +87,11 @@ _Bool	get_arg(t_data *data)
 		return (data->err = EMPT, 1);
 	return (0);
 }
+
+/* **************************************************************************
+ * chk_edges:
+ * - check if the map is effectively closed by walls
+ ************************************************************************** */
 
 _Bool	chk_edges(t_data *data, char c, char d)
 {

@@ -12,6 +12,11 @@
 
 #include "./../../inc/cub3d.h"
 
+/* **************************************************************************
+ * clean_raw:
+ * - free the raw map
+ ************************************************************************** */
+
 void	clean_raw(t_data *data)
 {
 	int	i;
@@ -29,6 +34,11 @@ void	clean_raw(t_data *data)
 	}
 }
 
+/* **************************************************************************
+ * init_alloc:
+ * - allocate the data structure
+ ************************************************************************** */
+
 _Bool	init_alloc(t_data *data)
 {
 	data->arg = (t_arg *)gc_alloc(1, sizeof(t_arg));
@@ -42,6 +52,11 @@ _Bool	init_alloc(t_data *data)
 		return (free(data), free(data->arg->rgbF), data->err = MLLOC, 1);
 	return (0);
 }
+
+/* **************************************************************************
+ * map_op:
+ * - check the map
+ ************************************************************************** */
 
 _Bool	map_op(t_data *data, char **raw, int i, int j)
 {

@@ -32,5 +32,10 @@ typedef struct s_bfs
 
 t_int_point	fill_node_end(t_bfs *bfs, t_int_point start);
 void	fill_node(t_bfs *bfs, t_int_point *dir);
-
+t_int_point	*alloc_dir(void);
+t_int_point	**alloc_parent(int map_width, int map_height);
+t_bfs	*init_bfs_structs(t_raydata *data);
+t_queue	*create_queue(int capacity);
+void	enqueue(t_queue *queue, t_queue_node node);
+t_queue_node	dequeue(t_queue *queue);
 #endif

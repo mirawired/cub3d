@@ -397,4 +397,7 @@ void		nmi_ai(t_raydata *raydata);
 int	check_nmi_collision(t_raydata *raydata);
 void data_reset(t_raydata *raydata);
 void clamp_sprites(t_raydata *raydata);
+int	is_within_bounds(t_raydata *raydata, int x, int y);
+t_int_point	find_direction(t_raydata *raydata, int x, int y, t_int_point inc);
+int	find_inc(int dest, int src);
 #endif
