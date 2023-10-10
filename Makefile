@@ -6,7 +6,7 @@
 #    By: avassor <avassor@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 12:13:14 by mira              #+#    #+#              #
-#    Updated: 2023/10/08 17:02:02 by avassor          ###   ########.fr        #
+#    Updated: 2023/10/10 21:41:47 by avassor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,6 +130,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(BONUS_NAME)
 	rm -f $(MLX_PATH)$(MLX_NAME)
 
 re: fclean all
