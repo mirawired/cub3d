@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:36:22 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 16:31:56 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:42:00 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr)
 	{
 		while (y < cs->drawendy)
 		{
-			d = (y - cs->vMoveScreen) * 256 - HEIGHT * 128
-				+ cs->spriteHeight * 128;
-			texy = ((d * 64) / cs->spriteHeight) / 256;
+			d = (y - cs->vmovescreen) * 256 - HEIGHT * 128
+				+ cs->spriteheight * 128;
+			texy = ((d * 64) / cs->spriteheight) / 256;
 			color = curr->texture[data->spr->spr_i % 2]
 				->texture[64 * texy + texx];
 			if (color.color != BLACK)

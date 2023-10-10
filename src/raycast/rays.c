@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:55 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/10 16:32:17 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:38:17 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ void	ray_comp_2(t_raydata *data, t_r *r)
 		if (r->sidedist.x < r->sidedist.y)
 		{
 			ray_inc_h(r);
-			if (r->MapX < 0 || r->MapX >= data->map_width)
+			if (r->mapx < 0 || r->mapx >= data->map_width)
 				break ;
 		}
 		else
 		{
 			ray_inc_v(r);
-			if (r->MapY < 0 || r->MapY >= data->map_height)
+			if (r->mapy < 0 || r->mapy >= data->map_height)
 				break ;
 		}
 		if (data->map[r->mapy][r->mapx] > 0)

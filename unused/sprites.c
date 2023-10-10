@@ -230,11 +230,11 @@ int main(int /*argc*/, char */*argv*/[])
       int spriteScreenX = int((w / 2) * (1 + transformX / transformY));
 
       //calculate height of the sprite on screen
-      int spriteHeight = abs(int(h / (transformY))); //using 'transformY' instead of the real distance prevents fisheye
+      int spriteheight = abs(int(h / (transformY))); //using 'transformY' instead of the real distance prevents fisheye
       //calculate lowest and highest pixel to fill in current stripe
-      int drawstartY = -spriteHeight / 2 + h / 2;
+      int drawstartY = -spriteheight / 2 + h / 2;
       if(drawstartY < 0) drawstartY = 0;
-      int drawendY = spriteHeight / 2 + h / 2;
+      int drawendY = spriteheight / 2 + h / 2;
       if(drawendY >= h) drawendY = h - 1;
 
       //calculate width of the sprite
@@ -256,8 +256,8 @@ int main(int /*argc*/, char */*argv*/[])
         if(transformY > 0 && stripe > 0 && stripe < w && transformY < ZBuffer[stripe])
         for(int y = drawstartY; y < drawendY; y++) //for every pixel of the current stripe
         {
-          int d = (y) * 256 - h * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
-          int texY = ((d * texHeight) / spriteHeight) / 256;
+          int d = (y) * 256 - h * 128 + spriteheight * 128; //256 and 128 factors to avoid floats
+          int texY = ((d * texHeight) / spriteheight) / 256;
           Uint32 color = texture[sprite[spriteOrder[i]].texture][texWidth * texY + texX]; //get current color from the texture
           if((color & 0x00FFFFFF) != 0) buffer[y][stripe] = color; //paint pixel if it isn't black, black is the invisible color
         }

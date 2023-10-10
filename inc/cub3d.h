@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:34:08 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 16:36:09 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:42:01 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,6 +346,16 @@ typedef struct s_map
 	t_color	grid_color;
 	t_color	nmi_color;
 }	t_map;
+
+typedef struct s_draw_player
+{
+	t_point	front;
+	t_point	left;
+	t_point	right;
+	double	player_angle;
+	t_point	player_pos;
+	t_color	player_color;
+}	t_draw_player;
 
 void			init_mlx(t_raydata *raydata);
 void			starting_data_init(t_arg *arg, t_raydata *raydata);
