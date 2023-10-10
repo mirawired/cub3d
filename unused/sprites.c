@@ -93,65 +93,65 @@ int main(int /*argc*/, char */*argv*/[])
     for(int x = 0; x < w; x++)
     {
       //calculate ray position and direction
-      double cameraX = 2 * x / double(w) - 1; //x-coordinate in camera space
-      double rayDirX = dirX + planeX * cameraX;
-      double rayDirY = dirY + planeY * cameraX;
+      double camerax = 2 * x / double(w) - 1; //x-coordinate in camera space
+      double rayDirX = dirX + planeX * camerax;
+      double rayDirY = dirY + planeY * camerax;
 
       //which box of the map we're in
       int mapX = int(posX);
       int mapY = int(posY);
 
       //length of ray from current position to next x or y-side
-      double sideDistX;
-      double sideDistY;
+      double sidedistX;
+      double sidedistY;
 
       //length of ray from one x or y-side to next x or y-side
-      double deltaDistX = (rayDirX == 0) ? 1e30 : std::abs(1 / rayDirX);
-      double deltaDistY = (rayDirY == 0) ? 1e30 : std::abs(1 / rayDirY);
-      double perpWallDist;
+      double deltadistX = (rayDirX == 0) ? 1e30 : std::abs(1 / rayDirX);
+      double deltadistY = (rayDirY == 0) ? 1e30 : std::abs(1 / rayDirY);
+      double perpwalldist;
 
       //what direction to step in x or y-direction (either +1 or -1)
-      int stepX;
-      int stepY;
+      int stepx;
+      int stepy;
 
       int hit = 0; //was there a wall hit?
       int side; //was a NS or a EW wall hit?
 
-      //calculate step and initial sideDist
+      //calculate step and initial sidedist
       if (rayDirX < 0)
       {
-        stepX = -1;
-        sideDistX = (posX - mapX) * deltaDistX;
+        stepx = -1;
+        sidedistX = (posX - mapX) * deltadistX;
       }
       else
       {
-        stepX = 1;
-        sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+        stepx = 1;
+        sidedistX = (mapX + 1.0 - posX) * deltadistX;
       }
       if (rayDirY < 0)
       {
-        stepY = -1;
-        sideDistY = (posY - mapY) * deltaDistY;
+        stepy = -1;
+        sidedistY = (posY - mapY) * deltadistY;
       }
       else
       {
-        stepY = 1;
-        sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+        stepy = 1;
+        sidedistY = (mapY + 1.0 - posY) * deltadistY;
       }
       //perform DDA
       while (hit == 0)
       {
         //jump to next map square, either in x-direction, or in y-direction
-        if (sideDistX < sideDistY)
+        if (sidedistX < sidedistY)
         {
-          sideDistX += deltaDistX;
-          mapX += stepX;
+          sidedistX += deltadistX;
+          mapX += stepx;
           side = 0;
         }
         else
         {
-          sideDistY += deltaDistY;
-          mapY += stepY;
+          sidedistY += deltadistY;
+          mapY += stepy;
           side = 1;
         }
         //Check if ray has hit a wall
@@ -159,24 +159,24 @@ int main(int /*argc*/, char */*argv*/[])
       }
 
       //Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
-      if(side == 0) perpWallDist = (sideDistX - deltaDistX);
-      else          perpWallDist = (sideDistY - deltaDistY);
+      if(side == 0) perpwalldist = (sidedistX - deltadistX);
+      else          perpwalldist = (sidedistY - deltadistY);
 
       //Calculate height of line to draw on screen
-      int lineHeight = (int)(h / perpWallDist);
+      int lineheight = (int)(h / perpwalldist);
 
       //calculate lowest and highest pixel to fill in current stripe
-      int drawStart = -lineHeight / 2 + h / 2;
-      if(drawStart < 0) drawStart = 0;
-      int drawEnd = lineHeight / 2 + h / 2;
-      if(drawEnd >= h) drawEnd = h - 1;
+      int drawstart = -lineheight / 2 + h / 2;
+      if(drawstart < 0) drawstart = 0;
+      int drawend = lineheight / 2 + h / 2;
+      if(drawend >= h) drawend = h - 1;
       //texturing calculations
       int texNum = worldMap[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
 
       //calculate value of wallX
       double wallX; //where exactly the wall was hit
-      if (side == 0) wallX = posY + perpWallDist * rayDirY;
-      else           wallX = posX + perpWallDist * rayDirX;
+      if (side == 0) wallX = posY + perpwalldist * rayDirY;
+      else           wallX = posX + perpwalldist * rayDirX;
       wallX -= floor((wallX));
 
       //x coordinate on the texture
@@ -185,10 +185,10 @@ int main(int /*argc*/, char */*argv*/[])
       if(side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
 
       // How much to increase the texture coordinate per screen pixel
-      double step = 1.0 * texHeight / lineHeight;
+      double step = 1.0 * texHeight / lineheight;
       // Starting texture coordinate
-      double texPos = (drawStart - h / 2 + lineHeight / 2) * step;
-      for(int y = drawStart; y<drawEnd; y++)
+      double texPos = (drawstart - h / 2 + lineheight / 2) * step;
+      for(int y = drawstart; y<drawend; y++)
       {
         // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
         int texY = (int)texPos & (texHeight - 1);
@@ -199,7 +199,7 @@ int main(int /*argc*/, char */*argv*/[])
         buffer[y][x] = color;
       }
       //SET THE ZBUFFER FOR THE SPRITE CASTING
-      ZBuffer[x] = perpWallDist; //perpendicular distance is used
+      ZBuffer[x] = perpwalldist; //perpendicular distance is used
     }
     //SPRITE CASTING
     //sort sprites from far to close
@@ -232,20 +232,20 @@ int main(int /*argc*/, char */*argv*/[])
       //calculate height of the sprite on screen
       int spriteHeight = abs(int(h / (transformY))); //using 'transformY' instead of the real distance prevents fisheye
       //calculate lowest and highest pixel to fill in current stripe
-      int drawStartY = -spriteHeight / 2 + h / 2;
-      if(drawStartY < 0) drawStartY = 0;
-      int drawEndY = spriteHeight / 2 + h / 2;
-      if(drawEndY >= h) drawEndY = h - 1;
+      int drawstartY = -spriteHeight / 2 + h / 2;
+      if(drawstartY < 0) drawstartY = 0;
+      int drawendY = spriteHeight / 2 + h / 2;
+      if(drawendY >= h) drawendY = h - 1;
 
       //calculate width of the sprite
       int spriteWidth = abs( int (h / (transformY)));
-      int drawStartX = -spriteWidth / 2 + spriteScreenX;
-      if(drawStartX < 0) drawStartX = 0;
-      int drawEndX = spriteWidth / 2 + spriteScreenX;
-      if(drawEndX >= w) drawEndX = w - 1;
+      int drawstartX = -spriteWidth / 2 + spriteScreenX;
+      if(drawstartX < 0) drawstartX = 0;
+      int drawendX = spriteWidth / 2 + spriteScreenX;
+      if(drawendX >= w) drawendX = w - 1;
 
       //loop through every vertical stripe of the sprite on screen
-      for(int stripe = drawStartX; stripe < drawEndX; stripe++)
+      for(int stripe = drawstartX; stripe < drawendX; stripe++)
       {
         int texX = int(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
         //the conditions in the if are:
@@ -254,7 +254,7 @@ int main(int /*argc*/, char */*argv*/[])
         //3) it's on the screen (right)
         //4) ZBuffer, with perpendicular distance
         if(transformY > 0 && stripe > 0 && stripe < w && transformY < ZBuffer[stripe])
-        for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
+        for(int y = drawstartY; y < drawendY; y++) //for every pixel of the current stripe
         {
           int d = (y) * 256 - h * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
           int texY = ((d * texHeight) / spriteHeight) / 256;

@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:36:22 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/09 12:32:52 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:02:34 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ void	sort_sprites(t_spr	*spr, t_point pos)
 
 void	comp_long(t_raydata *data, t_cs *cs)
 {
-	cs->invDet = 1.0 / (data->player->plane_vector.x
+	cs->invdet = 1.0 / (data->player->plane_vector.x
 			* data->player->dir_vector.y - data->player->dir_vector.x
 			* data->player->plane_vector.y);
-	cs->transX = cs->invDet * (data->player->dir_vector.y * cs->spriteX
-			- data->player->dir_vector.x * cs->spriteY);
-	cs->transY = cs->invDet * (-data->player->plane_vector.y * cs->spriteX
+	cs->transx = cs->invdet * (data->player->dir_vector.y * cs->spritex
+			- data->player->dir_vector.x * cs->spritey);
+	cs->transx = cs->invdet * (-data->player->plane_vector.y * cs->spritex
 			+ data->player->plane_vector.x + data->player->plane_vector.x
-			* cs->spriteY);
+			* cs->spritey);
 }
 
 /* **************************************************************************
@@ -70,26 +70,26 @@ void	comp_sprites(t_raydata *data, t_sprite *curr, t_point pos)
 	t_cs	*cs;
 
 	cs = &data->spr->cs;
-	cs->spriteX = curr->x - pos.x;
-	cs->spriteY = curr->y - pos.y;
+	cs->spritex = curr->x - pos.x;
+	cs->spritey = curr->y - pos.y;
 	comp_long(data, cs);
-	cs->spriteScreenX = (int)((WIDTH / 2) * (1 + cs->transX / cs->transY));
-	cs->vMoveScreen = (int)(0.0 / cs->transY);
-	cs->spriteHeight = ft_abs((int)(HEIGHT / cs->transY)) / 1;
-	cs->drawStartY = -cs->spriteHeight / 2 + HEIGHT / 2 + cs->vMoveScreen;
-	if (cs->drawStartY < 0)
-		cs->drawStartY = 0;
-	cs->drawEndY = cs->spriteHeight / 2 + HEIGHT / 2 + cs->vMoveScreen;
-	if (cs->drawEndY >= HEIGHT)
-		cs->drawEndY = HEIGHT - 1;
-	cs->spriteWidth = ft_abs((int)(HEIGHT / cs->transY)) / 1;
-	cs->drawStartX = -cs->spriteWidth / 2 + cs->spriteScreenX;
-	if (cs->drawStartX < 0)
-		cs->drawStartX = 0;
-	cs->drawEndX = cs->spriteWidth / 2 + cs->spriteScreenX;
-	if (cs->drawEndX >= WIDTH)
-		cs->drawEndX = WIDTH;
-	cs->stripe = cs->drawStartX;
+	cs->spritescreenx = (int)((WIDTH / 2) * (1 + cs->transx / cs->transx));
+	cs->vmovescreen = (int)(0.0 / cs->transx);
+	cs->spriteheight = ft_abs((int)(HEIGHT / cs->transx)) / 1;
+	cs->drawstarty = -cs->spriteheight / 2 + HEIGHT / 2 + cs->vmovescreen;
+	if (cs->drawstarty < 0)
+		cs->drawstarty = 0;
+	cs->drawendy = cs->spriteheight / 2 + HEIGHT / 2 + cs->vmovescreen;
+	if (cs->drawendy >= HEIGHT)
+		cs->drawendy = HEIGHT - 1;
+	cs->spritewidth = ft_abs((int)(HEIGHT / cs->transx)) / 1;
+	cs->drawstartx = -cs->spritewidth / 2 + cs->spritescreenx;
+	if (cs->drawstartx < 0)
+		cs->drawstartx = 0;
+	cs->drawendx = cs->spritewidth / 2 + cs->spritescreenx;
+	if (cs->drawendx >= WIDTH)
+		cs->drawendx = WIDTH;
+	cs->stripe = cs->drawstartx;
 }
 
 /* **************************************************************************
@@ -105,16 +105,16 @@ void	sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr)
 	int		y;
 	int		d;
 
-	texx = (int)(256 * (cs->stripe - (-cs->spriteWidth / 2
-					+ cs->spriteScreenX)) * 64 / cs->spriteWidth) / 256;
-	y = cs->drawStartY;
-	if (cs->transY > 0 && cs->transY < data->spr->Zbuffer[cs->stripe])
+	texx = (int)(256 * (cs->stripe - (-cs->spritewidth / 2
+					+ cs->spritescreenx)) * 64 / cs->spritewidth) / 256;
+	y = cs->drawstarty;
+	if (cs->transx > 0 && cs->transx < data->spr->zbuffer[cs->stripe])
 	{
-		while (y < cs->drawEndY)
+		while (y < cs->drawendy)
 		{
-			d = (y - cs->vMoveScreen) * 256 - HEIGHT * 128
-				+ cs->spriteHeight * 128;
-			texy = ((d * 64) / cs->spriteHeight) / 256;
+			d = (y - cs->vmovescreen) * 256 - HEIGHT * 128
+				+ cs->spriteheight * 128;
+			texy = ((d * 64) / cs->spriteheight) / 256;
 			color = curr->texture[data->spr->spr_i % 2]->texture[64 * texy + texx];
 			if (color.color != BLACK)
 				my_mlx_pixel_put(data->img_buffer, color,
@@ -145,7 +145,7 @@ void	draw_sprites(t_raydata *data, t_point pos)
 		curr = spr->sprite[spr->sprite_order[i]];
 		comp_sprites(data, &curr, pos);
 		cs = &spr->cs;
-		while (cs->stripe < cs->drawEndX)
+		while (cs->stripe < cs->drawendx)
 		{
 			sprite_pxl(data, cs, &curr);
 			cs->stripe++;

@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:23:01 by avassor           #+#    #+#             */
-/*   Updated: 2023/09/05 13:31:25 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:00:03 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,20 @@ t_data	*init_data(void)
 	data = (t_data *)gc_alloc(1, sizeof(t_data));
 	if (!data || init_alloc(data))
 		return (NULL);
-	data->arg->NO = NULL;
-	data->arg->SO = NULL;
-	data->arg->WE = NULL;
-	data->arg->EA = NULL;
-	data->arg->EA = NULL;
+	data->arg->no = NULL;
+	data->arg->so = NULL;
+	data->arg->we = NULL;
+	data->arg->ea = NULL;
 	data->arg->map = NULL;
 	data->arg->fmap = NULL;
 	data->raw = NULL;
 	data->err = 0;
 	data->fd = -1;
 	data->lines = -1;
-	data->pars.N = 0;
-	data->pars.S = 0;
-	data->pars.E = 0;
-	data->pars.W = 0;
+	data->pars.n = 0;
+	data->pars.s = 0;
+	data->pars.e = 0;
+	data->pars.w = 0;
 	data->arg->height = -1;
 	data->arg->width = -1;
 	return (data);
@@ -41,8 +40,8 @@ t_data	*init_data(void)
 
 _Bool	convert_rgb(t_arg *arg)
 {
-	arg->rgbC->color = ((arg->C[0] << 16) | (arg->C[1] << 8) | arg->C[2]);
-	arg->rgbF->color = ((arg->F[0] << 16) | (arg->F[1] << 8) | arg->F[2]);
+	arg->rgbc->color = ((arg->c[0] << 16) | (arg->c[1] << 8) | arg->c[2]);
+	arg->rgbf->color = ((arg->f[0] << 16) | (arg->f[1] << 8) | arg->f[2]);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:40:28 by avassor           #+#    #+#             */
-/*   Updated: 2023/09/30 12:30:32 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/10 15:48:24 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void	clean_raw(t_data *data)
 _Bool	init_alloc(t_data *data)
 {
 	data->arg = (t_arg *)gc_alloc(1, sizeof(t_arg));
-	data->arg->rgbC = (t_color *)gc_alloc(1, sizeof(t_color));
+	data->arg->rgbc = (t_color *)gc_alloc(1, sizeof(t_color));
 	if (!data->arg)
-		return (free(data), data->err = MLLOC, 1);
-	if (!data->arg->rgbC)
-		return (free(data), data->err = MLLOC, 1);
-	data->arg->rgbF = (t_color *)gc_alloc(1, sizeof(t_color));
-	if (!data->arg->rgbF)
-		return (free(data), free(data->arg->rgbF), data->err = MLLOC, 1);
+		return (data->err = MLLOC, 1);
+	if (!data->arg->rgbc)
+		return (data->err = MLLOC, 1);
+	data->arg->rgbf = (t_color *)gc_alloc(1, sizeof(t_color));
+	if (!data->arg->rgbf)
+		return (free(data->arg->rgbf), data->err = MLLOC, 1);
 	return (0);
 }
 
