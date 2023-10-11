@@ -57,7 +57,8 @@ _Bool			ft_sprstrncmp(char *s1, char *s2);
 _Bool			pars_map(t_data *data);
 _Bool			search_id(t_data *data, char **fill, char *id);
 _Bool			copy_id(t_data *data, char **fill, char *raw);
-_Bool			ft_strncmp(t_data *data, char *needle, char *haystack, int size);
+_Bool			ft_strncmp(t_data *data, char *needle, char *haystack,
+					int size);
 _Bool			copy_nbr(t_data *data, int *arr, char *raw);
 _Bool			search_id_nbr(t_data *data, int *arr, char *id);
 int				ft_atoi(const char *p);
