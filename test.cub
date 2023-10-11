@@ -1,8 +1,8 @@
-NO ./t3.cub
+NO ./tex.xpm
 SO ./tex.xpm
 WE ./tex.xpm
 EA ./tex.xpm
-F  30,       0 ,         30
+F  30,       0 ,                                   52 2255
 C 80,0,70
 
 111111111111
