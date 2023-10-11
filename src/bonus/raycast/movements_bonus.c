@@ -48,13 +48,13 @@ void	move_backward(t_raydata *raydata)
 	t_point	new_pos;
 
 	new_pos.x = raydata->player->pos.x - cos(raydata->player->angle
-			* RADIAN) * 10;
+			* RADIAN) * PLAYERSPEED;
 	new_pos.y = raydata->player->pos.y;
 	if (!check_collision(raydata, new_pos))
 		raydata->player->pos.x = new_pos.x;
 	new_pos.x = raydata->player->pos.x;
 	new_pos.y = raydata->player->pos.y - sin(raydata->player->angle
-			* RADIAN) * 10;
+			* RADIAN) * PLAYERSPEED;
 	if (!check_collision(raydata, new_pos))
 		raydata->player->pos.y = new_pos.y;
 	clamp_player(raydata);

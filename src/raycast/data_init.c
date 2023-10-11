@@ -89,7 +89,7 @@ void	rotate_player(t_raydata *raydata, double angle)
 void	starting_data_init(t_arg *arg, t_raydata *raydata)
 {
 	raydata->player->angle = raydata->player->init_angle;
-	raydata->player->size = 10;
+	raydata->player->size = 5;
 	raydata->player->dir_vector.x = 1;
 	raydata->player->dir_vector.y = 0;
 	raydata->player->plane_vector.x = 0;
