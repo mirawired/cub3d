@@ -60,10 +60,10 @@ void	player_init_position(t_arg *arg, t_raydata *raydata)
 void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 {
 	raydata->texture = (t_texture **)gc_alloc(4, sizeof(t_raydata));
-	raydata->texture[NO] = load_texture(raydata->mlx, arg->no);
-	raydata->texture[SO] = load_texture(raydata->mlx, arg->so);
-	raydata->texture[WE] = load_texture(raydata->mlx, arg->we);
-	raydata->texture[EA] = load_texture(raydata->mlx, arg->ea);
+	raydata->texture[NO] = load_texture(raydata, arg->no);
+	raydata->texture[SO] = load_texture(raydata, arg->so);
+	raydata->texture[WE] = load_texture(raydata, arg->we);
+	raydata->texture[EA] = load_texture(raydata, arg->ea);
 }
 
 void	starting_data_init(t_arg *arg, t_raydata *raydata)

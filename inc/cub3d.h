@@ -95,7 +95,7 @@ t_garbage		**gc_add(t_garbage *ptr);
 void			gc_free(void);
 int				gc_del(void *ptr);
 void			*gc_alloc(size_t nmemb, size_t size);
-void			gc_error_exit();
+void			gc_error_exit(void);
 // ..................... RAYCAST ............................................
 # define RADIAN 0.0174532925
 # define SPRITENBR 4
@@ -136,7 +136,7 @@ void			sort_sprites(t_spr	*spr, t_point pos);
 void			comp_sprites(t_raydata *data, t_sprite *curr, t_point pos);
 void			sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr);
 void			comp_long(t_raydata *data, t_cs *cs);
-t_texture		*load_texture(void *mlx, char *path);
+t_texture		*load_texture(t_raydata *raydata, char *path);
 void			draw_minimap(t_raydata *raydata);
 void			ray_comp_1(t_raydata *data, t_r *r);
 void			ray_comp_2(t_raydata *data, t_r *r);
@@ -147,6 +147,7 @@ void			set_color(t_color *color, t_texture *texture,
 int				check_collision(t_raydata *raydata, t_point new_pos);
 void			draw_horiz(t_raydata *data, t_point pos);
 void			draw_menu(t_raydata *raydata);
+void			clean_exit(t_raydata *raydata);
 // ..................... Ennemies AI ...................................
 t_int_point		bfs(t_raydata *data, t_int_point start, t_int_point end);
 void			nmi_ai(t_raydata *raydata);
