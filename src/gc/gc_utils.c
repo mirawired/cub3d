@@ -58,3 +58,16 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	ft_memset(r_ptr, 0, nmemb * size);
 	return ((char *)r_ptr);
 }
+
+/* **************************************************************************
+ * gc_error_exit:
+ * - In case of memory error, print an error message free all allocated memory
+ * and exit the program.
+ ************************************************************************** */
+
+void	gc_error_exit(void)
+{
+	write(2, "PANIC! Memory error, Exiting ...\n", 34);
+	gc_free();
+	exit(1);
+}
