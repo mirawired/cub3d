@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:30:04 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 11:54:09 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:02:31 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	rror(int err, t_data *data)
 		write(STDERR_FILENO, " and one starting position {n,s,e,w}\n", 38);
 		write(STDERR_FILENO, "MAP must be closed by walls {1}\n", 33);
 	}
+	else if (err = EXT2)
+		write(STDERR_FILENO, "Wrong texture extension\n", 25);
 	return (gc_free(), EXIT_FAILURE);
 }
 
@@ -56,8 +58,23 @@ int	find_end_map(t_data *data, char **raw, int i)
 	int	j;
 
 	j = 0;
-	while (i + j < data->lines && raw[i + j] && raw[i + j][0]
-		&& raw[i + j][0] != '\n')
+	while ((i + j <= data->lines) && raw[i + j])
+	{
+		if (!raw[i + j] || raw[i + j][0] != '1')
+			break ;
 		j++;
+	}
 	return (j);
+}
+
+_Bool	ko_ext(char *fill)
+{
+	int	i;
+
+	i = 0;
+	while (fill[i])
+		i++;
+	if (fill[i - 1] != 'm' || fill[i - 2] != 'p' || fill[i - 3] != 'x' || fill[i - 4] != '.')
+		return (1);
+	return (0);
 }

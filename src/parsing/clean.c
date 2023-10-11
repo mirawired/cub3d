@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:40:28 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 11:37:54 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:09:38 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ _Bool	init_alloc(t_data *data)
 
 _Bool	map_op(t_data *data, char **raw, int i, int j)
 {
-	if ((!j || i == data->endmap))
+	if ((!j || (j + 1)  == data->mlines))
 	{
 		if (chk_bottop(data, raw[i], j))
 			return (1);
