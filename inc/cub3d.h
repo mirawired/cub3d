@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:34:08 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 11:37:38 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:02:56 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define EXT 134
 # define RFD 135
 # define NOID 136
+# define EXT2 139
 # define MAPERROR 137
 # define RRGB 138
 # define BLACK -16777216
@@ -76,6 +77,7 @@ void			do_conv(t_arg *arg, int i, int j);
 _Bool			map_op(t_data *data, char **raw, int i, int j);
 int				find_id(char *raw);
 int				find_end_map(t_data *data, char **raw, int i);
+_Bool			ko_ext(char *fill);
 // ..................... GNL ................................................
 char			*get_next_line(int fd);
 void			ft_reader(int fd, t_stash **stash);

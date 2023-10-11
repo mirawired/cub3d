@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:43:37 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 14:40:57 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:02:04 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ _Bool	copy_id(t_data *data, char **fill, char *raw)
 	fd = open(*fill, O_RDONLY);
 	if (fd == -1)
 		return (data->err = RFD, 1);
+	if (is_dir(*fill))
+		return (close(fd), data->err = DIR, 1);
+	if (ko_ext(*fill))
+		return (close(fd), data->err = EXT2, 1);
 	else
 		close(fd);
 	return (0);
