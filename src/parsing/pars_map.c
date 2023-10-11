@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:43:37 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 13:50:18 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:40:57 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,17 @@ _Bool	copy_nbr(t_data *data, int *arr, char *raw)
 	data->k = 0;
 	while (raw[j] && raw[j] != '\n')
 	{
-		i = j;
 		if (data->k >= 3)
 			return (data->err = ARGRR, 1);
-		while (raw[j] && raw[j] != ',' && raw[j] != '\n')
-		{
-			if (!(raw[j] >= '0' && raw[j] <= '9'))
-				return (data->err = ARGRR, 1);
+		while(raw[j] == ' ' || raw[j] == ',')
 			j++;
-		}
+		i = j;
+		if (!(raw[j] >= '0' && raw[j] <= '9'))
+			return (data->err = ARGRR, 1);
+		while (raw[j] && raw[j] >= '0' && raw[j] <= '9')
+			j++;
 		if (convert_nbr(data, arr, &raw[i], j - i))
 			return (1);
-		if (raw[j] == ',')
-			j++;
 	}
 	clear_line(raw - 2);
 	return (0);
