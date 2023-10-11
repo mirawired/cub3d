@@ -60,7 +60,7 @@ _Bool	init_alloc(t_data *data)
 
 _Bool	map_op(t_data *data, char **raw, int i, int j)
 {
-	if ((!j || (j + 1)  == data->mlines))
+	if ((!j || (j + 1) == data->mlines))
 	{
 		if (chk_bottop(data, raw[i], j))
 			return (1);
