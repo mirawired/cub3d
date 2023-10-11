@@ -49,7 +49,7 @@ t_garbage	**gc_add(t_garbage *ptr)
 		return (&garbage);
 	new = malloc(sizeof(t_garbage));
 	if (!new)
-		return (NULL);
+		gc_error_exit();
 	new->ptr = ptr;
 	if (garbage)
 		new->next = garbage;
@@ -130,7 +130,7 @@ void	*gc_alloc(size_t nmemb, size_t size)
 
 	ptr = ft_calloc(nmemb, size);
 	if (!ptr)
-		return (NULL);
+		gc_error_exit();
 	gc_add(ptr);
 	return (ptr);
 }

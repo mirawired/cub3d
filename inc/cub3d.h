@@ -95,6 +95,7 @@ t_garbage		**gc_add(t_garbage *ptr);
 void			gc_free(void);
 int				gc_del(void *ptr);
 void			*gc_alloc(size_t nmemb, size_t size);
+void			gc_error_exit();
 // ..................... RAYCAST ............................................
 # define RADIAN 0.0174532925
 # define SPRITENBR 4
