@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:23:01 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 14:48:11 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:05:45 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,18 +136,18 @@ int	main(int argc, char **argv)
 
 	data = NULL;
 	if (argc != 2)
-		return (rror(NOARG, NULL));
+		return (rror(NOARG));
 	data = init_data();
 	if (!data)
-		return (rror(MLLOC, NULL));
+		return (rror(MLLOC));
 	if (chk_arg(data, argv[1]))
-		return (rror(data->err, data));
+		return (rror(data->err));
 	if (get_arg(data))
-		return (rror(data->err, data));
+		return (rror(data->err));
 	if (pars_map(data) || convert_map(data, data->arg))
-		return (rror(data->err, data));
+		return (rror(data->err));
 	if (raycast(data->arg))
-		return (rror(1, data));
+		return (rror(1));
 	gc_free();
 	return (EXIT_SUCCESS);
 }

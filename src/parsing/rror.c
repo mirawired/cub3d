@@ -6,15 +6,14 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:30:04 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 15:31:13 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:10:49 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../../inc/cub3d.h"
 
-int	rror(int err, t_data *data)
+int	rror(int err)
 {
-	(void)data;
 	write(STDERR_FILENO, "Error\n", 7);
 	if (err == MLLOC)
 		write(STDERR_FILENO, "Memory Allocation failed\n", 26);
@@ -33,13 +32,9 @@ int	rror(int err, t_data *data)
 	else if (err == NOID)
 		write(STDERR_FILENO, "Missing texture\n", 17);
 	else if (err == MAPERROR)
-	{
-		write(STDERR_FILENO, "Invalid MAP, valid characters: {0,1,' '}", 41);
-		write(STDERR_FILENO, " and one starting position {n,s,e,w}\n", 38);
-		write(STDERR_FILENO, "MAP must be closed by walls {1}\n", 33);
-	}
+		write(STDERR_FILENO, "MAP err bad char or position or enclosure\n", 43);
 	else if (err == EXT2)
-		write(STDERR_FILENO, "Wrong texture extension\n", 25);
+		write(STDERR_FILENO, "Illegal filetype\n", 18);
 	return (gc_free(), EXIT_FAILURE);
 }
 
@@ -74,7 +69,8 @@ _Bool	ko_ext(char *fill)
 	i = 0;
 	while (fill[i])
 		i++;
-	if (fill[i - 1] != 'm' || fill[i - 2] != 'p' || fill[i - 3] != 'x' || fill[i - 4] != '.')
+	if (fill[i - 1] != 'm' || fill[i - 2] != 'p'
+		|| fill[i - 3] != 'x' || fill[i - 4] != '.')
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:34:08 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 15:46:31 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:05:23 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			clean_raw(t_data *data);
 _Bool			copy_line(t_data *data, char *line);
 _Bool			upscale_raw(t_data *data);
 int				ft_strlen(const char *s);
-int				rror(int err, t_data *data);
+int				rror(int err);
 _Bool			ft_sprstrncmp(char *s1, char *s2);
 _Bool			pars_map(t_data *data);
 _Bool			search_id(t_data *data, char **fill, char *id);

@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:43:37 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 16:03:43 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:10:04 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ _Bool	copy_id(t_data *data, char **fill, char *raw)
 	fd = open(*fill, O_RDONLY);
 	if (fd == -1)
 		return (data->err = RFD, 1);
-	if (is_dir(*fill))
-		return (close(fd), data->err = DIR, 1);
-	if (ko_ext(*fill))
+	if (is_dir(*fill) || ko_ext(*fill))
 		return (close(fd), data->err = EXT2, 1);
 	else
 		close(fd);
@@ -53,7 +51,7 @@ _Bool	copy_nbr(t_data *data, int *arr, char *raw)
 	{
 		if (data->k >= 3)
 			return (data->err = ARGRR, 1);
-		while(raw[j] == ' ' || raw[j] == ',')
+		while (raw[j] == ' ' || raw[j] == ',')
 			j++;
 		i = j;
 		if (!(raw[j] >= '0' && raw[j] <= '9'))
