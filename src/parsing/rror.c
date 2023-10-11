@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:30:04 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 15:02:31 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:20:10 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	rror(int err, t_data *data)
 		write(STDERR_FILENO, " and one starting position {n,s,e,w}\n", 38);
 		write(STDERR_FILENO, "MAP must be closed by walls {1}\n", 33);
 	}
-	else if (err = EXT2)
+	else if (err == EXT2)
 		write(STDERR_FILENO, "Wrong texture extension\n", 25);
 	return (gc_free(), EXIT_FAILURE);
 }

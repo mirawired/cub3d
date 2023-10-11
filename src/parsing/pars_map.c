@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:43:37 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 15:02:04 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:24:19 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ _Bool	copy_nbr(t_data *data, int *arr, char *raw)
 		if (convert_nbr(data, arr, &raw[i], j - i))
 			return (1);
 	}
+	if (data->k != 3)
+		return (data->err = ARGRR, 1);
 	clear_line(raw - 2);
 	return (0);
 }
