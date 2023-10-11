@@ -25,6 +25,7 @@ int	find_player(t_raydata *raydata, int i, double gs_x, double gs_y)
 		{
 			raydata->player->pos.x = (double) j * gs_x + gs_x / 2;
 			raydata->player->pos.y = (double) i * gs_y + gs_y / 2;
+			raydata->player->init_angle = -(raydata->arg->fmap[i][j] + 1) * 90;
 			found = 1;
 			raydata->arg->fmap[i][j] = 0;
 		}
@@ -66,14 +67,34 @@ void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 	raydata->texture[EA] = load_texture(raydata, arg->ea);
 }
 
+void	rotate_player(t_raydata *raydata, double angle)
+{
+	t_point	old_dir;
+	t_point	old_plane;
+
+	old_dir = raydata->player->dir_vector;
+	old_plane = raydata->player->plane_vector;
+	raydata->player->dir_vector.x = raydata->player->dir_vector.x
+		* cos(angle * RADIAN)
+		- raydata->player->dir_vector.y * sin(angle * RADIAN);
+	raydata->player->dir_vector.y = old_dir.x * sin(angle * RADIAN)
+		+ raydata->player->dir_vector.y * cos(angle * RADIAN);
+	raydata->player->plane_vector.x = raydata->player->plane_vector.x
+		* cos(angle * RADIAN) - raydata->player->plane_vector.y
+		* sin(angle * RADIAN);
+	raydata->player->plane_vector.y = old_plane.x * sin(angle * RADIAN)
+		+ raydata->player->plane_vector.y * cos(angle * RADIAN);
+}
+
 void	starting_data_init(t_arg *arg, t_raydata *raydata)
 {
-	raydata->player->angle = 0;
-	raydata->player->size = 10;
+	raydata->player->angle = raydata->player->init_angle;
+	raydata->player->size = 5;
 	raydata->player->dir_vector.x = 1;
 	raydata->player->dir_vector.y = 0;
 	raydata->player->plane_vector.x = 0;
 	raydata->player->plane_vector.y = 0.66;
+	rotate_player(raydata, raydata->player->init_angle);
 	raydata->map = arg->fmap;
 	raydata->map_height = arg->height;
 	raydata->map_width = arg->width;

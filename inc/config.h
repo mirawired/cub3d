@@ -19,5 +19,5 @@
 # define OFFSET_MAP_X 0
 # define OFFSET_MAP_Y 0
 # define ROTSPEED 6
-# define PLAYERSPEED 10
+# define PLAYERSPEED 2
 #endif

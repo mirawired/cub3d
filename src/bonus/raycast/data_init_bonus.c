@@ -100,6 +100,34 @@ void	ennemies_textures_init(t_raydata *raydata)
 	spr->sprite[3].y = raydata->map_height - 2;
 	raydata->spr->spr_i = 0;
 }
+/* **************************************************************************
+ * find_player:
+ * - find the player in the map and set its position
+ * - set the player's initial position
+ * - return 1 if found, 0 if not
+ ************************************************************************** */
+
+int	find_player(t_raydata *raydata, int i, double gs_x, double gs_y)
+{
+	int	j;
+	int	found;
+
+	j = 0;
+	found = 0;
+	while (j < raydata->arg->width)
+	{
+		if (raydata->arg->fmap[i][j] < 0)
+		{
+			raydata->player->pos.x = (double) j * gs_x + gs_x / 2;
+			raydata->player->pos.y = (double) i * gs_y + gs_y / 2;
+			raydata->player->init_angle = -(raydata->arg->fmap[i][j] + 1) * 90;
+			found = 1;
+			raydata->arg->fmap[i][j] = 0;
+		}
+		j++;
+	}
+	return (found);
+}
 
 /* **************************************************************************
  * starting_data_init:
@@ -108,12 +136,13 @@ void	ennemies_textures_init(t_raydata *raydata)
 
 void	starting_data_init(t_arg *arg, t_raydata *raydata)
 {
-	raydata->player->angle = 0;
-	raydata->player->size = 10;
+	raydata->player->angle = raydata->player->init_angle;
+	raydata->player->size = 5;
 	raydata->player->dir_vector.x = 1;
 	raydata->player->dir_vector.y = 0;
 	raydata->player->plane_vector.x = 0;
 	raydata->player->plane_vector.y = 0.66;
+	rotate_player(raydata, raydata->player->init_angle);
 	raydata->map = arg->fmap;
 	raydata->map_height = arg->height;
 	raydata->map_width = arg->width;
