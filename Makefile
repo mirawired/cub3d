@@ -6,7 +6,7 @@
 #    By: avassor <avassor@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 12:13:14 by mira              #+#    #+#              #
-#    Updated: 2023/10/11 10:53:41 by avassor          ###   ########.fr        #
+#    Updated: 2023/10/11 11:02:16 by avassor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,12 +74,12 @@ BONUS_SRC = 		cub3d.c					\
 					render_bonus.c			\
 					gc.c					\
 					gc_utils.c				\
-					bfs.c					\
-					minimap.c				\
-					ai.c					\
+					bfs_bonus.c				\
+					minimap_bonus.c			\
+					ai_bonus.c				\
 					ai_utils_bonus.c		\
 					bfs_utils_bonus.c		\
-					queue.c					\
+					queue_bonus.c			\
 					textures.c				\
 					mlx_helpers.c			\
 					data_init_bonus.c		\
@@ -87,9 +87,9 @@ BONUS_SRC = 		cub3d.c					\
 					movements_extra_bonus.c	\
 					sprites.c				\
 					data_init_add_bonus.c	\
-					horiz.c					\
-					collision.c				\
-					sprites_utils.c			\
+					horiz_bonus.c			\
+					collision_bonus.c		\
+					sprites_utils_bonus.c	\
 					menu.c					\
 					rays_add_bonus.c		\
 					rays_utils_bonus.c

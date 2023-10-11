@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:34:08 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 10:49:37 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 11:05:59 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void			sprite_pxl(t_raydata *data, t_cs *cs, t_sprite *curr);
 void			comp_long(t_raydata *data, t_cs *cs);
 t_texture		*load_texture(void *mlx, char *path);
 void			draw_minimap(t_raydata *raydata);
-void			ray_comp_1(t_r *r);
+void			ray_comp_1(t_raydata *data, t_r *r);
 void			ray_comp_2(t_raydata *data, t_r *r);
 void			ray_comp_3(t_r *r);
 t_r				*r_init(t_raydata *data);

@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:55 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/11 10:56:01 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 11:06:18 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	draw_rays(t_raydata *data)
 		r->delta_dist.x = fabs(1 / r->ray_dir.x);
 		r->delta_dist.y = fabs(1 / r->ray_dir.y);
 		r->hit = 0;
-		ray_comp_1(r);
+		ray_comp_1(data, r);
 		draw_slice(data, r, x);
 		data->spr->zbuffer[x] = r->perp_wall_dist;
 		x++;
@@ -63,7 +63,7 @@ void	draw_rays(t_raydata *data)
 	draw_sprites(data, r->pos);
 }
 
-void	ray_comp_1(t_r *r)
+void	ray_comp_1(t_raydata *data, t_r *r)
 {
 	if (r->ray_dir.x < 0)
 	{
