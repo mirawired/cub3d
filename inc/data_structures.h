@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_structures.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corecaps <corecaps@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:10:47 by corecaps          #+#    #+#             */
-/*   Updated: 2023/10/10 16:10:51 by corecaps         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:21:14 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_data
 	char	**raw;
 	int		lines;
 	int		mlines;
+	int		endmap;
 	int		fd;
 	int		k;
 	size_t	err;
