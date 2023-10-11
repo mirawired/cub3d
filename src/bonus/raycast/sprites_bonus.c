@@ -136,11 +136,14 @@ void	draw_sprites(t_raydata *data, t_point pos)
 	t_spr		*spr;
 	t_cs		*cs;
 	int			i;
+	static int	count = 0;
 
 	i = 0;
 	spr = data->spr;
 	sort_sprites(spr, pos);
-	spr->spr_i++;
+	count ++;
+	if (count % 4 == 0)
+		spr->spr_i++;
 	while (i < SPRITENBR)
 	{
 		curr = spr->sprite[spr->sprite_order[i]];

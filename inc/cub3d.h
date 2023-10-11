@@ -152,6 +152,7 @@ void			draw_horiz(t_raydata *data, t_point pos);
 void			draw_menu(t_raydata *raydata);
 void			clean_exit(t_raydata *raydata);
 void			rotate_player(t_raydata *raydata, double angle);
+void			draw_loose(t_raydata *raydata);
 // ..................... Ennemies AI ...................................
 t_int_point		bfs(t_raydata *data, t_int_point start, t_int_point end);
 void			nmi_ai(t_raydata *raydata);

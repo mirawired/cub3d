@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:00:37 by corecaps          #+#    #+#             */
-/*   Updated: 2023/10/10 21:16:41 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:27:58 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@
 # define OFFSET_MAP_X 0
 # define OFFSET_MAP_Y 0
 # define ROTSPEED 6
-# define PLAYERSPEED 2
+# define PLAYERSPEED 4
 #endif

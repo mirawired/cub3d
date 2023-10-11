@@ -32,12 +32,13 @@ void	data_reset(t_raydata *raydata)
 	raydata->spr->sprite[3].x = raydata->map_width - 2;
 	raydata->spr->sprite[3].y = raydata->map_height - 2;
 	raydata->spr->spr_i = 0;
-	raydata->player->angle = 0;
-	raydata->player->size = 10;
+	raydata->player->angle = raydata->player->init_angle;
+	raydata->player->size = 5;
 	raydata->player->dir_vector.x = 1;
 	raydata->player->dir_vector.y = 0;
 	raydata->player->plane_vector.x = 0;
 	raydata->player->plane_vector.y = 0.66;
+	rotate_player(raydata, raydata->player->angle);
 }
 
 void	rotate_player(t_raydata *raydata, double angle)

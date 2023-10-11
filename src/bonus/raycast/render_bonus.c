@@ -65,13 +65,7 @@ void	render_game(t_raydata *raydata)
 void	render_game_over(t_raydata *raydata)
 {
 	clear_buffer(raydata);
-	mlx_put_image_to_window(raydata->mlx,
-		raydata->mlx_win,
-		raydata->img_buffer->img,
-		0, 0);
-	mlx_string_put(raydata->mlx, raydata->mlx_win,
-		100, 100, 0x00FFFFFF, "GAME OVER");
-	return ;
+	draw_loose(raydata);
 }
 
 /* **************************************************************************

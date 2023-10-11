@@ -55,14 +55,8 @@ void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 	raydata->texture[SO] = load_texture(raydata, arg->so);
 	raydata->texture[WE] = load_texture(raydata, arg->we);
 	raydata->texture[EA] = load_texture(raydata, arg->ea);
-	raydata->texture[CEIL] = load_texture(raydata, "bluestone.xpm");
-	raydata->texture[FLOOR] = load_texture(raydata, "purplestone.xpm");
-	raydata->texture[NO] = load_texture(raydata, arg->no);
-	raydata->texture[SO] = load_texture(raydata, arg->so);
-	raydata->texture[WE] = load_texture(raydata, arg->we);
-	raydata->texture[EA] = load_texture(raydata, arg->ea);
-	raydata->texture[CEIL] = load_texture(raydata, "steel.xpm");
-	raydata->texture[FLOOR] = load_texture(raydata, "floor.xpm");
+	raydata->texture[CEIL] = load_texture(raydata, "blue_floor.xpm");
+	raydata->texture[FLOOR] = load_texture(raydata, "blue_floor.xpm");
 }
 
 /* **************************************************************************
@@ -75,21 +69,20 @@ void	wall_textures_init(t_arg *arg, t_raydata *raydata)
 void	ennemies_textures_init(t_raydata *raydata)
 {
 	t_spr	*spr;
+	int		i;
 
 	raydata->spr = (t_spr *)gc_alloc(1, sizeof(t_spr));
 	spr = raydata->spr;
-	spr->sprite[0].texture = gc_alloc(2, sizeof(t_texture *));
-	spr->sprite[1].texture = gc_alloc(2, sizeof(t_texture *));
-	spr->sprite[2].texture = gc_alloc(2, sizeof(t_texture *));
-	spr->sprite[3].texture = gc_alloc(2, sizeof(t_texture *));
-	spr->sprite[0].texture[0] = load_texture(raydata, "ghost.xpm");
-	spr->sprite[0].texture[1] = load_texture(raydata, "ghost2.xpm");
-	spr->sprite[1].texture[0] = load_texture(raydata, "ghost2.xpm");
-	spr->sprite[1].texture[1] = load_texture(raydata, "ghost.xpm");
-	spr->sprite[2].texture[0] = load_texture(raydata, "ghost.xpm");
-	spr->sprite[2].texture[1] = load_texture(raydata, "ghost2.xpm");
-	spr->sprite[3].texture[0] = load_texture(raydata, "ghost2.xpm");
-	spr->sprite[3].texture[1] = load_texture(raydata, "ghost.xpm");
+	i = 0;
+	while (i < 4)
+	{
+		spr->sprite[i].texture = gc_alloc(4, sizeof(t_texture *));
+		spr->sprite[i].texture[0] = load_texture(raydata, "ghost.xpm");
+		spr->sprite[i].texture[1] = load_texture(raydata, "ghost_1.xpm");
+		spr->sprite[i].texture[2] = load_texture(raydata, "ghost_2.xpm");
+		spr->sprite[i].texture[3] = load_texture(raydata, "ghost_3.xpm");
+		i++;
+	}
 	spr->sprite[0].x = 1.0;
 	spr->sprite[0].y = 1.0;
 	spr->sprite[1].x = raydata->map_width - 2;
@@ -120,6 +113,8 @@ int	find_player(t_raydata *raydata, int i, double gs_x, double gs_y)
 		{
 			raydata->player->pos.x = (double) j * gs_x + gs_x / 2;
 			raydata->player->pos.y = (double) i * gs_y + gs_y / 2;
+			raydata->player->init_pos.x = raydata->player->pos.x;
+			raydata->player->init_pos.y = raydata->player->pos.y;
 			raydata->player->init_angle = -(raydata->arg->fmap[i][j] + 1) * 90;
 			found = 1;
 			raydata->arg->fmap[i][j] = 0;
