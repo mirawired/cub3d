@@ -38,7 +38,7 @@ int	rror(int err, t_data *data)
 		write(STDERR_FILENO, " and one starting position {n,s,e,w}\n", 38);
 		write(STDERR_FILENO, "MAP must be closed by walls {1}\n", 33);
 	}
-	else if (err = EXT2)
+	else if (err == EXT2)
 		write(STDERR_FILENO, "Wrong texture extension\n", 25);
 	return (gc_free(), EXIT_FAILURE);
 }
