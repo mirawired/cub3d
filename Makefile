@@ -6,7 +6,7 @@
 #    By: avassor <avassor@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 12:13:14 by mira              #+#    #+#              #
-#    Updated: 2023/10/10 21:42:44 by avassor          ###   ########.fr        #
+#    Updated: 2023/10/11 10:53:41 by avassor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,9 @@ BONUS_SRC = 		cub3d.c					\
 					horiz.c					\
 					collision.c				\
 					sprites_utils.c			\
-					menu.c
+					menu.c					\
+					rays_add_bonus.c		\
+					rays_utils_bonus.c
 
 SRCS = $(shell find $(SRC_PATH) -type d)
 BONUS_SRCS = $(shell find $(SRC_PATH) -type d)

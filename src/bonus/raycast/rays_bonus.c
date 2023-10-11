@@ -6,112 +6,140 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:55:55 by jgarcia           #+#    #+#             */
-/*   Updated: 2023/10/10 21:20:27 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 10:56:01 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/raycast.h"
 
-void	draw_slice(t_raydata *data, int texture_index, int draw_start, int draw_end, int x, double wall_x, double dist)
+void	draw_slice(t_raydata *data, t_r *r, int x)
 {
 	float		texture_step;
 	float		texture_pos;
 	int			y;
 	t_texture	*texture;
+	t_color		color;
 
-	texture = data->texture[texture_index];
-	texture_step = 1.0 * texture->height / (draw_end - draw_start);
-	y = draw_start;
+	texture = data->texture[r->texture_index];
+	texture_step = 1.0 * texture->height / (r->draw_end - r->draw_start);
+	y = r->draw_start;
 	texture_pos = 0;
-	wall_x *= texture->width;
-	while (y < draw_end) {
-		t_color color = texture->texture[(int) texture_pos * texture->width + (int) wall_x];
-		color.s_rgb.r -= (int) dist;
-		color.s_rgb.g -= (int) dist;
-		color.s_rgb.b -= (int) dist;
-		my_mlx_pixel_put(data->img_buffer, color, (t_int_point) {x, y});
+	r->wall_x *= texture->width;
+	while (y < r->draw_end)
+	{
+		set_color(&color, texture, texture_pos, r);
+		my_mlx_pixel_put(data->img_buffer, color, (t_int_point){x, y});
 		y++;
 		texture_pos += texture_step;
 	}
 }
 
-void draw_rays(t_raydata *data) {
-	double perpwalldist;
-	t_texture_index texture_index;
-	int grid_size_x = WIDTH / data->map_width;
-	int grid_size_y = HEIGHT / data->map_height;
-	t_point pos = {data->player->pos.x / grid_size_x, data->player->pos.y / grid_size_y};
+void	draw_rays(t_raydata *data)
+{
+	t_r	*r;
+	int	x;
 
-	draw_horiz(data, pos);
-	draw_horiz(data, pos);
-	for (int x = 0; x < WIDTH; x++) {
-		double camerax = 2 * x / (double) WIDTH - 1;
-		t_point ray_dir = {data->player->dir_vector.x + data->player->plane_vector.x * camerax,
-						   data->player->dir_vector.y + data->player->plane_vector.y * camerax};
-		int mapx = (int) pos.x;
-		int mapy = (int) pos.y;
-		t_point sidedist;
-		t_point deltadist = {fabs(1 / ray_dir.x), fabs(1 / ray_dir.y)};
-		int stepx;
-		int stepy;
-		int hit = 0;
-		int side;
-		if (ray_dir.x < 0) {
-			stepx = -1;
-			sidedist.x = (pos.x - mapx) * deltadist.x;
-		} else {
-			stepx = 1;
-			sidedist.x = (mapx + 1.0 - pos.x) * deltadist.x;
-		}
-		if (ray_dir.y < 0) {
-			stepy = -1;
-			sidedist.y = (pos.y - mapy) * deltadist.y;
-		} else {
-			stepy = 1;
-			sidedist.y = (mapy + 1.0 - pos.y) * deltadist.y;
-		}
-		while (hit == 0) {
-			if (sidedist.x < sidedist.y) {
-				sidedist.x += deltadist.x;
-				mapx += stepx;
-				if (mapx < 0 || mapx >= data->map_width )
-					break;
-				side = 0;
-			} else {
-				sidedist.y += deltadist.y;
-				mapy += stepy;
-				if (mapy < 0 || mapy >= data->map_height)
-					break;
-				side = 1;
-			}
-			if (data->map[mapy][mapx] > 0)
-				hit = 1;
-		}
-		if (side == 0)
-			perpwalldist = sidedist.x - deltadist.x;
-		else
-			perpwalldist = sidedist.y - deltadist.y;
-		int lineheight = (int) (HEIGHT / perpwalldist);
-		int drawstart = -lineheight / 2 + HEIGHT / 2;
-		if (drawstart < 0)
-			drawstart = 0;
-		int drawend = lineheight / 2 + HEIGHT / 2;
-		if (drawend >= HEIGHT)
-			drawend = HEIGHT - 1;
-		double wall_x;
-		if (side == 0) wall_x = pos.y + perpwalldist * ray_dir.y;
-		else wall_x = pos.x + perpwalldist * ray_dir.x;
-		wall_x -= floor((wall_x));
-		if (side == 0) {
-			if (ray_dir.x > 0) texture_index = WE;
-			else texture_index = EA;
-		} else {
-			if (ray_dir.y > 0) texture_index = NO;
-			else texture_index = SO;
-		}
-		draw_slice(data, texture_index, drawstart, drawend, x, wall_x, perpwalldist);
-		data->spr->zbuffer[x] = perpwalldist;
+	x = 0;
+	r = r_init(data);
+	draw_horiz(data, r->pos);
+	while (x < WIDTH)
+	{
+		r->camerax = 2 * x / (double) WIDTH - 1;
+		r->ray_dir.x = data->player->dir_vector.x + data->player->plane_vector.x
+			* r->camerax;
+		r->ray_dir.y = data->player->dir_vector.y + data->player->plane_vector.y
+			* r->camerax;
+		r->map_x = (int)r->pos.x;
+		r->map_y = (int)r->pos.y;
+		r->delta_dist.x = fabs(1 / r->ray_dir.x);
+		r->delta_dist.y = fabs(1 / r->ray_dir.y);
+		r->hit = 0;
+		ray_comp_1(r);
+		draw_slice(data, r, x);
+		data->spr->zbuffer[x] = r->perp_wall_dist;
+		x++;
 	}
 	clamp_sprites(data);
-	draw_sprites(data, pos);
+	draw_sprites(data, r->pos);
+}
+
+void	ray_comp_1(t_r *r)
+{
+	if (r->ray_dir.x < 0)
+	{
+		r->step_x = -1;
+		r->side_dist.x = (r->pos.x - r->map_x) * r->delta_dist.x;
+	}
+	else
+	{
+		r->step_x = 1;
+		r->side_dist.x = (r->map_x + 1.0 - r->pos.x) * r->delta_dist.x;
+	}
+	if (r->ray_dir.y < 0)
+	{
+		r->step_y = -1;
+		r->side_dist.y = (r->pos.y - r->map_y) * r->delta_dist.y;
+	}
+	else
+	{
+		r->step_y = 1;
+		r->side_dist.y = (r->map_y + 1.0 - r->pos.y) * r->delta_dist.y;
+	}
+	ray_comp_2(data, r);
+}
+
+void	ray_comp_2(t_raydata *data, t_r *r)
+{
+	while (r->hit == 0)
+	{
+		if (r->side_dist.x < r->side_dist.y)
+		{
+			ray_inc_h(r);
+			if (r->map_x < 0 || r->map_x >= data->map_width)
+				break ;
+		}
+		else
+		{
+			ray_inc_v(r);
+			if (r->map_y < 0 || r->map_y >= data->map_height)
+				break ;
+		}
+		if (data->map[r->map_y][r->map_x] > 0)
+			r->hit = 1;
+	}
+	if (r->side == 0)
+		r->perp_wall_dist = r->side_dist.x - r->delta_dist.x;
+	else
+		r->perp_wall_dist = r->side_dist.y - r->delta_dist.y;
+	r->line_height = (int)(HEIGHT / r->perp_wall_dist);
+	ray_comp_3(r);
+}
+
+void	ray_comp_3(t_r *r)
+{
+	r->draw_start = -r->line_height / 2 + HEIGHT / 2;
+	if (r->draw_start < 0)
+		r->draw_start = 0;
+	r->draw_end = r->line_height / 2 + HEIGHT / 2;
+	if (r->draw_end >= HEIGHT)
+		r->draw_end = HEIGHT - 1;
+	if (r->side == 0)
+		r->wall_x = r->pos.y + r->perp_wall_dist * r->ray_dir.y;
+	else
+		r->wall_x = r->pos.x + r->perp_wall_dist * r->ray_dir.x;
+	r->wall_x -= floor((r->wall_x));
+	if (r->side == 0)
+	{
+		if (r->ray_dir.x > 0)
+			r->texture_index = WE;
+		else
+			r->texture_index = EA;
+	}
+	else
+	{
+		if (r->ray_dir.y > 0)
+			r->texture_index = NO;
+		else
+			r->texture_index = SO;
+	}
 }
