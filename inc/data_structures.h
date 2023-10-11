@@ -80,6 +80,7 @@ typedef struct s_player {
 	t_point	dir_vector;
 	t_point	plane_vector;
 	t_point	init_pos;
+	int		init_angle;
 	double	size;
 }	t_player;
 typedef struct s_buffer

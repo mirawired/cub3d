@@ -67,7 +67,7 @@ _Bool			chk_bottop(t_data *data, char *line, int j);
 _Bool			search_map(t_data *data, char **raw);
 _Bool			chk_origin(t_data *data, char *line, char id, int i);
 _Bool			chk_line(t_data *data, char *line, int j);
-_Bool			is_origin(char id);
+int				is_origin(char id);
 _Bool			chk_edges(t_data *data, char c, char d);
 _Bool			convert_map(t_data *data, t_arg *arg);
 _Bool			to_integers(t_data *data, t_arg *arg);
@@ -148,6 +148,7 @@ int				check_collision(t_raydata *raydata, t_point new_pos);
 void			draw_horiz(t_raydata *data, t_point pos);
 void			draw_menu(t_raydata *raydata);
 void			clean_exit(t_raydata *raydata);
+void			rotate_player(t_raydata *raydata, double angle);
 // ..................... Ennemies AI ...................................
 t_int_point		bfs(t_raydata *data, t_int_point start, t_int_point end);
 void			nmi_ai(t_raydata *raydata);

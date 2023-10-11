@@ -59,17 +59,23 @@ void	clear_line(char *raw)
 	}
 }
 
-_Bool	is_origin(char id)
+int	is_origin(char id)
 {
-	if (id == 'N' || id == 'S' || id == 'E' || id == 'W')
+	if (id == 'E')
 		return (1);
+	else if (id == 'S')
+		return (2);
+	else if (id == 'W')
+		return (3);
+	else if (id == 'N')
+		return (4);
 	return (0);
 }
 
 void	do_conv(t_arg *arg, int i, int j)
 {
 	if (is_origin(arg->map[i][j]))
-		arg->fmap[i][j] = -2;
+		arg->fmap[i][j] = -is_origin(arg->map[i][j]);
 	else
 		arg->fmap[i][j] = arg->map[i][j] - '0';
 }

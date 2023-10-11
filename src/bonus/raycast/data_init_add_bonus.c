@@ -13,36 +13,6 @@
 #include "../../../inc/cub3d.h"
 
 /* **************************************************************************
- * find_player:
- * - find the player in the map and set its position
- * - set the player's initial position
- * - return 1 if found, 0 if not
- ************************************************************************** */
-
-int	find_player(t_raydata *raydata, int i, double gs_x, double gs_y)
-{
-	int	j;
-	int	found;
-
-	j = 0;
-	found = 0;
-	while (j < raydata->arg->width)
-	{
-		if (raydata->arg->fmap[i][j] < 0)
-		{
-			raydata->player->pos.x = (double) j * gs_x + gs_x / 2;
-			raydata->player->pos.y = (double) i * gs_y + gs_y / 2;
-			raydata->player->init_pos.x = raydata->player->pos.x;
-			raydata->player->init_pos.y = raydata->player->pos.y;
-			found = 1;
-			raydata->arg->fmap[i][j] = 0;
-		}
-		j++;
-	}
-	return (found);
-}
-
-/* **************************************************************************
  * data_reset:
  * - reset the player's position
  * - reset the sprite's position
@@ -68,4 +38,23 @@ void	data_reset(t_raydata *raydata)
 	raydata->player->dir_vector.y = 0;
 	raydata->player->plane_vector.x = 0;
 	raydata->player->plane_vector.y = 0.66;
+}
+
+void	rotate_player(t_raydata *raydata, double angle)
+{
+	t_point	old_dir;
+	t_point	old_plane;
+
+	old_dir = raydata->player->dir_vector;
+	old_plane = raydata->player->plane_vector;
+	raydata->player->dir_vector.x = raydata->player->dir_vector.x
+		* cos(angle * RADIAN)
+		- raydata->player->dir_vector.y * sin(angle * RADIAN);
+	raydata->player->dir_vector.y = old_dir.x * sin(angle * RADIAN)
+		+ raydata->player->dir_vector.y * cos(angle * RADIAN);
+	raydata->player->plane_vector.x = raydata->player->plane_vector.x
+		* cos(angle * RADIAN) - raydata->player->plane_vector.y
+		* sin(angle * RADIAN);
+	raydata->player->plane_vector.y = old_plane.x * sin(angle * RADIAN)
+		+ raydata->player->plane_vector.y * cos(angle * RADIAN);
 }
