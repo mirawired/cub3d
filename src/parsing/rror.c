@@ -56,7 +56,8 @@ int	find_end_map(t_data *data, char **raw, int i)
 	int	j;
 
 	j = 0;
-	while (i + j < data->lines && raw[i + j] && raw[i + j][0] && raw[i + j][0] != '\n')
+	while (i + j < data->lines && raw[i + j] && raw[i + j][0]
+		&& raw[i + j][0] != '\n')
 		j++;
 	return (j);
 }

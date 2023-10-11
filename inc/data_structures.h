@@ -137,6 +137,7 @@ typedef struct s_raydata
 	void			*mlx_win;
 	t_buffer		*img_buffer;
 	t_buffer		*img_menu;
+	t_buffer		*img_loose;
 	t_player		*player;
 	int				map_width;
 	int				map_height;

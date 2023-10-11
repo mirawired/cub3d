@@ -1,7 +1,7 @@
-NO ./metal1.xpm
-SO ./metal1.xpm
-WE ./metal1.xpm
-EA ./metal1.xpm
+NO ./blue_wall.xpm
+SO ./blue_wall.xpm
+WE ./blue_wall.xpm
+EA ./blue_wall.xpm
 F 47,44,42
 C 47,44,42
 11111111111111111111111111

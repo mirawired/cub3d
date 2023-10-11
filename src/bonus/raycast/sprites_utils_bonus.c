@@ -24,12 +24,12 @@ void	clamp_idx(t_raydata *raydata, int index)
 
 	x = (int) raydata->spr->sprite[index].x;
 	y = (int) raydata->spr->sprite[index].y;
-	if (x < raydata->map_width + 1
+	if (x < raydata->map_width - 1
 		&& raydata->map[y][x + 1] == 1
 		&& x > 0
 		&& raydata->map[y][x - 1] == 1)
 		raydata->spr->sprite[index].x = x + 0.5;
-	if (y < raydata->map_height + 1
+	if (y < raydata->map_height - 1
 		&& raydata->map[y + 1][x] == 1
 		&& y > 0
 		&& raydata->map[y - 1][x] == 1)
