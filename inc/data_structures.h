@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:10:47 by corecaps          #+#    #+#             */
-/*   Updated: 2023/10/11 12:43:15 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:44:29 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_data
 	int		lines;
 	int		mlines;
 	int		endmap;
+	int		last_index;
 	int		fd;
 	int		k;
 	size_t	err;

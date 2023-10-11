@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:35:42 by avassor           #+#    #+#             */
-/*   Updated: 2023/08/16 16:00:56 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:58:07 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ int	ft_strlen(const char *s)
 	return (str - s);
 }
 
-_Bool	ft_strncmp(char *needle, char *haystack, int size)
+_Bool	ft_strncmp(t_data *data, char *needle, char *haystack, int size)
 {
 	int	i;
 
+	(void)data;
 	i = 0;
 	while (haystack[i] && i < size)
 	{

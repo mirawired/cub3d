@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:33:29 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 15:30:41 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:04:12 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ _Bool	search_map(t_data *data, char **raw)
 	j = 0;
 	while (raw[i] && raw[i][0] == '\n')
 		i++;
+	if (i < data->last_index)
+		return (data->err = MAPERROR, 1);
 	data->endmap = i + find_end_map(data, raw, i);
 	data->mlines = data->endmap - i;
 	data->arg->map = (char **)gc_alloc((data->mlines + 1), sizeof(char *));
