@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:30:04 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 14:05:01 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:21:34 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int	find_end_map(t_data *data, char **raw, int i)
 	int	j;
 
 	j = 0;
-	while (raw[i + j])
+	while ((i + j <= data->lines) && raw[i + j])
 	{
-		if (raw[i + j][0] != '1')
+		if (!raw[i + j] || raw[i + j][0] != '1')
 			break ;
 		j++;
 	}
