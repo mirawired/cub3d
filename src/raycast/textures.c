@@ -35,28 +35,29 @@ void	fill_texture_buffer(t_buffer *img, const t_texture *texture,
 	}
 }
 
-t_texture	*load_texture(void *mlx, char *path)
+t_texture	*load_texture(t_raydata *raydata, char *path)
 {
 	t_buffer	img;
 	t_texture	*texture;
 	char		*addr;
 
 	texture = gc_alloc(1, sizeof(t_texture));
-	if (!texture)
-		return (NULL);
 	texture->width = 0;
 	texture->height = 0;
-	img.img = mlx_xpm_file_to_image(mlx, path, &texture->width,
-			&texture->height);
+	img.img = mlx_xpm_file_to_image(raydata->mlx, path,
+			&texture->width, &texture->height);
 	if (!img.img)
-		return (NULL);
+	{
+		write(2, "Error\nTextures could not be loaded\n", 36);
+		clean_exit(raydata);
+	}
 	texture->texture = gc_alloc(texture->width * texture->height,
 			sizeof(t_color));
 	addr = mlx_get_data_addr(img.img, &img.bit_per_pixel, &img.line_length,
 			&img.endian);
 	printf("Loading texture %s\t[", path);
 	fill_texture_buffer(&img, texture, addr);
-	mlx_destroy_image(mlx, img.img);
+	mlx_destroy_image(raydata->mlx, img.img);
 	printf("]\n");
 	return (texture);
 }

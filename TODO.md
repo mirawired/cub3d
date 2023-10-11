@@ -1,6 +1,6 @@
 - [X] Mandatory & Bonus part Separation
-- [ ] Malloc Protection 
-- [ ] Floor and ceiling textures
+- [X] Malloc Protection 
+- [X] Floor and ceiling textures
 - [X] Game Loop State Machine 
   - [X] Menu
   - [X] Game
@@ -20,7 +20,7 @@
   - [X] Enemies State Machine
   - [X] Enemies & Wall collision
 - [X] Minimap
-- [ ] HUD
+- [-] HUD
 - [X] Leaks
-- [ ] Norme
+- [X] Norme
 - [X] Side from raycasting
