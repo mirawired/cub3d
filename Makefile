@@ -6,7 +6,7 @@
 #    By: avassor <avassor@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 12:13:14 by mira              #+#    #+#              #
-#    Updated: 2023/10/11 11:02:16 by avassor          ###   ########.fr        #
+#    Updated: 2023/10/11 11:09:41 by avassor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,12 +85,12 @@ BONUS_SRC = 		cub3d.c					\
 					data_init_bonus.c		\
 					movements_bonus.c		\
 					movements_extra_bonus.c	\
-					sprites.c				\
+					sprites_bonus.c				\
 					data_init_add_bonus.c	\
 					horiz_bonus.c			\
 					collision_bonus.c		\
 					sprites_utils_bonus.c	\
-					menu.c					\
+					menu_bonus.c					\
 					rays_add_bonus.c		\
 					rays_utils_bonus.c
 
