@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:30:04 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/10 23:02:20 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 11:54:09 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,14 @@ int	find_id(char *raw)
 	while (raw[i] && raw[i] == ' ')
 		i++;
 	return (i);
+}
+
+int	find_end_map(t_data *data, char **raw, int i)
+{
+	int	j;
+
+	j = 0;
+	while (i + j < data->lines && raw[i + j] && raw[i + j][0] && raw[i + j][0] != '\n')
+		j++;
+	return (j);
 }

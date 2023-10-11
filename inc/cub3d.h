@@ -6,7 +6,7 @@
 /*   By: avassor <avassor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:34:08 by avassor           #+#    #+#             */
-/*   Updated: 2023/10/11 11:05:59 by avassor          ###   ########.fr       */
+/*   Updated: 2023/10/11 11:37:38 by avassor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ _Bool			convert_rgb(t_arg *arg);
 void			do_conv(t_arg *arg, int i, int j);
 _Bool			map_op(t_data *data, char **raw, int i, int j);
 int				find_id(char *raw);
+int				find_end_map(t_data *data, char **raw, int i);
 // ..................... GNL ................................................
 char			*get_next_line(int fd);
 void			ft_reader(int fd, t_stash **stash);
