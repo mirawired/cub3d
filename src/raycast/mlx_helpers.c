@@ -22,6 +22,7 @@ void	launch_game_loop(t_raydata *raydata)
 void	init_mlx(t_raydata *raydata)
 {
 	raydata->mlx = mlx_init();
+	raydata->mlx_win = NULL;
 	raydata->mlx_win = mlx_new_window(raydata->mlx, WIDTH, HEIGHT, "CUB3D");
 	raydata->img_buffer->img = mlx_new_image(raydata->mlx, WIDTH + 1,
 			HEIGHT + 1);

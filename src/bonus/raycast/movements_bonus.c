@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "../../../inc/cub3d.h"
 
 /* **************************************************************************
  * move_forward:
@@ -19,10 +19,22 @@
 
 void	move_forward(t_raydata *raydata)
 {
-	raydata->player->pos.x = raydata->player->pos.x
+	t_point	new_pos;
+
+	new_pos.x = raydata->player->pos.x
 		+ PLAYERSPEED * cos(raydata->player->angle * RADIAN);
-	raydata->player->pos.y = raydata->player->pos.y + PLAYERSPEED
+	new_pos.y = raydata->player->pos.y;
+	if (!check_collision(raydata, new_pos))
+	{
+		raydata->player->pos.x = new_pos.x;
+	}
+	new_pos.x = raydata->player->pos.x;
+	new_pos.y = raydata->player->pos.y + PLAYERSPEED
 		* (sin(raydata->player->angle * RADIAN));
+	if (!check_collision(raydata, new_pos))
+	{
+		raydata->player->pos.y = new_pos.y;
+	}
 	clamp_player(raydata);
 }
 
@@ -33,10 +45,18 @@ void	move_forward(t_raydata *raydata)
 
 void	move_backward(t_raydata *raydata)
 {
-	raydata->player->pos.x -= cos(raydata->player->angle
+	t_point	new_pos;
+
+	new_pos.x = raydata->player->pos.x - cos(raydata->player->angle
 			* RADIAN) * 10;
-	raydata->player->pos.y -= sin(raydata->player->angle
+	new_pos.y = raydata->player->pos.y;
+	if (!check_collision(raydata, new_pos))
+		raydata->player->pos.x = new_pos.x;
+	new_pos.x = raydata->player->pos.x;
+	new_pos.y = raydata->player->pos.y - sin(raydata->player->angle
 			* RADIAN) * 10;
+	if (!check_collision(raydata, new_pos))
+		raydata->player->pos.y = new_pos.y;
 	clamp_player(raydata);
 }
 

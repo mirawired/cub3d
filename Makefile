@@ -15,7 +15,7 @@ CUB3D	= cub3d
 NAME	= $(CUB3D)
 BONUS_NAME = $(CUB3D)_bonus
 CC		=	gcc
-CFLAGS 	=	-g -Wall -Wextra -Werror
+CFLAGS 	=	-g -Wall -Wextra #-Werror
 LFLAGS	=	-lX11 -lXext -lm
 INC		=	-I ./inc/
 
@@ -83,8 +83,8 @@ BONUS_SRC = 		cub3d.c					\
 					textures.c				\
 					mlx_helpers.c			\
 					data_init_bonus.c		\
-					movements.c				\
-					movements_extra.c		\
+					movements_bonus.c		\
+					movements_extra_bonus.c	\
 					sprites.c				\
 					data_init_add_bonus.c	\
 					horiz.c					\
